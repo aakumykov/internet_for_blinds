@@ -1,8 +1,8 @@
 #SingleInstance Force
 
 ; Настройки
-readerModeIcon_Active := "c:\Users\User\Pictures\target.png"
-readerModeIcon_Inactive := "c:\Users\User\Pictures\target-grey.png"
+readerModeIcon_Active := "C:\Users\User\Documents\reader\icons\reader-mode-active.png"
+readerModeIcon_Inactive := "C:\Users\User\Documents\reader\icons\reader-mode-inactive.png"
 web_server_command := "C:\Program Files (x86)\hfs.exe"
 
 ; Глобальные переменные
