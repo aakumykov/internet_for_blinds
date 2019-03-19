@@ -63,6 +63,10 @@ function clearPage() {
   //alert('clearPage');
   //console.log('clearPage()');
   $('body').empty();
+  $('body').append("<button id='startPoint4'>4 шага до списка сообщений</button>");
+  $('body').append("<button id='startPoint3'>3 шага до списка сообщений</button>");
+  $('body').append("<button id='startPoint2'>2 шага до списка сообщений</button>");
+  $('body').append("<button id='startPoint1'>1 шаг до списка сообщений</button>");
 }
 
 
@@ -87,8 +91,9 @@ function createMessageList() {
 
 // ================ Когда страница загружена... =================
 $(document).ready(function(){
-  playAudio('http://127.0.0.1/yandex.wav');
+  playAudio('http://127.0.0.1/mailbox-opened.mp3');
   fetchMessageList();
   clearPage();
   createMessageList();
+  $('#startPoint4').focus();
 });
