@@ -1,10 +1,12 @@
 #SingleInstance Force
 
 ; Настройки
-readerModeIcon_Active := "C:\Users\User\Documents\reader\icons\reader-mode-active.png"
-readerModeIcon_Inactive := "C:\Users\User\Documents\reader\icons\reader-mode-inactive.png"
+readerModeIcon_Active := A_ScriptDir . "\images\tray-icons\reader-mode-active.png"
+readerModeIcon_Inactive := A_ScriptDir . "\images\tray-icons\reader-mode-inactive.png"
+page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\firefox-page-load-complete.bmp"
+firefox_reader_mode_image_pattern := A_ScriptDir . "images\browser\firefox-reader-mode-start-icon.png"
 web_server_command := "C:\Program Files (x86)\hfs.exe"
-tab_open_delay := 500 ;Важная задержка на то, чтобы дать новой вкладке открыться
+tab_open_delay := 500 ; Важная задержка на то, чтобы дать новой вкладке открыться
 
 ; Глобальные переменные
 isReaderMode := false
@@ -140,9 +142,11 @@ firefoxIsOpened() {
 }
 
 pageIsLoaded() {
+	global page_is_loaded_image_pattern
+
 	if (firefoxIsOpened()) {
 		focusFirefox()
-		ImageSearch, imageX, imageY, 76, 47, 100, 72, c:\Users\User\Pictures\firefox-page-load-complete.bmp
+		ImageSearch, imageX, imageY, 76, 47, 100, 72, %page_is_loaded_image_pattern%
 		return (imageX and imageY)
 	} else {
 		;pronounceError "Фаерфокс не запущен!"
@@ -201,12 +205,14 @@ closeTab(){
 
 ; Работа с режимом чтения Firefox
 isReaderModeAvailable() {
-	ImageSearch, imageX, imageY, 1132, 46, 1158, 73, c:\Users\User\Pictures\firefox-reader-mode-start-icon.png
+	global firefox_reader_mode_image_pattern
+	ImageSearch, imageX, imageY, 1132, 46, 1158, 73, %firefox_reader_mode_image_pattern%
 	return (imageX and imageY)
 }
 
 isReaderModeActivated() {
-	ImageSearch, imageX, imageY, 0, 168, 45, 211, c:\Users\User\Pictures\firefox-reader-mode-start-icon.png
+	global firefox_reader_mode_image_pattern
+	ImageSearch, imageX, imageY, 0, 168, 45, 211, %firefox_reader_mode_image_pattern%
 	return (imageX and imageY)
 }
 
