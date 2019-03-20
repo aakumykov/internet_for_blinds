@@ -4,6 +4,7 @@
 readerModeIcon_Active := "C:\Users\User\Documents\reader\icons\reader-mode-active.png"
 readerModeIcon_Inactive := "C:\Users\User\Documents\reader\icons\reader-mode-inactive.png"
 web_server_command := "C:\Program Files (x86)\hfs.exe"
+tab_open_delay := 500 ;Важная задержка на то, чтобы дать новой вкладке открыться
 
 ; Глобальные переменные
 isReaderMode := false
@@ -66,6 +67,7 @@ activateTextSearch() {
 	isVideoMode := false
 	isMailMode := false7
 	Run, firefox.exe "http://ya.ru"
+	focusFirefox()
 }
 
 activateVideoSearch() {
@@ -85,6 +87,7 @@ activateMailMode() {
 	isVideoMode := false
 	isMailMode := true
 	Run, firefox.exe "http://mail.yandex.ru/lite"
+	focusFirefox()7
 }
 
 
@@ -136,7 +139,7 @@ firefoxIsOpened() {
 	return (0 != %ErrorLevel%)
 }
 
-firefoxPageIsLoaded() {
+pageIsLoaded() {
 	if (firefoxIsOpened()) {
 		focusFirefox()
 		ImageSearch, imageX, imageY, 76, 47, 100, 72, c:\Users\User\Pictures\firefox-page-load-complete.bmp
@@ -169,13 +172,19 @@ prevLink(){
 
 openLink(){
 	global isReaderMode
+	global tab_open_delay
+
 	if (isReaderMode) {
+		stopNVDA()
 		focusFirefox()
 		Send, {Return}
-		
-		while (!firefoxPageIsLoaded()) {
+		Sleep, %tab_open_delay%
+
+		while (!pageIsLoaded()) {
 			Sleep, 100
 		}
+
+		MsgBox "PAGE IS LOADED"
 	}
 }
 
