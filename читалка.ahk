@@ -4,12 +4,13 @@
 readerModeIcon_Active := A_ScriptDir . "\images\tray-icons\reader-mode-active.png"
 readerModeIcon_Inactive := A_ScriptDir . "\images\tray-icons\reader-mode-inactive.png"
 page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\firefox-page-load-complete.bmp"
-firefox_reader_mode_image_pattern := A_ScriptDir . "images\browser\firefox-reader-mode-start-icon.png"
+reader_mode_image_pattern := A_ScriptDir . "\images\browser\firefox-reader-mode-start-icon.png"
+video_mode_image_pattern := A_ScriptDir . "\images\browser\youtube.png"
 web_server_command := "C:\Program Files (x86)\hfs.exe"
 tab_open_delay := 500 ; Важная задержка на то, чтобы дать новой вкладке открыться
 
 ; Глобальные переменные
-isReaderMode := false
+readerModeIsActive := false
 
 isTextMode := false
 isVideoMode := false
@@ -23,10 +24,10 @@ firefoxReadingIsActive := false
 toggleReaderMode() {
 	global readerModeIcon_Active
 	global readerModeIcon_Inactive
-	global isReaderMode
+	global readerModeIsActive
 
-	isReaderMode := !isReaderMode
-	if (isReaderMode) {
+	readerModeIsActive := !readerModeIsActive
+	if (readerModeIsActive) {
 		startWebServer()
 		Menu, Tray, Icon, %readerModeIcon_Active%
 	} else {
@@ -35,28 +36,28 @@ toggleReaderMode() {
 }
 
 prolongateReaderMode() {
-	global isReaderMode
-	isReaderMode := true
+	global readerModeIsActive
+	readerModeIsActive := true
 }
 
 
 openTextSearch() {
-	global isReaderMode
-	if (isReaderMode) {
+	global readerModeIsActive
+	if (readerModeIsActive) {
 		activateTextSearch()
 	}
 }
 
 openVideoSearch() {
-	global isReaderMode
-	if (isReaderMode) {
+	global readerModeIsActive
+	if (readerModeIsActive) {
 		activateVideoSearch()
 	}
 }
 
 openMail(){
-	global isReaderMode
-	if (isReaderMode) {
+	global readerModeIsActive
+	if (readerModeIsActive) {
 		activateMailMode()
 	}
 }
@@ -155,8 +156,8 @@ pageIsLoaded() {
 }
 
 nextLink(){
-	global isReaderMode
-	if (isReaderMode) {
+	global readerModeIsActive
+	if (readerModeIsActive) {
 		prolongateReaderMode()
 		startNVDA()
 		focusFirefox()
@@ -165,8 +166,8 @@ nextLink(){
 }
 
 prevLink(){
-	global isReaderMode
-	if (isReaderMode) {
+	global readerModeIsActive
+	if (readerModeIsActive) {
 		prolongateReaderMode()
 		startNVDA()
 		focusFirefox()
@@ -175,10 +176,10 @@ prevLink(){
 }
 
 openLink(){
-	global isReaderMode
+	global readerModeIsActive
 	global tab_open_delay
 
-	if (isReaderMode) {
+	if (readerModeIsActive) {
 		stopNVDA()
 		focusFirefox()
 		Send, {Return}
@@ -193,8 +194,8 @@ openLink(){
 }
 
 closeTab(){
-	global isReaderMode
-	if (isReaderMode) {
+	global readerModeIsActive
+	if (readerModeIsActive) {
 		focusFirefox()
 		Send, {Ctrl down}w{Ctrl up}
 	}
@@ -204,15 +205,15 @@ closeTab(){
 
 
 ; Работа с режимом чтения Firefox
-isReaderModeAvailable() {
-	global firefox_reader_mode_image_pattern
-	ImageSearch, imageX, imageY, 1132, 46, 1158, 73, %firefox_reader_mode_image_pattern%
+readerModeIsActiveAvailable() {
+	global reader_mode_image_pattern
+	ImageSearch, imageX, imageY, 1132, 46, 1158, 73, %reader_mode_image_pattern%
 	return (imageX and imageY)
 }
 
-isReaderModeActivated() {
-	global firefox_reader_mode_image_pattern
-	ImageSearch, imageX, imageY, 0, 168, 45, 211, %firefox_reader_mode_image_pattern%
+readerModeIsActiveActivated() {
+	global reader_mode_image_pattern
+	ImageSearch, imageX, imageY, 0, 168, 45, 211, %reader_mode_image_pattern%
 	return (imageX and imageY)
 }
 
@@ -304,9 +305,9 @@ isYoutubeVideo() {
 }
 
 videoPlayPause() {
-	global isReaderMode
+	global readerModeIsActive
 	
-	if ( isReaderMode ) {
+	if ( readerModeIsActive ) {
 		if ( isYoutubeVideo() ) {
 			Click, 65, 529
 		}
@@ -314,9 +315,9 @@ videoPlayPause() {
 }
 
 videoSkipForward() {
-	global isReaderMode
+	global readerModeIsActive
 	
-	if ( isReaderMode ) {
+	if ( readerModeIsActive ) {
 		if ( isYoutubeVideo() ) {
 			Send, {Right}
 		}
@@ -324,9 +325,9 @@ videoSkipForward() {
 }
 
 videoSkipBack() {
-	global isReaderMode
+	global readerModeIsActive
 	
-	if ( isReaderMode ) {
+	if ( readerModeIsActive ) {
 		if ( isYoutubeVideo() ) {
 			Send, {Left}
 		}
@@ -334,6 +335,12 @@ videoSkipBack() {
 }
 
 
+; Функции определения текущего режима
+isVideoMode() {
+	global video_mode_image_pattern
+	ImageSearch, OutputVarX, OutputVarY, 65, 110, 160, 140, %video_mode_image_pattern%
+	return (OutputVarX && OutputVarY)
+}
 
 
 ; Временные отладочные функции
@@ -360,12 +367,12 @@ if (Process, Exist, nvda.exe) {
 
 startReaderModeTimeout() {
 	global readerModeTimeout
-	global isReaderMode
+	global readerModeIsActive
 	while (readerModeTimeout > 0) {
 		Sleep, 1000
 		readerModeTimeout := readerModeTimeout - 1
 	}
-	isReaderMode := false
+	readerModeIsActive := false
 }
 
 
@@ -411,30 +418,38 @@ closeTab()
 return
 
 F6::
-if (isReaderMode) {
+if (readerModeIsActive) {
 	startStopReading()
 }
 return
 
 
 ~a::
-if (isReaderMode) {
-	;videoSkipBack()
-	skipBack()
+if (readerModeIsActive) {
+	if (isVideoMode()) {
+		videoSkipBack()
+	}
+	;skipBack()
 }
 return
 
 ~s::
-if (isReaderMode) {
-	startStopReading()
+if (readerModeIsActive) {
+	if (isVideoMode()) {
+		videoPlayPause()
+	}
+	;else if (isTextMode()) {
+	;	startStopReading()
+	;}
 }
-;videoPlayPause()
 return
 
 ~d::
-if (isReaderMode) {
-	;videoSkipForward()
-	skipForward()
+if (readerModeIsActive) {
+	if (isVideoMode()) {
+		videoSkipForward()
+	}
+	;skipForward()
 }
 return
 
