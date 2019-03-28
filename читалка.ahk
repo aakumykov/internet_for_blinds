@@ -1,16 +1,40 @@
 #SingleInstance Force
+;CoordMode, Pixel, Screen
 
 ; Настройки
-readerModeIcon_Active := A_ScriptDir . "\images\tray-icons\reader-mode-active.png"
-readerModeIcon_Inactive := A_ScriptDir . "\images\tray-icons\reader-mode-inactive.png"
+reader_mode_active_tray_icon := A_ScriptDir . "\images\tray-icons\reader-mode-active.png"
+reader_mode_inactive_tray_icon := A_ScriptDir . "\images\tray-icons\reader-mode-inactive.png"
+
 page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\firefox-page-load-complete.bmp"
-reader_mode_image_pattern := A_ScriptDir . "\images\browser\firefox-reader-mode-start-icon.png"
+
+; Верхняя иконка режима чтения
+reader_mode_top_x1 := 1108
+reader_mode_top_y1 := 43
+reader_mode_top_x2 := 1125
+reader_mode_top_y2 := 62
+
+reader_mode_available_top_icon  := A_ScriptDir . "\images\browser\reader-mode-available-top.bmp"
+reader_mode_activated_top_icon  := A_ScriptDir . "\images\browser\reader-mode-enabled-top.bmp"
+
+; Боковая иконка режима чтения
+reader_mode_side_x1 := 0
+reader_mode_side_y1 := 163
+reader_mode_side_x2 := 39
+reader_mode_side_y2 := 243
+
+reader_mode_enabled_side_icon := A_ScriptDir . "\images\browser\reader-mode-enabled-side-icon-small.bmp"
+
+
 video_mode_image_pattern := A_ScriptDir . "\images\browser\youtube.png"
+
 web_server_command := "C:\Program Files (x86)\hfs.exe"
+
 tab_open_delay := 500 ; Важная задержка на то, чтобы дать новой вкладке открыться
 
+
+
 ; Глобальные переменные
-readerModeIsActive := false
+scriptIsEnabled := false
 
 isTextMode := false
 isVideoMode := false
@@ -20,44 +44,45 @@ readerModeTimeout := 120
 nvdaIsRun := false
 firefoxReadingIsActive := false
 
-; Функции
-toggleReaderMode() {
-	global readerModeIcon_Active
-	global readerModeIcon_Inactive
-	global readerModeIsActive
 
-	readerModeIsActive := !readerModeIsActive
-	if (readerModeIsActive) {
+; Функции
+toggleScriptMode() {
+	global reader_mode_active_tray_icon
+	global reader_mode_inactive_tray_icon
+	global scriptIsEnabled
+
+	scriptIsEnabled := !scriptIsEnabled
+	if (scriptIsEnabled) {
 		startWebServer()
-		Menu, Tray, Icon, %readerModeIcon_Active%
+		Menu, Tray, Icon, %reader_mode_active_tray_icon%
 	} else {
-		Menu, Tray, Icon, %readerModeIcon_Inactive%
+		Menu, Tray, Icon, %reader_mode_inactive_tray_icon%
 	}
 }
 
 prolongateReaderMode() {
-	global readerModeIsActive
-	readerModeIsActive := true
+	global scriptIsEnabled
+	scriptIsEnabled := true
 }
 
 
 openTextSearch() {
-	global readerModeIsActive
-	if (readerModeIsActive) {
+	global scriptIsEnabled
+	if (scriptIsEnabled) {
 		activateTextSearch()
 	}
 }
 
 openVideoSearch() {
-	global readerModeIsActive
-	if (readerModeIsActive) {
+	global scriptIsEnabled
+	if (scriptIsEnabled) {
 		activateVideoSearch()
 	}
 }
 
 openMail(){
-	global readerModeIsActive
-	if (readerModeIsActive) {
+	global scriptIsEnabled
+	if (scriptIsEnabled) {
 		activateMailMode()
 	}
 }
@@ -156,8 +181,8 @@ pageIsLoaded() {
 }
 
 nextLink(){
-	global readerModeIsActive
-	if (readerModeIsActive) {
+	global scriptIsEnabled
+	if (scriptIsEnabled) {
 		prolongateReaderMode()
 		startNVDA()
 		focusFirefox()
@@ -166,8 +191,8 @@ nextLink(){
 }
 
 prevLink(){
-	global readerModeIsActive
-	if (readerModeIsActive) {
+	global scriptIsEnabled
+	if (scriptIsEnabled) {
 		prolongateReaderMode()
 		startNVDA()
 		focusFirefox()
@@ -176,10 +201,10 @@ prevLink(){
 }
 
 openLink(){
-	global readerModeIsActive
+	global scriptIsEnabled
 	global tab_open_delay
 
-	if (readerModeIsActive) {
+	if (scriptIsEnabled) {
 		stopNVDA()
 		focusFirefox()
 		Send, {Return}
@@ -194,8 +219,8 @@ openLink(){
 }
 
 closeTab(){
-	global readerModeIsActive
-	if (readerModeIsActive) {
+	global scriptIsEnabled
+	if (scriptIsEnabled) {
 		focusFirefox()
 		Send, {Ctrl down}w{Ctrl up}
 	}
@@ -205,19 +230,47 @@ closeTab(){
 
 
 ; Работа с режимом чтения Firefox
-readerModeIsActiveAvailable() {
-	global reader_mode_image_pattern
-	ImageSearch, imageX, imageY, 1132, 46, 1158, 73, %reader_mode_image_pattern%
-	return (imageX and imageY)
+readerModeAvailable() {
+	CoordMode, Pixel, Screen
+
+	global reader_mode_available_top_icon
+	global reader_mode_top_x1
+	global reader_mode_top_y1
+	global reader_mode_top_x2
+	global reader_mode_top_y2
+
+	ImageSearch, topIconX, topIconY, reader_mode_top_x1, reader_mode_top_y1, reader_mode_top_x2, reader_mode_top_y2, %reader_mode_available_top_icon%
+
+	CoordMode, Pixel
+
+	return (topIconX and topIconY)
 }
 
-readerModeIsActiveActivated() {
-	global reader_mode_image_pattern
-	ImageSearch, imageX, imageY, 0, 168, 45, 211, %reader_mode_image_pattern%
-	return (imageX and imageY)
+isReaderMode() {
+	global reader_mode_activated_top_icon
+	global reader_mode_top_x1
+	global reader_mode_top_y1
+	global reader_mode_top_x2
+	global reader_mode_top_y2
+
+	global reader_mode_enabled_side_icon
+	global reader_mode_side_x1
+	global reader_mode_side_y1
+	global reader_mode_side_x2
+	global reader_mode_side_y2
+	
+	CoordMode, Pixel, Screen
+
+	ImageSearch, topX, topY, reader_mode_top_x1, reader_mode_top_y1, reader_mode_top_x2, reader_mode_top_y2, %reader_mode_activated_top_icon%
+
+	ImageSearch, sideX, sideY, reader_mode_side_x1, reader_mode_side_y1, reader_mode_side_x2, reader_mode_side_y2, %reader_mode_enabled_side_icon%
+
+	CoordMode, Pixel
+
+	return (topX and topY and sideX and sideY)
 }
 
-activateReaderView() {
+activateReaderMode() {
 	Click, 1146, 59
 }
 
@@ -305,9 +358,9 @@ isYoutubeVideo() {
 }
 
 videoPlayPause() {
-	global readerModeIsActive
+	global scriptIsEnabled
 	
-	if ( readerModeIsActive ) {
+	if ( scriptIsEnabled ) {
 		if ( isYoutubeVideo() ) {
 			Click, 65, 529
 		}
@@ -315,9 +368,9 @@ videoPlayPause() {
 }
 
 videoSkipForward() {
-	global readerModeIsActive
+	global scriptIsEnabled
 	
-	if ( readerModeIsActive ) {
+	if ( scriptIsEnabled ) {
 		if ( isYoutubeVideo() ) {
 			Send, {Right}
 		}
@@ -325,9 +378,9 @@ videoSkipForward() {
 }
 
 videoSkipBack() {
-	global readerModeIsActive
+	global scriptIsEnabled
 	
-	if ( readerModeIsActive ) {
+	if ( scriptIsEnabled ) {
 		if ( isYoutubeVideo() ) {
 			Send, {Left}
 		}
@@ -341,6 +394,8 @@ isVideoMode() {
 	ImageSearch, OutputVarX, OutputVarY, 65, 110, 160, 140, %video_mode_image_pattern%
 	return (OutputVarX && OutputVarY)
 }
+
+
 
 
 ; Временные отладочные функции
@@ -367,18 +422,18 @@ if (Process, Exist, nvda.exe) {
 
 startReaderModeTimeout() {
 	global readerModeTimeout
-	global readerModeIsActive
+	global scriptIsEnabled
 	while (readerModeTimeout > 0) {
 		Sleep, 1000
 		readerModeTimeout := readerModeTimeout - 1
 	}
-	readerModeIsActive := false
+	scriptIsEnabled := false
 }
 
 
 
 ScrollLock::
-toggleReaderMode()
+toggleScriptMode()
 return
 
 
@@ -418,44 +473,61 @@ closeTab()
 return
 
 F6::
-if (readerModeIsActive) {
+if (scriptIsEnabled) {
 	startStopReading()
 }
 return
 
+~F7::
+if (readerModeAvailable()) {
+	MsgBox "READER MODE AVAILABLE " + %ErrorLevel%
+} else {
+	MsgBox "READER MODE =NOT= AVAILABLE " + %ErrorLevel%
+}
+return
+
+F8::
+if (isReaderMode()) {
+	MsgBox "READER MODE ACTIVE " + %ErrorLevel%
+} else {
+	MsgBox "READER MODE NOT ACTIVE " + %ErrorLevel%
+}
+return
 
 ~a::
-if (readerModeIsActive) {
+if (scriptIsEnabled) {
 	if (isVideoMode()) {
 		videoSkipBack()
 	}
-	;skipBack()
+	else if (isReaderMode()) {
+		skipBack()
+	}
 }
 return
 
 ~s::
-if (readerModeIsActive) {
+if (scriptIsEnabled) {
 	if (isVideoMode()) {
 		videoPlayPause()
 	}
-	;else if (isTextMode()) {
-	;	startStopReading()
-	;}
+	else if (isReaderMode()) {
+		startStopReading()
+	}
 }
 return
 
 ~d::
-if (readerModeIsActive) {
+if (scriptIsEnabled) {
 	if (isVideoMode()) {
 		videoSkipForward()
 	}
-	;skipForward()
+	else if (isReaderMode()) {
+		skipForward()
+	}
 }
 return
 
-~F7::
-startNVDA()
-return
+
 
 ;^#z::
 ;Process, Close, nvda.exe
