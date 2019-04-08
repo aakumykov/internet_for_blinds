@@ -2,9 +2,13 @@
 ;CoordMode, Pixel, Screen
 
 ; Настройки
+program_name := "reader_for_blinds"
+system_data_dir := A_AppDataCommon . "\" . program_name
+last_run_file := system_data_dir . "\last_run.ini"
+firefox_cold_start_threshold := 3600*8 	; в секундах
+
 reader_mode_active_tray_icon := A_ScriptDir . "\images\tray-icons\reader-mode-active.png"
 reader_mode_inactive_tray_icon := A_ScriptDir . "\images\tray-icons\reader-mode-inactive.png"
-
 page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\firefox-page-load-complete.bmp"
 
 ; Верхняя иконка режима чтения
@@ -432,13 +436,91 @@ startReaderModeTimeout() {
 
 
 
+; Высокоуровневые функции (первого уровня)
+startSearch() {
+	startFirefox("http://ya.ru")
+}
+
+
+; Функции второго уровня
+startFirefox(url) {
+	if (!isFirefoxRunning()) {
+		last_run_timeout := getLastRunTimeout()
+		
+		if ((-1 == last_run_timeout) or (%last_run_timeout% > %firefox_cold_start_threshold%)) {
+			informAboutColdStart()
+		}
+		else {
+			informAboutOpeningSearch()
+		}
+		
+		saveLastRunTime()
+	}
+	
+	Run, firefox.exe %url%, C:\Program Files\Mozilla Firefox\
+}
+
+informAboutOpeningSearch() {
+	;playSoundFile("C:\Users\User\Documents\reader\sounds\ru\opening-search.mp3")
+	playSoundFile("C:\Users\User\Documents\reader\sounds\ru\search-slowly-opening.mp3")
+}
+
+informAboutColdStart() {
+	playSoundFile("C:\Users\User\Documents\reader\sounds\ru\cold-start-wait.mp3")
+}
+
+
+; Функции третьего уровня
+isFirefoxRunning() {
+	Process, Exist, firefox.exe
+	return (0 != %ErrorLevel%)
+}
+
+
+; Вспомогательные функции
+createSystemDataDir() {
+	global system_data_dir
+	if (!FileExist(system_data_dir)) {
+		FileCreateDir, %system_data_dir%
+	}
+}
+
+saveLastRunTime() {
+	global last_run_file
+	createSystemDataDir()
+	IniWrite, %A_Now%, %last_run_file%, Common, last_run_time
+}
+
+getLastRunTimeout() {
+	global last_run_file
+	IniRead, lr_time, %last_run_file%, Common, last_run_time, -1
+	;current_time := A_Now
+	if (-1 == lr_time) 
+		return -1
+	else
+		return A_Now - lr_time
+}
+
+playSoundFile(fullFilePath) {
+	Run, mpg123.exe %fullFilePath%, C:\Program Files\mpg123, Hide
+}
+
+
+
+
+
+
+
+
+
 ScrollLock::
 toggleScriptMode()
 return
 
 
 ~Numpad7::
-openTextSearch()
+;openTextSearch()
+startSearch()
 return
 
 ~Numpad3::
