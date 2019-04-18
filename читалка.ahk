@@ -455,6 +455,9 @@ startFirefox(url) {
 		}
 		
 		saveLastRunTime()
+
+	} else {
+		focusFirefox()
 	}
 	
 	Run, firefox.exe %url%, C:\Program Files\Mozilla Firefox\
@@ -517,8 +520,8 @@ ScrollLock::
 toggleScriptMode()
 return
 
-
-~Numpad7::
+; СДЕЛАТЬ: фокус окна Firefox при запуске поиска и т.д.
+Numpad7::
 ;openTextSearch()
 startSearch()
 return
