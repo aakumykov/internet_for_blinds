@@ -218,7 +218,7 @@ openLink(){
 			Sleep, 100
 		}
 
-		MsgBox "PAGE IS LOADED"
+		;MsgBox "PAGE IS LOADED"
 	}
 }
 
