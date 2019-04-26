@@ -1,10 +1,11 @@
 // ==UserScript==
-// @name     mail.yandex.ru (список)
+// @name     Яндекс.Почта (список)
 // @version  1
 // @grant    none
-// @match	   https://mail.yandex.ru/lite
-// @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require  https://raw.githubusercontent.com/aakumykov/static_test/master/date_functions.js
+// @match    https://mail.yandex.ru/lite
+// @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
+// @require  https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/date_functions.js
+// @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/html_functions.js
 // ==/UserScript==
 
 // Системная настройка JQuery
@@ -58,24 +59,12 @@ function fetchMessageList() {
 }
 
 
-// --- Очистка страницы ---
-function clearPage() {
-  //alert('clearPage');
-  //console.log('clearPage()');
-  $('body').empty();
-  $('body').append("<button id='startPoint4'>4 шага до списка сообщений</button>");
-  $('body').append("<button id='startPoint3'>3 шага до списка сообщений</button>");
-  $('body').append("<button id='startPoint2'>2 шага до списка сообщений</button>");
-  $('body').append("<button id='startPoint1'>1 шаг до списка сообщений</button>");
-}
-
-
 // --- Создание новых элементов ---
 function createMessageLine(date, from, title, link) {
   //console.log("DATE: "+date);
   let linePrefix = "Письмо, получено ";
   let humanDate = humanizeDate(date);
- 	return $("<li><a href='"+link+"' target='_blank'>"+linePrefix+" "+humanDate+", прислал "+from+", заголовок: "+title+"</a></li>");
+  return $("<li><a href='"+link+"' target='_blank'>"+linePrefix+" "+humanDate+", прислал "+from+", заголовок: "+title+"</a></li>");
 }
 
 function createMessageList() {
@@ -93,7 +82,7 @@ function createMessageList() {
 $(document).ready(function(){
   playAudio('http://127.0.0.1/mailbox-opened.mp3');
   fetchMessageList();
-  clearPage();
+  clearPage("списка сообщений");
   createMessageList();
   $('#startPoint4').focus();
 });
