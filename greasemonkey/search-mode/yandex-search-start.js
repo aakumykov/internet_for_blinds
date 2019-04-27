@@ -4,7 +4,7 @@
 // @grant    none
 // @match    https://ya.ru/
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play-audio.js
+// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
 
 var $ = window.jQuery;

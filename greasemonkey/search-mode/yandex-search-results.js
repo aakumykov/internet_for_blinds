@@ -3,7 +3,7 @@
 // @version  1
 // @grant    none
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play-audio.js
+// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
 // @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/html_functions.js
 // @include  https://yandex.ru/search/*
 // ==/UserScript==
