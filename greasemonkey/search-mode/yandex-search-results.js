@@ -1,94 +1,81 @@
 // ==UserScript==
-// @name     ������ (�����)
+// @name     Яндекс (результаты поиска)
 // @version  1
 // @grant    none
-// @match	   https://ya.ru/
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
+// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play-audio.js
+// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/html_functions.js
+// @include  https://yandex.ru/search/*
 // ==/UserScript==
 
 var $ = window.jQuery;
 
-function playAudio(audioURL, completeCallback){
-  var audioTag = document.createElement('audio');
-  audioTag.src = audioURL;
+
+$(document).ready(function(e){
+
+  // Оповещаю об завершении поиска
+  playAudio('http://127.0.0.1/search-complete.mp3');
   
-  if (null!=completeCallback) audioTag.addEventListener('ended', function(){completeCallback();}, true);
-  else console.log("completeCallback is NULL");
   
-  audioTag.play();
-}
-
-var observer = new MutationObserver(function(mutations) {
-	//console.log('���������: '+mutations.length);
-
-  mutations.forEach(function(oneMutation){
-    //console.log(oneMutation.target.className);
+  // Элемент на странице, к которому будет прикреплён программно созданный список
+  var topContainer = document.querySelector('.content__left');
+  
+  
+  // HTML-элемент контейнер наших результатов
+  var newResultsContainer = document.createElement('UL');
+    newResultsContainer.id = 'newResultsContainer';
+    newResultsContainer.style.listStyleType = 'none';
+    newResultsContainer.style.borderStyle = 'dashed';
+    newResultsContainer.style.borderWidth = 4;
+    newResultsContainer.style.borderColor = 'limegreen';
+    newResultsContainer.style.width = '100%';
+    newResultsContainer.style.lineHeight = '2em';
+    newResultsContainer.style.fontSize = '200%';
+  
+  
+  // Собираю ссылки со страницы
+  var linkItems = document.querySelectorAll('A.organic__url');
+  //alert("linkItems.length="+linkItems.length);
+  
+  
+  // Обрабатываю ссылки
+  for (var i=0; i<linkItems.length; i++) {
+    var item = linkItems[i];
     
-    if (questionAwaited(oneMutation)) {
-      console.log("========= ��������� �������� ============");
-    }
+    var linkText = item.innerText;
+    var linkAddress = item.href;
+    //alert(linkText+"\n"+linkAddress);
     
-    if (questionAccepted(oneMutation)) { 
-      console.log("============ ������ ������ ============="); 
-    }
+    var resultLine = document.createElement('LI');
     
-    if (questionMissed(oneMutation)) { 
-      console.log("============ ������ ����������� ============="); 
-    }
-  });
-
+    var resultAnchor = document.createElement('A');
+        resultAnchor.href = linkAddress;
+        resultAnchor.innerText = linkText;
+        resultAnchor.target = '_blank';
+    
+    resultLine.appendChild(resultAnchor);
+    
+    newResultsContainer.appendChild(resultLine);
+  }
+  
+  
+  // Очищаю страницу
+  //var element = document.createElement("link");
+  //element.setAttribute("rel", "stylesheet");
+  //element.setAttribute("type", "text/css");
+  //element.setAttribute("href", "external.css");
+  //document.getElementsByTagName("head")[0].appendChild(element);
+  clearPage("результатов поиска");
+  
+  document.body.style="";
+  document.body.setAttribute("class","");
+  document.body.setAttribute("style","");
+  document.body.setAttribute("data-bem","");
+  document.body.setAttribute("data-log-node","");
+  
+  
+  // Прикрепляю воссозданный список результатов
+  document.body.appendChild(newResultsContainer);
+  
 });
 
-$(document).ready(function(){
-  console.log("�������� ��������");
-  observer.observe(document.body,{childList: true, subtree: true, attributes: true, characterData: false});
-  //activateVoiceSearch();
-  playAudio('http://127.0.0.1/what-you-want-to-find.mp3', activateVoiceSearch);
-});
-
-function activateVoiceSearch(){
-  $('DIV.input__voice-search').trigger('click');
-}
-
-// �������� - ������ "Mutation" �� MutationObserver.
-function questionAwaited(oneMutation) {
-	var className = oneMutation.target.className; 
-  if (className.match("voice-search-popup_speechkit-state_start")) {
-  	if (className.match("voice-search-popup_state_opened")) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function questionAccepted(oneMutation) {
-	var className = oneMutation.target.className; 
-  if (className.match("voice-search-popup_state_opened")) {
-  	if (className.match("voice-search-popup_speechkit-state_recognized")) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function questionMissed(oneMutation) {
-	var className = oneMutation.target.className; 
-  if (className.match("voice-search-popup_speechkit-state_start")) {
-  	if (className.match('voice-search-popup_state_closed')) {
-      return true;
-    }
-  }
-  return false;
-}
-
-//voice-search-popup voice-search-popup_state_opened i-bem voice-search-popup_js_inited voice-search-popup_speechkit-state_access
-//voice-search-popup voice-search-popup_state_opened i-bem voice-search-popup_js_inited voice-search-popup_speechkit-state_init
-//voice-search-popup voice-search-popup_state_opened i-bem voice-search-popup_js_inited voice-search-popup_speechkit-state_start
-//voice-search-popup voice-search-popup_state_opened i-bem voice-search-popup_js_inited voice-search-popup_speechkit-state_error
-
-//voice-search-popup voice-search-popup_state_closed i-bem voice-search-popup_js_inited voice-search-popup_speechkit-state_start
-  
-//voice-search-popup_state_closed voice-search-popup_speechkit-state_start
-//voice-search-popup_state_opened voice-search-popup_speechkit-state_start
-
-//voice-search-popup_speechkit-state_recognized
