@@ -36,6 +36,9 @@ web_server_command := "C:\Program Files (x86)\hfs.exe"
 tab_open_delay := 500 ; Важная задержка на то, чтобы дать новой вкладке открыться
 
 
+; Звуки
+sounds_dir := A_ScriptDir . "\sounds\ru\"
+
 
 ; Глобальные переменные
 scriptIsEnabled := false
@@ -211,6 +214,9 @@ openLink(){
 	if (scriptIsEnabled) {
 		stopNVDA()
 		focusFirefox()
+
+		sayPageIsOpening()
+
 		Send, {Return}
 		Sleep, %tab_open_delay%
 
@@ -218,7 +224,7 @@ openLink(){
 			Sleep, 100
 		}
 
-		;MsgBox "PAGE IS LOADED"
+		sayPageHasOpened()
 	}
 }
 
@@ -508,9 +514,15 @@ playSoundFile(fullFilePath) {
 	Run, mpg123.exe %fullFilePath%, C:\Program Files\mpg123, Hide
 }
 
+sayPageIsOpening() {
+	global sounds_dir
+	playSoundFile(sounds_dir . "page-is-opening.mp3")
+}
 
-
-
+sayPageHasOpened() {
+	global sounds_dir
+	playSoundFile(sounds_dir . "page-has-opened.mp3")
+}
 
 
 
