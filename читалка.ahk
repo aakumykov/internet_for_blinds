@@ -591,7 +591,7 @@ playSound(soundFileName) {
 }
 
 
-
+; СДЕЛАТЬ: остановка чтения ситаницы9при запуске поиска
 
 
 ScrollLock::
@@ -604,11 +604,11 @@ Numpad7::
 startSearch()
 return
 
-~Numpad3::
+Numpad3::
 openVideoSearch()
 return
 
-~Numpad9::
+Numpad9::
 openMail()
 return
 
@@ -666,11 +666,6 @@ skipForward()
 return
 
 
-
-;^#z::
-;Process, Close, nvda.exe
-;Runwait, taskkill /im firefox.exe /f
-;return
 
 ; Блоки с метками
 WindowTitleCheck:
