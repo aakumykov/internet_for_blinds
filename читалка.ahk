@@ -251,7 +251,7 @@ readPage() {
 	sayPageHasOpened()
 	activateReaderMode()
 	Sleep, 2000
-	startStopReading()
+	textPlayPause()
 }
 
 sayPageIsOpening() {
@@ -333,7 +333,46 @@ clickReadPrevParagraph() {
 	Click, 102, 222
 }
 
-startStopReading() {
+playPause() {
+	global scriptIsEnabled
+
+	if (scriptIsEnabled) {
+		if (isVideoMode()) {
+			videoPlayPause()
+		}
+		else if (isReaderMode()) {
+			textPlayPause()
+		}
+	}
+}
+
+skipBack() {
+	global scriptIsEnabled
+
+	if (scriptIsEnabled) {
+		if (isVideoMode()) {
+			videoSkipBack()
+		}
+		else if (isReaderMode()) {
+			textSkipBack()
+		}
+	}
+}
+
+skipForward() {
+	global scriptIsEnabled
+
+	if (scriptIsEnabled) {
+		if (isVideoMode()) {
+			videoSkipForward()
+		}
+		else if (isReaderMode()) {
+			textSkipForward()
+		}
+	}
+}
+
+textPlayPause() {
 	global firefoxReadingIsActive
 	if (!firefoxReadingIsActive) {
 		prolongateReaderMode()
@@ -352,7 +391,7 @@ startStopReading() {
 	}
 }
 
-skipForward() {
+textSkipForward() {
 	global firefoxReadingIsActive
 	if (firefoxReadingIsActive) {
 		prolongateReaderMode()
@@ -362,7 +401,7 @@ skipForward() {
 	}
 }
 
-skipBack() {
+textSkipBack() {
 	global firefoxReadingIsActive
 	if (firefoxReadingIsActive) {
 		prolongateReaderMode()
@@ -592,7 +631,7 @@ return
 
 F6::
 if (scriptIsEnabled) {
-	startStopReading()
+	textPlayPause()
 }
 return
 
@@ -614,37 +653,16 @@ F8::
 sayPageHasOpened()
 return
 
-~a::
-if (scriptIsEnabled) {
-	if (isVideoMode()) {
-		videoSkipBack()
-	}
-	else if (isReaderMode()) {
-		skipBack()
-	}
-}
+a::
+skipBack()
 return
 
-~s::
-if (scriptIsEnabled) {
-	if (isVideoMode()) {
-		videoPlayPause()
-	}
-	else if (isReaderMode()) {
-		startStopReading()
-	}
-}
+s::
+playPause()
 return
 
-~d::
-if (scriptIsEnabled) {
-	if (isVideoMode()) {
-		videoSkipForward()
-	}
-	else if (isReaderMode()) {
-		skipForward()
-	}
-}
+d::
+skipForward()
 return
 
 
