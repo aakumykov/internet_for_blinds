@@ -224,11 +224,11 @@ openLink(){
 			Sleep, 100
 		}
 
-		sayPageHasOpened()
+		readPage()
 	}
 }
 
-closeTab(){
+closePage(){
 	global scriptIsEnabled
 	if (scriptIsEnabled) {
 		focusFirefox()
@@ -236,10 +236,42 @@ closeTab(){
 	}
 	firefoxReadingIsActive := false
 	stopReadClipboard()
+	sayPageHasClosed()
 }
 
 
 ; Работа с режимом чтения Firefox
+readPage() {
+	if (!readerModeAvailable()) {
+		sayNoReadableVersion()
+		closePage()
+		return
+	}
+
+	sayPageHasOpened()
+	activateReaderMode()
+	Sleep, 2000
+	startStopReading()
+}
+
+sayPageIsOpening() {
+	playSound("page-is-opening.mp3")
+}
+
+sayPageHasOpened() {
+	playSound("page-has-opened.mp3")
+}
+
+sayPageHasClosed() {
+	playSound("page-has-closed.mp3")
+}
+
+sayNoReadableVersion() {
+	playSound("no-readable-version.mp3")
+}
+
+
+
 readerModeAvailable() {
 	CoordMode, Pixel, Screen
 
@@ -280,8 +312,9 @@ isReaderMode() {
 	return (topX and topY and sideX and sideY)
 }
 
+; TODO: сделать ПОИСК кнопки режима чтения, так как из-за значков дополнений она смещается
 activateReaderMode() {
-	Click, 1146, 59
+	Click, 1116, 53
 }
 
 clickReadingControls() {
@@ -503,7 +536,6 @@ saveLastRunTime() {
 getLastRunTimeout() {
 	global last_run_file
 	IniRead, lr_time, %last_run_file%, Common, last_run_time, -1
-	;current_time := A_Now
 	if (-1 == lr_time) 
 		return -1
 	else
@@ -514,14 +546,9 @@ playSoundFile(fullFilePath) {
 	Run, mpg123.exe %fullFilePath%, C:\Program Files\mpg123, Hide
 }
 
-sayPageIsOpening() {
+playSound(soundFileName) {
 	global sounds_dir
-	playSoundFile(sounds_dir . "page-is-opening.mp3")
-}
-
-sayPageHasOpened() {
-	global sounds_dir
-	playSoundFile(sounds_dir . "page-has-opened.mp3")
+	playSoundFile(sounds_dir . "\" . soundFileName)
 }
 
 
@@ -549,15 +576,9 @@ return
 
 F1::
 nextLink()
-;focusFirefox()
-;Click, 200, 200
-;Send, ^a
-;Sleep, 100
-;Send, ^c
-;say(clipboard)
 return
 
-~F2::
+F2::
 prevLink()
 return
 
@@ -565,8 +586,8 @@ F3::
 openLink()
 return
 
-~F4::
-closeTab()
+F4::
+closePage()
 return
 
 F6::
@@ -575,20 +596,22 @@ if (scriptIsEnabled) {
 }
 return
 
-~F7::
-if (readerModeAvailable()) {
-	MsgBox "READER MODE AVAILABLE " + %ErrorLevel%
-} else {
-	MsgBox "READER MODE =NOT= AVAILABLE " + %ErrorLevel%
-}
+F7::
+; if (readerModeAvailable()) {
+; 	MsgBox "READER MODE AVAILABLE " + %ErrorLevel%
+; } else {
+; 	MsgBox "READER MODE =NOT= AVAILABLE " + %ErrorLevel%
+; }
+readPage()
 return
 
 F8::
-if (isReaderMode()) {
-	MsgBox "READER MODE ACTIVE " + %ErrorLevel%
-} else {
-	MsgBox "READER MODE NOT ACTIVE " + %ErrorLevel%
-}
+; if (isReaderMode()) {
+; 	MsgBox "READER MODE ACTIVE " + %ErrorLevel%
+; } else {
+; 	MsgBox "READER MODE NOT ACTIVE " + %ErrorLevel%
+; }
+sayPageHasOpened()
 return
 
 ~a::
