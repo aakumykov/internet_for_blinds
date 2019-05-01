@@ -42,6 +42,7 @@ sounds_dir := A_ScriptDir . "\sounds\ru\"
 
 ; Глобальные переменные
 scriptIsEnabled := false
+playIsActive := false
 
 isTextMode := false
 isVideoMode := false
@@ -270,6 +271,13 @@ sayNoReadableVersion() {
 	playSound("no-readable-version.mp3")
 }
 
+sayPause() {
+	global playIsActive
+	if (!playIsActive) {
+		playSound("pause.mp3")
+	}
+}
+
 
 
 readerModeAvailable() {
@@ -335,8 +343,13 @@ clickReadPrevParagraph() {
 
 playPause() {
 	global scriptIsEnabled
+	global playIsActive
 
 	if (scriptIsEnabled) {
+
+		playIsActive := !playIsActive
+		sayPause()
+
 		if (isVideoMode()) {
 			videoPlayPause()
 		}
@@ -599,16 +612,16 @@ toggleScriptMode()
 return
 
 ; СДЕЛАТЬ: фокус окна Firefox при запуске поиска и т.д.
-Numpad7::
+~Numpad7::
 ;openTextSearch()
 startSearch()
 return
 
-Numpad3::
+~Numpad3::
 openVideoSearch()
 return
 
-Numpad9::
+~Numpad9::
 openMail()
 return
 
@@ -653,15 +666,15 @@ F8::
 sayPageHasOpened()
 return
 
-a::
+~a::
 skipBack()
 return
 
-s::
+~s::
 playPause()
 return
 
-d::
+~d::
 skipForward()
 return
 
