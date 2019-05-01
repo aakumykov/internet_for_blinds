@@ -77,6 +77,7 @@ prolongateReaderMode() {
 openTextSearch() {
 	global scriptIsEnabled
 	if (scriptIsEnabled) {
+		
 		activateTextSearch()
 	}
 }
@@ -84,6 +85,7 @@ openTextSearch() {
 openVideoSearch() {
 	global scriptIsEnabled
 	if (scriptIsEnabled) {
+		stopNVDA()
 		activateVideoSearch()
 	}
 }
@@ -150,6 +152,11 @@ startNVDA() {
 stopNVDA() {
 	global nvdaIsRun
 	Process, Close, nvda.exe
+	; Process, Close, nvda.exe
+	; Process, Close, nvda.exe
+	; Process, Close, nvda.exe
+	; Process, Close, nvda.exe
+	; Process, Close, nvda.exe
 	nvdaIsRun := false
 }
 
@@ -623,6 +630,7 @@ startSearch()
 return
 
 ~Numpad3::
+stopNVDA()
 openVideoSearch()
 return
 
@@ -659,7 +667,8 @@ F7::
 ; } else {
 ; 	MsgBox "READER MODE =NOT= AVAILABLE " + %ErrorLevel%
 ; }
-readPage()
+;readPage()
+stopNVDA()
 return
 
 F8::
