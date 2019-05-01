@@ -229,7 +229,7 @@ openLink(){
 	}
 }
 
-closePage(){
+closePage(withVoice){
 	global scriptIsEnabled
 	if (scriptIsEnabled) {
 		focusFirefox()
@@ -237,7 +237,9 @@ closePage(){
 	}
 	firefoxReadingIsActive := false
 	stopReadClipboard()
-	sayPageHasClosed()
+	
+	if (withVoice)
+		sayPageHasClosed()
 }
 
 
@@ -245,7 +247,7 @@ closePage(){
 readPage() {
 	if (!readerModeAvailable()) {
 		sayNoReadableVersion()
-		closePage()
+		closePage(false)
 		return
 	}
 
@@ -642,7 +644,7 @@ openLink()
 return
 
 F4::
-closePage()
+closePage(true)
 return
 
 F6::
