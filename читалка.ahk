@@ -272,10 +272,7 @@ sayNoReadableVersion() {
 }
 
 sayPause() {
-	global playIsActive
-	if (!playIsActive) {
-		playSound("pause.mp3")
-	}
+	playSound("pause.mp3")
 }
 
 
@@ -347,8 +344,12 @@ playPause() {
 
 	if (scriptIsEnabled) {
 
+		stopNVDA()
+
 		playIsActive := !playIsActive
-		sayPause()
+		if (!playIsActive) {
+			sayPause()
+		}
 
 		if (isVideoMode()) {
 			videoPlayPause()
@@ -387,14 +388,16 @@ skipForward() {
 
 textPlayPause() {
 	global firefoxReadingIsActive
-	if (!firefoxReadingIsActive) {
+
+	if (!firefoxReadinsgIsActive) {
 		prolongateReaderMode()
 		focusFirefox()
 		clickReadingControls()
 		clickPlayPause()
 		clickReadingControls()
 		firefoxReadingIsActive := true
-	} else {
+	}
+	else {
 		prolongateReaderMode()
 		focusFirefox()
 		clickReadingControls()
