@@ -1,6 +1,6 @@
 images_dir := A_ScriptDir . "\images\"
 
-searchImage2(image_pattern_file_name, x1, y1, x2, y2, use_absolute_coords) {
+searchImage(image_pattern_file_name, x1, y1, x2, y2, relative_mode) {
 
 	global images_dir
 
@@ -11,10 +11,10 @@ searchImage2(image_pattern_file_name, x1, y1, x2, y2, use_absolute_coords) {
 		return
 	}
 
-	if (use_absolute_coords) {
-		CoordMode, Pixel, Screen
-	} else {
+	if (relative_mode) {
 		CoordMode, Pixel, Window
+	} else {
+		CoordMode, Pixel, Screen
 	}
 
 	ImageSearch, OutputVarX, OutputVarY, x1, y1, x2, y2, %image_pattern_file_path%
