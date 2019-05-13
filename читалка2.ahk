@@ -1,32 +1,18 @@
-#SingleInstance Force
+#Include, config.ahk
+#Include, image_functions.ahk
+#Include, browser_functions.ahk
 
-images_dir := A_ScriptDir . "\images\"
 
 isSearchMode() {
-	return searchImage("\browser\search-mode-ya.ru-site.bmp", 165, 39, 273, 66)
+	focusFirefox()
+	return searchImage2("browser\search-mode-ya.ru-dark.bmp", 160, 40, 280, 74, false)
 }
-
-searchImage(imageFileName, x1, y1, x2, y2) {
-	CoordMode, Pixel, Screen
-
-	images_dir := A_ScriptDir . "\images\"
-	filePath := images_dir . "\" . imageFileName
-
-	if (!FileExist(filePath)) {
-		Throw, %filePath% . " does not exists!"
-	}
-
-	ImageSearch, OutputVarX, OutputVarY, 165, 39, 273, 66, %filePath%
-
-	return (OutputVarX && OutputVarY)
-}
-
 
 
 F1::
 if (isSearchMode()) {
-	MsgBox "yes"
+	MsgBox "SEARCH MODE"
 } else {
-	MsgBox "no"
+	MsgBox "OTHER MODE"
 }
 return

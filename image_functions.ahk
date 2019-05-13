@@ -1,18 +1,23 @@
-
 images_dir := A_ScriptDir . "\images\"
 
+searchImage2(image_pattern_file_name, x1, y1, x2, y2, use_absolute_coords) {
 
-searchImage(imageFileName, x1, y1, x2, y2) {
-	CoordMode, Pixel, Screen
+	global images_dir
 
-	images_dir := A_ScriptDir . "\images\"
-	filePath := images_dir . "\" . imageFileName
+	image_pattern_file_path := images_dir . "\" . image_pattern_file_name
 
-	if (!FileExist(filePath)) {
-		Throw, %filePath% . " does not exists!"
+	if (!FileExist(image_pattern_file_path)) {
+		Throw, "image '" . image_pattern_file_path . "' pattern not found"
+		return
 	}
 
-	ImageSearch, OutputVarX, OutputVarY, 165, 39, 273, 66, %filePath%
+	if (use_absolute_coords) {
+		CoordMode, Pixel, Screen
+	} else {
+		CoordMode, Pixel, Window
+	}
 
-	return (OutputVarX && OutputVarY)
+	ImageSearch, OutputVarX, OutputVarY, x1, y1, x2, y2, %image_pattern_file_path%
+
+	return (OutputVarX and OutputVarY)
 }
