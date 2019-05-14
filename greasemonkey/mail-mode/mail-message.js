@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name     mail.yandex.ru (сообщение)
+// @name     Яндекс.Почта (сообщение)
 // @version  1
 // @grant    none
 // @include  https://mail.yandex.ru/lite/message/*
