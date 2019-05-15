@@ -21,6 +21,16 @@ is_mail_list_mode() {
 	return searchImage("browser\mail-mode-list-dark.bmp", 138, 30, 520, 90, true)
 }
 
+is_video_search_results_mode() {
+	focusFirefox()
+	return searchImage("browser\search-mode-video-results-dark.bmp", 138, 30, 520, 90, true)
+}
+
+
+
+
+
+
 
 F1::
 if (is_search_start_mode()) {
@@ -42,6 +52,14 @@ return
 F3::
 if (is_mail_list_mode()) {
 	MsgBox "MAIL LIST MODE"
+} else {
+	MsgBox "OTHER MODE"
+}
+return
+
+F4::
+if (is_video_search_results_mode()) {
+	MsgBox "VIDEO RESULTS MODE"
 } else {
 	MsgBox "OTHER MODE"
 }
