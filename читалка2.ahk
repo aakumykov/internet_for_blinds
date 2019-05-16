@@ -9,6 +9,20 @@ is_search_start_mode() {
 	return searchImage("browser\1.bmp", 138, 30, 520, 90, true)
 }
 
+
+is_list_mode() {
+	if (is_text_search_results_mode()) {
+		return true
+	}
+	if (is_mail_list_mode()) {
+		return true
+	}
+	if (is_video_search_results_mode()) {
+		return true
+	}
+	return false
+}
+
 is_text_search_results_mode() {
 	focusFirefox()
 	return searchImage("browser\search-mode-results-dark.bmp", 138, 30, 520, 90, true)
@@ -33,8 +47,10 @@ is_video_search_results_mode() {
 
 
 F1::
-if (is_search_start_mode()) {
-	MsgBox "SEARCH MODE"
+; if (is_search_start_mode()) {
+if (is_list_mode()) {
+	; MsgBox "SEARCH MODE"
+	MsgBox "LIST MODE"
 } else {
 	MsgBox "OTHER MODE"
 }
