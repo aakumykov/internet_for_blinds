@@ -41,6 +41,11 @@ is_video_search_results_mode() {
 }
 
 
+is_mail_message_mode(){
+	focusFirefox()
+	return searchImage("browser\mail-mode-message-dark.bmp", 138, 30, 520, 90, true)
+}
+
 
 
 
@@ -58,8 +63,8 @@ return
 
 
 F2::
-if (is_text_search_results_mode()) {
-	MsgBox "SEARCH RESULTS MODE"
+if (is_mail_message_mode()) {
+	MsgBox "MAIL MESSAGE MODE"
 } else {
 	MsgBox "OTHER MODE"
 }
