@@ -32,7 +32,10 @@ is_text_search_results_mode() {
 
 is_mail_list_mode() {
 	focusFirefox()
-	return searchImage("browser\mail-mode-list-dark.bmp", 138, 30, 520, 90, true)
+	; return searchImage("browser\mail-mode-list-dark.bmp", 138, 30, 520, 90, true)
+	listMode1 := searchImage("browser\mail-mode-list-light-1.bmp", 138, 30, 520, 90, true)
+	listMode2 := searchImage("browser\mail-mode-list-light-2.bmp", 138, 30, 520, 90, true)
+	return (listMode1 or listMode2)
 }
 
 is_video_search_results_mode() {
@@ -43,7 +46,9 @@ is_video_search_results_mode() {
 
 is_mail_message_mode(){
 	focusFirefox()
-	return searchImage("browser\mail-mode-message-dark.bmp", 138, 30, 520, 90, true)
+	messageMode1 := searchImage("browser\mail-mode-message-light.bmp", 138, 30, 520, 90, true)
+	messageMode2 := searchImage("browser\mail-mode-message-dark.bmp", 138, 30, 520, 90, true)
+	return (messageMode1 or messageMode2)
 }
 
 
