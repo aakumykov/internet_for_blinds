@@ -61,7 +61,12 @@ is_text_reader_mode() {
 	return searchImage("browser\reader-mode-letter.bmp", 0, 90, 44, 250, true)
 }
 
-
+is_youtube_watch_mode() {
+	focusFirefox()
+	light := searchImage("browser\youtube-mode-watch-light.bmp", 138, 30, 520, 90, true)
+	dark := searchImage("browser\youtube-mode-watch-dark.bmp", 138, 30, 520, 90, true)
+	return (light or dark)
+}
 
 
 
@@ -70,10 +75,12 @@ is_text_reader_mode() {
 F1::
 ; if (is_search_start_mode()) {
 ; if (is_list_mode()) {
-if (is_text_reader_mode()) {
+; if (is_text_reader_mode()) {
+if (is_youtube_watch_mode()) {
 	; MsgBox "SEARCH MODE"
 	; MsgBox "LIST MODE"
-	MsgBox "TEXT READER MODE"
+	; MsgBox "TEXT READER MODE"
+	MsgBox "YOUTUBE WATCH MODE"
 } else {
 	MsgBox "OTHER MODE"
 }
