@@ -45,14 +45,17 @@ is_text_search_results_mode() {
 is_mail_list_mode() {
 	focusFirefox()
 	
-	; listMode1 := searchImage("browser\mail-mode-list-defailt-1.bmp", 138, 30, 520, 90, true)
-	; listMode2 := searchImage("browser\mail-mode-list-default-2.bmp", 138, 30, 520, 90, true)
+	listMode1 := searchImage("browser\mail-mode-list-default-1.bmp", 138, 30, 520, 90, true)
+	listMode2 := searchImage("browser\mail-mode-list-default-2.bmp", 138, 30, 520, 90, true)
 
-	listMode1 := searchImage("browser\mail-mode-list-light-1.bmp", 138, 30, 520, 90, true)
-	listMode2 := searchImage("browser\mail-mode-list-light-2.bmp", 138, 30, 520, 90, true)
+	; listMode1 := searchImage("browser\mail-mode-list-light-1.bmp", 136, 36, 600, 70, true)
+	; listMode2 := searchImage("browser\mail-mode-list-light-2.bmp", 136, 36, 600, 70, true)
 
-	;listMode1 := searchImage("browser\mail-mode-list-dark-1.bmp", 136, 36, 600, 70, true)
-	;listMode2 := searchImage("browser\mail-mode-list-dark-2.bmp", 136, 36, 600, 70, true)
+	; listMode1 := searchImage("browser\mail-mode-list-light-1-home.bmp", 136, 36, 600, 70, true)
+	; listMode2 := searchImage("browser\mail-mode-list-light-2-home.bmp", 136, 36, 600, 70, true)
+
+	; listMode1 := searchImage("browser\mail-mode-list-dark-1.bmp", 136, 36, 600, 70, true)
+	; listMode2 := searchImage("browser\mail-mode-list-dark-2.bmp", 136, 36, 600, 70, true)
 
 	return (listMode1 or listMode2)
 }
