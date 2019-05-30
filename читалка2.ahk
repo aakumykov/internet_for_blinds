@@ -6,8 +6,10 @@
 ; Определение текущего режима
 is_search_start_mode() {
 	focusFirefox()
-	; return searchImage("browser\search-mode-ya.ru-dark.bmp", 150, 30, 520, 90, true)
-	return searchImage("browser\1.bmp", 138, 30, 520, 90, true)
+	mode1 := searchImage("browser\search-mode-ya.ru-default.bmp", 135, 35, 520, 70, true)
+	mode2 := searchImage("browser\search-mode-ya.ru-light.bmp", 135, 35, 520, 70, true)
+	mode3 := searchImage("browser\search-mode-ya.ru-dark.bmp", 135, 35, 520, 70, true)
+	return (mode1 or mode2 or mode3)
 }
 
 is_list_mode() {
@@ -97,6 +99,9 @@ if (is_list_mode()) {
 else if (is_content_mode()) {
 	MsgBox "CONTENT MODE"
 }
+else if (is_search_start_mode()) {
+	MsgBox "SEARCH START MODE"	
+}
 else {
 	MsgBox "OTHER MODE"
 }
@@ -104,17 +109,20 @@ return
 
 
 F2::
-if (is_mail_list_mode()) {
-		MsgBox "MAIL LIST MODE"
-	} else {
-		MsgBox "NOT MAIL LIST MODE"
-	}
+; if (is_mail_list_mode()) {
+if (is_search_start_mode()) {
+	; MsgBox "MAIL LIST MODE"
+	MsgBox "SEARCH START MODE"
+} else {
+	; MsgBox "NOT MAIL LIST MODE"
+	MsgBox "NOT SEARCH START MODE"
+}
 return
 
+; w:
+; step_up()
+; return
 
-F3::
-return
-
-
-F4::
-return
+; ~x:
+; step_down()
+; return
