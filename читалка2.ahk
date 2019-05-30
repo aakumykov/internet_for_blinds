@@ -1,4 +1,5 @@
-#Include, config.ahk
+#Include, config_system.ahk
+#Include, config_user.ahk
 #Include, image_functions.ahk
 #Include, browser_functions.ahk
 #Include, mode_detection_functions.ahk
@@ -25,7 +26,7 @@ return
 
 F2::
 ; if (is_mail_list_mode()) {
-if (search_image_in_address_bar("browser\search-mode-ya.ru-dark.bmp", true)) {
+if (searchImageInAddressBar("browser\search-mode-ya.ru-dark.bmp", true)) {
 	; MsgBox "MAIL LIST MODE"
 	MsgBox "SEARCH START MODE"
 } else {

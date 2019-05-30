@@ -1,4 +1,4 @@
-images_dir := A_ScriptDir . "\images\"
+
 
 searchImage(image_pattern_file_name, x1, y1, x2, y2, relative_mode) {
 
