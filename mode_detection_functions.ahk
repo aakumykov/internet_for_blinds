@@ -37,7 +37,10 @@ is_content_mode() {
 ; Виды списка
 is_text_search_results_mode() {
 	focusFirefox()
-	return searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)
+	mode1 := searchImageInAddressBar("browser\search-mode-results-default.bmp", true)
+	mode2 := searchImageInAddressBar("browser\search-mode-results-light.bmp", true)
+	mode3 := searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)
+	return (mode1 or mode2 or mode3)
 }
 
 is_mail_list_mode() {
