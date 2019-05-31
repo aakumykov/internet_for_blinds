@@ -1,10 +1,9 @@
-function clearPage(stepButtonsLabel) {
+function clearPage(container, stepButtonsLabel) {
   $('body').empty();
 
   if (null != stepButtonsLabel) {
-	  $('body').append("<button id='startPoint4'>4 шага до "+stepButtonsLabel+"</button>");
-	  $('body').append("<button id='startPoint3'>3 шага до "+stepButtonsLabel+"</button>");
-	  $('body').append("<button id='startPoint2'>2 шага до "+stepButtonsLabel+"</button>");
-	  $('body').append("<button id='startPoint1'>1 шаг до "+stepButtonsLabel+"</button>");
+    for (var i=1; i<4; i++) {
+      $("<button id='startPoint"+i+"'>"+i+" шага до "+stepButtonsLabel+"</button>").insertBefore($(container).children().first());
+    }
   }
 }
