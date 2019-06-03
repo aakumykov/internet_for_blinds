@@ -67,7 +67,7 @@ is_video_search_results_mode() {
 ; Виды содержимого
 is_text_reader_mode() {
 	focusFirefox()
-	return searchImage("browser\reader-mode-letter.bmp", 0, 90, 44, 250, true)
+	return searchImage("browser\reader-mode-letter-default-home.bmp", 0, 90, 44, 250, true)
 }
 
 is_mail_message_mode(){
