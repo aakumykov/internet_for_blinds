@@ -7,6 +7,15 @@
 #Include, reader_mode_functions.ahk
 
 
+
+
+
+playPause() {
+	if (is_text_reader_mode()) {
+		textPlayPause()
+	}
+}
+
 stepBack() {
 	if (is_list_mode()) {
 		prevLink()
@@ -61,10 +70,15 @@ if (is_text_reader_mode()) {
 }
 return
 
+
 w::
 stepBack()
 return
 
 x::
 stepForward()
+return
+
+s::
+playPause()
 return

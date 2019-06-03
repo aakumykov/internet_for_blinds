@@ -1,3 +1,6 @@
+firefoxReadingIsActive := false
+
+
 textSkipForward() {
 	clickReadingControls()
 	clickReadNextParagraph()
@@ -10,6 +13,20 @@ textSkipBack() {
 	clickReadingControls()
 }
 
+textPlayPause() {
+	focusFirefox()
+	clickReadingControls()
+	clickPlayPause()
+	clickReadingControls()
+
+	global firefoxReadingIsActive
+	firefoxReadingIsActive := !firefoxReadingIsActive
+}
+
+
+
+
+
 clickReadingControls() {
 	Click 22, 227
 }
@@ -20,4 +37,8 @@ clickReadNextParagraph() {
 
 clickReadPrevParagraph() {
 	Click, 102, 222
+}
+
+clickPlayPause() {
+	Click, 204, 222
 }
