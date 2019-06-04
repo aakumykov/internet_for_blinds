@@ -5,14 +5,16 @@
 #Include, mode_detection_functions.ahk
 #Include, list_mode_functions.ahk
 #Include, reader_mode_functions.ahk
-
-
+#Include, video_mode_functions.ahk
 
 
 
 playPause() {
 	if (is_text_reader_mode()) {
 		textPlayPause()
+	}
+	else if (is_youtube_watch_mode()) {
+		videoPlayPause()
 	}
 }
 
@@ -23,6 +25,9 @@ stepBack() {
 	else if (is_text_reader_mode()) {
 		textSkipBack()
 	}
+	else if (is_youtube_watch_mode()) {
+		videoSkipBack()
+	}
 }
 
 stepForward() {
@@ -32,9 +37,10 @@ stepForward() {
 	else if (is_text_reader_mode()) {
 		textSkipForward()
 	}
+	else if (is_youtube_watch_mode()) {
+		videoSkipForward()
+	}
 }
-
-
 
 
 
@@ -59,14 +65,17 @@ return
 F2::
 ; if (is_mail_list_mode()) {
 ; if (searchImageInAddressBar("browser\search-mode-ya.ru-dark.bmp", true)) {
-if (is_text_reader_mode()) {
+; if (is_text_reader_mode()) {
+if (is_youtube_watch_mode()) {
 	; MsgBox "MAIL LIST MODE"
 	; MsgBox "SEARCH START MODE"
-	MsgBox "TEXT READER MODE"
+	; MsgBox "TEXT READER MODE"
+	MsgBox "VIDEO MODE"
 } else {
 	; MsgBox "NOT MAIL LIST MODE"
 	; MsgBox "NOT SEARCH START MODE"
-	MsgBox "NOT TEXT READER MODE"
+	; MsgBox "NOT TEXT READER MODE"
+	MsgBox "NOT VIDEO MODE"
 }
 return
 
