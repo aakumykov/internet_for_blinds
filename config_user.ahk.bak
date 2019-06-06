@@ -8,7 +8,7 @@
 ; address_bar_y2 := 70
 
 ; Работа
-address_bar_x1 := 130
-address_bar_y1 := 30
+address_bar_x1 := 136
+address_bar_y1 := 36
 address_bar_x2 := 600
-address_bar_y2 := 75
+address_bar_y2 := 69

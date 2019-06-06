@@ -44,6 +44,23 @@ stepForward() {
 
 
 
+openSearch() {
+	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
+}
+
+openMail() {
+	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
+}
+
+
+Numpad3::
+openMail()
+return
+
+Numpad9::
+openSearch()
+return
+
 
 
 F1::
@@ -66,7 +83,11 @@ F2::
 ; if (is_mail_list_mode()) {
 ; if (searchImageInAddressBar("browser\search-mode-ya.ru-dark.bmp", true)) {
 ; if (is_text_reader_mode()) {
-if (is_youtube_watch_mode()) {
+; if (searchImageInAddressBar("browser\youtube-mode-watch-dark-work.bmp", true)) {
+CoordMode, Pixel, Window
+; CoordMode, Pixel, Screen
+
+if (ImageSearch, OutputVarX, OutputVarY, 136, 36, 600, 69, "C:\Users\SANDRA\Documents\internet_for_blinds\images\browser\youtube-mode-watch-dark-work.bmp") {
 	; MsgBox "MAIL LIST MODE"
 	; MsgBox "SEARCH START MODE"
 	; MsgBox "TEXT READER MODE"
@@ -91,3 +112,5 @@ return
 s::
 playPause()
 return
+
+
