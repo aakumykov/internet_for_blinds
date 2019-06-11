@@ -1,6 +1,19 @@
 firefoxReadingIsActive := false
 
 
+enableTextReaderMode() {
+	global reader_mode_enable_button_x
+	global reader_mode_enable_button_y
+	Click, %reader_mode_enable_button_x%, %reader_mode_enable_button_y%
+}
+
+disableTextReaderMode() {
+	; global reader_mode_enable_button_x
+	; global reader_mode_enable_button_y
+	; Click, reader_mode_enable_button_x, reader_mode_enable_button_y
+}
+
+
 textSkipForward() {
 	clickReadingControls()
 	clickReadNextParagraph()
