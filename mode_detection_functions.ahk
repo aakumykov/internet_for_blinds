@@ -44,18 +44,33 @@ is_content_mode() {
 ; Виды списка
 is_text_search_results_mode() {
 	focusFirefox()
-	return searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)
+
+	if (searchImageInAddressBar("browser\search-mode-results-default.bmp", true)) {
+		return true
+	}
+
+	if (searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)) {
+		return true
+	}
+
+	; if (searchImageInAddressBar("browser\search-mode-results-lite.bmp", true)) {
+	; 	return true
+	; }
+
+	; if (searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)) {
+	; 	return true
+	; }
 }
 
 is_mail_list_mode() {
 	focusFirefox()
 	
-	; if (searchImageInAddressBar("browser\mail-mode-list-default-1.bmp", true)) { 
-	; 	return true 
-	; }
-	; if (searchImageInAddressBar("browser\mail-mode-list-default-2.bmp", true)) { 
-	; 	return true 
-	; }
+	if (searchImageInAddressBar("browser\mail-mode-list-default-1.bmp", true)) { 
+		return true 
+	}
+	if (searchImageInAddressBar("browser\mail-mode-list-default-2.bmp", true)) { 
+		return true 
+	}
 
 	; if (searchImageInAddressBar("browser\mail-mode-list-light-1.bmp", true)) { 
 	; 	return true 
