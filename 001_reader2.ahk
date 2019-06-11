@@ -124,20 +124,18 @@ F3::
 playPause()
 return
 
+F4::
+closePage()
+return
+
 
 
 F9::
-if (is_text_reader_mode()) {
-	MsgBox "TEXT READER MODE"
-} else {
-	MsgBox "NOT TEXT READER MODE"
-}
+openLink()
 return
 
 F10::
-Run, nvda.exe -q, "C:\Program Files (x86)\NVDA", UseErrorLevel
 return
 
 F11::
-readPage()
 return

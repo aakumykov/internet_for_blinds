@@ -8,6 +8,13 @@ focusFirefox() {
 	WinActivate, ahk_class MozillaWindowClass
 }
 
+closePage() {
+	if (firefoxIsOpened()) {
+		focusFirefox()
+		Send, ^w
+	}
+}
+
 searchImageInAddressBar(imageFileName, isRelativeToWindow) {
 	global address_bar_x1
 	global address_bar_y1
@@ -30,13 +37,13 @@ pageIsLoaded() {
 }
 
 openLink(){
-	; global text_reader_mode_delay
+	global tab_open_delay
 
 	focusFirefox()
 	stopNVDA()
 
 	Send, {Return}
-	; Sleep, %text_reader_mode_delay%
+	Sleep, %tab_open_delay%
 
 	while (!pageIsLoaded()) {
 		Sleep, 100
@@ -51,3 +58,4 @@ readPage() {
 	}
 	textPlayPause()
 }
+

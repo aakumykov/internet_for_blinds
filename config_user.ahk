@@ -20,5 +20,5 @@ reader_mode_enable_button_y := 84
 ; reader_mode_disable_button_x := 
 ; reader_mode_disable_button_y := 
 
-; == Задержка перед активацией режима чтения страницы
-; text_reader_mode_delay
+; == Время на открытие браузером вкладки ==
+tab_open_delay := 200
