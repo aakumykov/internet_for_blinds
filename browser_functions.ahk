@@ -23,17 +23,16 @@ searchImageInAddressBar(imageFileName, isRelativeToWindow) {
 	return searchImage(imageFileName, address_bar_x1, address_bar_y1, address_bar_x2, address_bar_y2, isRelativeToWindow)
 }
 
-pageIsLoaded() {
-	page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\firefox-page-load-complete.bmp"
 
-	if (firefoxIsOpened()) {
-		focusFirefox()
-		ImageSearch, imageX, imageY, 76, 47, 100, 72, %page_is_loaded_image_pattern%
-		return (imageX and imageY)
-	} else {
-		;pronounceError "Фаерфокс не запущен!"
-		return false
-	}
+
+openRegularLink() {
+	openLink()
+	readPage()
+}
+
+openMailMessageLink() {
+	openLink()
+	readMailMessage()
 }
 
 openLink(){
@@ -48,7 +47,6 @@ openLink(){
 	while (!pageIsLoaded()) {
 		Sleep, 100
 	}
-	readPage()
 }
 
 readPage() {
@@ -59,3 +57,21 @@ readPage() {
 	textPlayPause()
 }
 
+readMailMessage() {
+	startNVDA()
+	Click, 31, 133
+	Send, ^a
+}
+
+pageIsLoaded() {
+	page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\firefox-page-load-complete.bmp"
+
+	if (firefoxIsOpened()) {
+		focusFirefox()
+		ImageSearch, imageX, imageY, 76, 47, 100, 72, %page_is_loaded_image_pattern%
+		return (imageX and imageY)
+	} else {
+		;pronounceError "Фаерфокс не запущен!"
+		return false
+	}
+}

@@ -14,8 +14,11 @@ playPause() {
 	if (is_text_reader_mode()) {
 		textPlayPause()
 	}
+	else if (is_mail_list_mode()) {
+		openMailMessageLink()
+	}
 	else if (is_list_mode()) {
-		openLink()
+		openRegularLink()
 	}
 	else if (is_youtube_watch_mode()) {
 		videoPlayPause()
@@ -61,54 +64,15 @@ openMail() {
 }
 
 
+
+
+
 Numpad3::
 openMail()
 return
 
 Numpad9::
 openSearch()
-return
-
-
-
-F8::
-if (is_list_mode()) {
-	MsgBox "LIST MODE"
-}
-else if (is_content_mode()) {
-	MsgBox "CONTENT MODE"
-}
-else if (is_search_start_mode()) {
-	MsgBox "SEARCH START MODE"	
-}
-else {
-	MsgBox "OTHER MODE"
-}
-return
-
-
-F7::
-; if (is_mail_list_mode()) {
-if (is_list_mode()) {
-; if (searchImageInAddressBar("browser\search-mode-ya.ru-dark.bmp", true)) {
-; if (is_text_reader_mode()) {
-; if (searchImageInAddressBar("browser\youtube-mode-watch-dark-work.bmp", true)) {
-; CoordMode, Pixel, Window
-; CoordMode, Pixel, Screen
-
-; if (ImageSearch, OutputVarX, OutputVarY, 136, 36, 600, 69, "C:\Users\SANDRA\Documents\internet_for_blinds\images\browser\youtube-mode-watch-dark-work.bmp") {
-	; MsgBox "MAIL LIST MODE"
-	MsgBox "LIST MODE"
-	; MsgBox "SEARCH START MODE"
-	; MsgBox "TEXT READER MODE"
-	; MsgBox "VIDEO MODE"
-} else {
-	; MsgBox "NOT MAIL LIST MODE"
-	MsgBox "NOT LIST MODE"
-	; MsgBox "NOT SEARCH START MODE"
-	; MsgBox "NOT TEXT READER MODE"
-	; MsgBox "NOT VIDEO MODE"
-}
 return
 
 
@@ -129,6 +93,32 @@ closePage()
 return
 
 
+
+
+
+
+F8::
+if (is_list_mode()) {
+	MsgBox "LIST MODE"
+}
+else if (is_content_mode()) {
+	MsgBox "CONTENT MODE"
+}
+else if (is_search_start_mode()) {
+	MsgBox "SEARCH START MODE"	
+}
+else {
+	MsgBox "OTHER MODE"
+}
+return
+
+F7::
+if (is_mail_message_mode()) {
+	MsgBox "mail_message_mode"
+} else {
+	MsgBox "not_mail_message_mode"
+}
+return
 
 F9::
 openLink()
