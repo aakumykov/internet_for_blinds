@@ -4,9 +4,9 @@
 // @grant    none
 // @include  https://mail.yandex.ru/lite/message/*
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require  https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/date_functions.js
+// @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/date_functions.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/html_functions.js
-// @require  https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play-audio.js
+// @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
 
 var DEBUG = false;
@@ -85,10 +85,19 @@ $(document).ready(function(){
   let msgBody = fetchBody();
   let msgDate = fetchDate();
   
-  document.title = "Письмо: "+msgSubject;
-  clearPage("письма");
-  constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount);
+  let singleTextMessage = "";
+  singleTextMessage += msgSubject + "\n";
+  singleTextMessage += msgBody + "\n";
+  singleTextMessage += msgDate + "\n";
   
-  $('body').append("<textarea style='width:80%; height: 200px;'>Бывший высокопоставленный руководитель Mozilla обвинил Google в умышленном и систематическом саботаже Firefox в течение последнего десятилетия, чтобы ускорить процесс перехода на Chrome. В адрес Google не в первый раз звучат подобные обвинения, однако в первый раз утверждается наличие у Google скоординированного плана, предусматривающего внесение небольших ошибок на своих сайтах, которые будут проявляться только для пользователей Firefox. ");
+  singleTextMessage += "\n" + "Чтобы прослушать письмо в ручном режиме, используйте навигационные клавиши." + "\n";
+  
+  document.title = "Письмо: "+msgSubject;
+  
+  clearPage();
+  
+  $('body').append("<textarea onclick='this.select()' style='width:80%; height: 200px;'>"+singleTextMessage+"</textarea>");
+  
+  constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount);
   
 });
