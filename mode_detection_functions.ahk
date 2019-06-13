@@ -15,10 +15,10 @@ is_search_start_mode() {
 }
 
 is_list_mode() {
-	if (is_text_search_results_mode())  { 
+	if (is_mail_list_mode()) 			{ 
 		return true 
 	}
-	if (is_mail_list_mode()) 			{ 
+	if (is_text_search_results_mode())  { 
 		return true 
 	}
 	if (is_video_search_results_mode()) { 
@@ -65,6 +65,13 @@ is_text_search_results_mode() {
 is_mail_list_mode() {
 	focusFirefox()
 	
+	if (searchImageInAddressBar("browser\mail-mode-list-dark-1-work.bmp", true)) { 
+		return true 
+	}
+	if (searchImageInAddressBar("browser\mail-mode-list-dark-2.bmp", true)) { 
+		return true 
+	}
+
 	if (searchImageInAddressBar("browser\mail-mode-list-default-1.bmp", true)) { 
 		return true 
 	}
@@ -72,12 +79,12 @@ is_mail_list_mode() {
 		return true 
 	}
 
-	; if (searchImageInAddressBar("browser\mail-mode-list-light-1.bmp", true)) { 
-	; 	return true 
-	; }
-	; if (searchImageInAddressBar("browser\mail-mode-list-light-2.bmp", true)) { 
-	; 	return true 
-	; }
+	if (searchImageInAddressBar("browser\mail-mode-list-light-1.bmp", true)) { 
+		return true 
+	}
+	if (searchImageInAddressBar("browser\mail-mode-list-light-2.bmp", true)) { 
+		return true 
+	}
 
 	; if (searchImageInAddressBar("browser\mail-mode-list-light-1-home.bmp", true)) { 
 	; 	return true 
@@ -86,12 +93,7 @@ is_mail_list_mode() {
 	; 	return true 
 	; }
 
-	if (searchImageInAddressBar("browser\mail-mode-list-dark-1.bmp", true)) { 
-		return true 
-	}
-	if (searchImageInAddressBar("browser\mail-mode-list-dark-2.bmp", true)) { 
-		return true 
-	}
+	
 
 	return false
 }

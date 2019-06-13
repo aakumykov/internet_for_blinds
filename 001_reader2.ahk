@@ -9,6 +9,33 @@
 #Include, nvda_functions.ahk
 
 
+Numpad3::
+openMail()
+return
+
+Numpad9::
+openSearch()
+return
+
+
+F1::
+stepForward()
+return
+
+F2::
+stepBack()
+return
+
+F3::
+playPause()
+return
+
+F4::
+closePage()
+return
+
+
+
 
 playPause() {
 	if (is_text_reader_mode()) {
@@ -67,30 +94,7 @@ openMail() {
 
 
 
-Numpad3::
-openMail()
-return
 
-Numpad9::
-openSearch()
-return
-
-
-F1::
-stepForward()
-return
-
-F2::
-stepBack()
-return
-
-F3::
-playPause()
-return
-
-F4::
-closePage()
-return
 
 
 
@@ -113,10 +117,10 @@ else {
 return
 
 F7::
-if (is_mail_message_mode()) {
-	MsgBox "mail_message_mode"
+if (is_mail_list_mode()) {
+	MsgBox "mail_list_mode"
 } else {
-	MsgBox "not_mail_message_mode"
+	MsgBox "no_mail_list_mode"
 }
 return
 
