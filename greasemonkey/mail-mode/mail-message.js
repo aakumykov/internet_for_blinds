@@ -61,16 +61,27 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
   $('body').append("<UL id='"+listId+"'></UL>");
   
   let attachmentsMsg = (0==attachmentsCount) ? "вложений нет" : "вложения: "+attachmentsCount+" штуки";
+  let dateLine = buildLine("Письмо от "+humanDate);
+  let subjectLine = buildLine("Заголовок: "+msgSubject);
+  let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
   
-  //$('#'+listId).append("<a id='hello' href='#'>Привет, прочти письмо</a>");
+  ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
+  //$('#'+listId).append(dateLine);
+  //$('#'+listId).append(subjectLine);
+  //$('#'+listId).append( buildLine("Сообщение: "+bodyLine) );
   
-  //$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
-  $('#'+listId).append( buildLine("Письмо от "+humanDate) );
+  let fullText = 
+      dateLine.text() + ". <br>" +
+      subjectLine.text() + ". <br>" +
+      bodyLine
+      ;
   
-  $('#'+listId).append( buildLine("Заголовок: "+msgSubject) );
-  
-  let bodyMsg = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : msgBody;
-  $('#'+listId).append( buildLine("Сообщение: "+bodyMsg) );
+  $(document.body).append("<button id='button1'></button><br>");
+  $('#button1').focus();
+  $(document.body).append("<a id='linkWithFullText' href='#'>"+fullText+"</a>");
+  setTimeout(function(){
+    $('#linkWithFullText').focus();
+  }, 2000);
 }
 
 
@@ -85,18 +96,9 @@ $(document).ready(function(){
   let msgBody = fetchBody();
   let msgDate = fetchDate();
   
-  let singleTextMessage = "";
-  singleTextMessage += msgSubject + "\n";
-  singleTextMessage += msgBody + "\n";
-  singleTextMessage += msgDate + "\n";
-  
-  singleTextMessage += "\n" + "Чтобы прослушать письмо в ручном режиме, используйте навигационные клавиши." + "\n";
-  
   document.title = "Письмо: "+msgSubject;
   
   clearPage();
-  
-  $('body').append("<textarea onclick='this.select()' style='width:80%; height: 200px;'>"+singleTextMessage+"</textarea>");
   
   constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount);
   
