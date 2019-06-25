@@ -4,16 +4,28 @@ nvdaIsRun() {
 }
 
 startNVDA() {
+	global nvda_cmd
 	if (!nvdaIsRun()) {
-		Run, nvda.exe, "C:\Program Files (x86)\NVDA", UseErrorLevel
+		Run, %nvda_cmd%, , UseErrorLevel
 	}
 }
 
 stopNVDA() {
-	Run, nvda.exe -q, "C:\Program Files (x86)\NVDA", UseErrorLevel
+	global nvda_cmd
+	Run, %nvda_cmd% -q, , UseErrorLevel
 
 	; Альтернативный метод
 	; Process, Close, nvda.exe
 	; Process, Close, nvda_eoaProxy.exe
 	; Process, Close, nvdaHelperRemoteLoader.exe
+}
+
+muteNVDA() {
+	global nircmd
+	Run, %nircmd% muteappvolume nvda.exe 1
+}
+
+unmuteNVDA() {
+	global nircmd
+	Run, %nircmd% muteappvolume nvda.exe 0
 }

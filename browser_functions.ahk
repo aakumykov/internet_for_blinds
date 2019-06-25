@@ -39,7 +39,8 @@ openLink(){
 	global tab_open_delay
 
 	focusFirefox()
-	stopNVDA()
+	; stopNVDA()
+	muteNVDA()
 
 	Send, {Return}
 	Sleep, %tab_open_delay%

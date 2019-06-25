@@ -2,6 +2,7 @@
 #Include, config_user.ahk
 #Include, image_functions.ahk
 #Include, browser_functions.ahk
+#Include, webserver_functions.ahk
 #Include, mode_detection_functions.ahk
 #Include, list_mode_functions.ahk
 #Include, reader_mode_functions.ahk
@@ -58,6 +59,7 @@ stepForward() {
 	}
 	else if (is_list_mode()) {
 		startNVDA()
+		unmuteNVDA()
 		nextLink()
 	}
 	else if (is_youtube_watch_mode()) {
@@ -71,6 +73,7 @@ stepBack() {
 	}
 	else if (is_list_mode()) {
 		startNVDA()
+		unmuteNVDA()
 		prevLink()
 	}
 	else if (is_youtube_watch_mode()) {
@@ -83,10 +86,12 @@ stepBack() {
 
 
 openSearch() {
+	startWebServer()
 	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
 }
 
 openMail() {
+	startWebServer()
 	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
 }
 
@@ -128,8 +133,13 @@ F9::
 openLink()
 return
 
+
 F10::
+; muteNVDA()
+startNVDA()
 return
 
 F11::
+; unmuteNVDA()
+stopNVDA()
 return

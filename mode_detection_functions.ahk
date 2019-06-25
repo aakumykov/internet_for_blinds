@@ -53,11 +53,11 @@ is_text_search_results_mode() {
 		return true
 	}
 
-	; if (searchImageInAddressBar("browser\search-mode-results-lite.bmp", true)) {
-	; 	return true
-	; }
+	if (searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)) {
+		return true
+	}
 
-	; if (searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)) {
+	; if (searchImageInAddressBar("browser\search-mode-results-lite.bmp", true)) {
 	; 	return true
 	; }
 }
