@@ -1,6 +1,9 @@
 
 ; == Координаты области адресной строки для browser_functions/search_image_in_address_bar() ==
 
+; Путь к исполняемому файлу веб-сервера (рекомендуется HTTP File Server от Rejetto)
+web_server_command := "C:\Program Files (x86)\hfs.exe"
+
 ; Дом
 ; address_bar_x1 := 135
 ; address_bar_y1 := 35
