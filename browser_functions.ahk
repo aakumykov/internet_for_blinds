@@ -9,9 +9,12 @@ focusFirefox() {
 }
 
 closePage() {
+	global browser_is_closed_check_delay
+
 	if (firefoxIsOpened()) {
 		focusFirefox()
 		Send, ^w
+		muteNVDA()
 	}
 }
 
