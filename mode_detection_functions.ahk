@@ -24,6 +24,9 @@ is_list_mode() {
 	if (is_video_search_results_mode()) { 
 		return true 
 	}
+	if (is_redline_programs_list_mode()) {
+		return true
+	}
 	return false
 }
 
@@ -36,6 +39,9 @@ is_content_mode() {
 	}
 	if (is_youtube_watch_mode()) { 
 		return true 
+	}
+	if (is_redline_watch_mode()) {
+		return true
 	}
 	return false
 }
@@ -103,6 +109,11 @@ is_video_search_results_mode() {
 	return searchImageInAddressBar("browser\search-mode-video-results-dark.bmp", true)
 }
 
+is_redline_programs_list_mode() {
+	focusFirefox()
+	return searchImageInAddressBar("browser\redline-programs-list.bmp", true)
+}
+
 
 ; Виды содержимого
 is_text_reader_mode() {
@@ -133,4 +144,11 @@ is_youtube_watch_mode() {
 		return true 
 	}
 	return false
+}
+
+is_redline_watch_mode() {
+	focusFirefox()
+	if (searchImageInAddressBar("browser\redline-opened-video.bmp", true)) { 
+		return true 
+	}
 }

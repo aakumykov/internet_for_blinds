@@ -8,10 +8,15 @@
 #Include, reader_mode_functions.ahk
 #Include, video_mode_functions.ahk
 #Include, nvda_functions.ahk
+#Include, readline_channel.ahk
 
 
 Numpad3::
 openMail()
+return
+
+Numpad6::
+openRedLineChannel()
 return
 
 Numpad9::
@@ -51,6 +56,9 @@ playPause() {
 	else if (is_youtube_watch_mode()) {
 		videoPlayPause()
 	}
+	else if (is_redline_watch_mode()) {
+		redlineVideoPlayPause()
+	}
 }
 
 stepForward() {
@@ -65,6 +73,9 @@ stepForward() {
 	else if (is_youtube_watch_mode()) {
 		videoSkipForward()
 	}
+	else if (is_redline_watch_mode()) {
+		videoSkipForward()
+	}
 }
 
 stepBack() {
@@ -77,6 +88,9 @@ stepBack() {
 		prevLink()
 	}
 	else if (is_youtube_watch_mode()) {
+		videoSkipBack()
+	}
+	else if (is_redline_watch_mode()) {
 		videoSkipBack()
 	}
 }
@@ -135,11 +149,11 @@ return
 
 
 F10::
-; muteNVDA()
-startNVDA()
+muteNVDA()
+; startNVDA()
 return
 
 F11::
-; unmuteNVDA()
-stopNVDA()
+unmuteNVDA()
+; stopNVDA()
 return
