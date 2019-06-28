@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name rline.tv
+// @name Красная Линия (список передач)
 // @namespace Violentmonkey Scripts
 // @match https://www.rline.tv/programs/
 // @grant none
@@ -10,7 +10,7 @@
 var $ = window.jQuery;
 
 $(document).ready(function(){
-    playAudio('http://127.0.0.1/redline-channel-opened.mp3');
+    playAudio('http://127.0.0.1/redline-channels-list-opened.mp3');
     let channels = collectLinks();
     createPageWithLinks(channels);
 });
