@@ -1,6 +1,7 @@
 #Include, config_system.ahk
 #Include, config_user.ahk
 #Include, image_functions.ahk
+#Include, sound_file_functions.ahk
 #Include, browser_functions.ahk
 #Include, webserver_functions.ahk
 #Include, mode_detection_functions.ahk
@@ -44,14 +45,14 @@ return
 
 
 playPause() {
-	if (is_text_reader_mode()) {
-		textPlayPause()
+	if (is_list_mode()) {
+		openLink()
 	}
 	else if (is_mail_list_mode()) {
 		openMailMessageLink()
 	}
-	else if (is_list_mode()) {
-		openRegularLink()
+	else if (is_text_reader_mode()) {
+		textPlayPause()
 	}
 	else if (is_youtube_watch_mode()) {
 		videoPlayPause()
@@ -156,4 +157,8 @@ return
 F11::
 unmuteNVDA()
 ; stopNVDA()
+return
+
+~F12::
+playSound("opening-link.mp3")
 return

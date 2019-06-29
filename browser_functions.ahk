@@ -28,7 +28,7 @@ searchImageInAddressBar(imageFileName, isRelativeToWindow) {
 
 
 
-openRegularLink() {
+openAndRead() {
 	openLink()
 	readPage()
 }
@@ -40,9 +40,9 @@ openMailMessageLink() {
 
 openLink(){
 	global tab_open_delay
+	;playSound("link-is-opening.mp3") // Это делается средствами JavaScript для большего единообразия
 
 	focusFirefox()
-	; stopNVDA()
 	muteNVDA()
 
 	Send, {Return}
