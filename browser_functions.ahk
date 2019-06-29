@@ -15,6 +15,7 @@ closePage() {
 		focusFirefox()
 		Send, ^w
 		muteNVDA()
+		playSound("page-closed.mp3")
 	}
 }
 
