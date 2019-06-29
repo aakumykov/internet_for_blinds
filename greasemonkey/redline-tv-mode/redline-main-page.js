@@ -4,7 +4,7 @@
 // @include /^https://www\.rline\.tv/$/
 // @grant none
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require			 https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
+// @require          https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
 
 var $ = window.jQuery;
@@ -12,44 +12,58 @@ var $ = window.jQuery;
 // ====================
 playAudio('http://127.0.0.1/redline-site-opened.mp3');
 
-//let channelName = $('.content-left > h1:nth-child(1)').text();
+let newVideosLinks = collectLinks('.video-list__item', '.video-list__name');
+let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-date');
 
-let links = collectLinks('.video-list__item', '.video-list__name');
+clearPage();
+createList(newVideosLinks, "Новые видео", "Конец новых видео");
+createList(newsLinks, "Последние новости", "Конец списка последних новостей");
 
-createPageWithLinks(links, "Новое видео на сайте", "Конец новых видео");
 // ====================
 
+function clearPage() {
+    let documentCorpus = $('body');
+    documentCorpus.empty();
+    documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
+}
 
 function collectLinks(linkNodeSelector, linkTextSelector) {
+    return collectLinks(linkNodeSelector, linkTextSelector, null);
+}
+
+function collectLinks(linkNodeSelector, linkTextSelector, linkDateSelector) {
     let list = {};
     let baseURL = 'https://www.rline.tv';
     
     $(linkNodeSelector).each(function(index, element){
-        let name = $(element).find(linkTextSelector).text();
         let address = baseURL + $(element).attr('href');
+        let name = $(element).find(linkTextSelector).text();
+        
+        if (null != linkDateSelector) {
+            let date = $(element).find(linkDateSelector).text();
+            name = name+", "+date;
+        }
+        
         list[name] = address;
     });
     
     return list;
 }
 
-function createPageWithLinks(linksHashMap, startText, endText) {
+function createList(linksHash, listTitle, listFinishText) {
     let documentCorpus = $('body');
     
-    documentCorpus.empty();
-    documentCorpus.append("<button id='startPoint'>*</button><br><br>");
+    //document.title = listTitle;
+    documentCorpus.append("<br><button>"+listTitle+"</button><br><br>");
     
-    document.title = startText;
-    documentCorpus.append("<button>"+startText+"</button><br><br>");
-    
-    for (let key in linksHashMap) {
-        if (linksHashMap.hasOwnProperty(key)) {
-            let value = linksHashMap[key];
+    for (let key in linksHash) {
+        if (linksHash.hasOwnProperty(key)) {
+            let value = linksHash[key];
             documentCorpus.append("<a href='"+value+"' target='_blank'>"+key+"</a><br>");
         }
     }
     
-    documentCorpus.append("<br><br><button id='startPoint'>"+endText+"</button>");
+    documentCorpus.append("<br><button id='startPoint'>"+listFinishText+"</button><br><br>");
     
-    $('#startPoint').focus();
+    //$('#startPoint').focus();
 }
