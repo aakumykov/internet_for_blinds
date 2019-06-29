@@ -30,7 +30,13 @@ searchImageInAddressBar(imageFileName, isRelativeToWindow) {
 
 openLinkAndRead() {
 	openLink()
-	readPage()
+
+	if (is_redline_video_mode()) {
+		redlineVideoPlayPause()
+	}
+	else if (is_redline_text_mode()) {
+		readPage()
+	}
 }
 
 openMailMessageLink() {
