@@ -40,7 +40,7 @@ is_content_mode() {
 	if (is_youtube_watch_mode()) { 
 		return true 
 	}
-	if (is_redline_watch_mode()) {
+	if (is_redline_video_mode()) {
 		return true
 	}
 	return false
@@ -143,9 +143,4 @@ is_youtube_watch_mode() {
 	return false
 }
 
-is_redline_watch_mode() {
-	focusFirefox()
-	if (searchImageInAddressBar("browser\redline-opened-video.bmp", true)) { 
-		return true 
-	}
-}
+

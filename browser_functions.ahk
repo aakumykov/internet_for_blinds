@@ -62,7 +62,7 @@ readPage() {
 }
 
 readMailMessage() {
-	startNVDA()
+	startNVDA(true)
 	Click, 31, 133
 	Send, ^a
 }

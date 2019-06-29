@@ -1,13 +1,21 @@
 
-nvdaIsRun() {
-	return Process, Exist, nvda.exe
+startNVDA(wait_until_starting) {
+	global nvda_cmd
+	
+	if (!nvdaIsRun()) {
+
+		Run, %nvda_cmd%, , UseErrorLevel
+
+		if (wait_until_starting) {
+			while (!nvdaIsRun()) {
+				Sleep, 100
+			}
+		}
+	}
 }
 
-startNVDA() {
-	global nvda_cmd
-	if (!nvdaIsRun()) {
-		Run, %nvda_cmd%, , UseErrorLevel
-	}
+nvdaIsRun() {
+	return Process, Exist, nvda.exe
 }
 
 stopNVDA() {

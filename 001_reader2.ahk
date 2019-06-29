@@ -57,7 +57,7 @@ playPause() {
 	else if (is_youtube_watch_mode()) {
 		videoPlayPause()
 	}
-	else if (is_redline_watch_mode()) {
+	else if (is_redline_video_mode()) {
 		redlineVideoPlayPause()
 	}
 }
@@ -67,14 +67,14 @@ stepForward() {
 		textSkipForward()
 	}
 	else if (is_list_mode()) {
-		startNVDA()
+		startNVDA(false)
 		unmuteNVDA()
 		nextLink()
 	}
 	else if (is_youtube_watch_mode()) {
 		videoSkipForward()
 	}
-	else if (is_redline_watch_mode()) {
+	else if (is_redline_video_mode()) {
 		videoSkipForward()
 	}
 }
@@ -84,14 +84,14 @@ stepBack() {
 		textSkipBack()
 	}
 	else if (is_list_mode()) {
-		startNVDA()
+		startNVDA(false)
 		unmuteNVDA()
 		prevLink()
 	}
 	else if (is_youtube_watch_mode()) {
 		videoSkipBack()
 	}
-	else if (is_redline_watch_mode()) {
+	else if (is_redline_video_mode()) {
 		videoSkipBack()
 	}
 }
@@ -159,6 +159,10 @@ unmuteNVDA()
 ; stopNVDA()
 return
 
-~F12::
-playSound("opening-link.mp3")
+F12::
+if (is_redline_video_mode()) {
+	MsgBox "redline_video_mode"
+} else {
+	MsgBox "NOT redline_video_mode"
+}
 return
