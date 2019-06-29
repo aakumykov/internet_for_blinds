@@ -15,16 +15,17 @@ playAudio('http://127.0.0.1/redline-site-opened.mp3');
 let newVideosLinks = collectLinks('.video-list__item', '.video-list__name');
 let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-date');
 
-clearPage();
-createList(newVideosLinks, "Новые видео", "Конец новых видео");
-createList(newsLinks, "Последние новости", "Конец списка последних новостей");
+clearPage("Телеканал красная линия");
+createList(newVideosLinks, "Новые видео", "Конец новых видео", " (видеоролик)", "http://127.0.0.1/opening-video.mp3");
+createList(newsLinks, "Последние новости", "Конец списка последних новостей", "", "http://127.0.0.1/opening-link.mp3");
 
 // ====================
 
-function clearPage() {
+function clearPage(newTitle) {
     let documentCorpus = $('body');
     documentCorpus.empty();
-    documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
+    if (null == newTitle) newTitle = "*";
+    documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
 }
 
 function collectLinks(linkNodeSelector, linkTextSelector) {
@@ -50,20 +51,29 @@ function collectLinks(linkNodeSelector, linkTextSelector, linkDateSelector) {
     return list;
 }
 
-function createList(linksHash, listTitle, listFinishText) {
+function createList(listHash, listTitle, listFinishText, linkNameSuffix, openingSoundLink) {
     let documentCorpus = $('body');
     
     //document.title = listTitle;
-    documentCorpus.append("<br><button>"+listTitle+"</button><br><br>");
+    documentCorpus.append("<br><button>"+listTitle+"</button><br>");
     
-    for (let key in linksHash) {
-        if (linksHash.hasOwnProperty(key)) {
-            let value = linksHash[key];
-            documentCorpus.append("<a href='"+value+"' target='_blank'>"+key+"</a><br>");
+    for (let name in listHash) {
+
+        if (listHash.hasOwnProperty(name)) {
+
+            let value = listHash[name];
+            
+            let a = $('<A><br>');
+                a.append(name + linkNameSuffix);
+                a.attr('href', value);
+                a.attr('target', '_blank');
+                a.click(function(){ playAudio(openingSoundLink); });
+            
+            documentCorpus.append(a);
         }
     }
     
-    documentCorpus.append("<br><button id='startPoint'>"+listFinishText+"</button><br><br>");
+    documentCorpus.append("<br><br><button id='startPoint'>"+listFinishText+"</button><br><br>");
     
     //$('#startPoint').focus();
 }
