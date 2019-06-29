@@ -79,10 +79,3 @@ pageIsLoaded() {
 		return false
 	}
 }
-
-
-copyPageAddress() {
-	focusFirefox()
-	Send, ^{l}
-	Send, ^{c}
-}

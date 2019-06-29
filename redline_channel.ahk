@@ -15,23 +15,28 @@ is_redline_list_mode() {
 	return false
 }
 
-
 is_redline_video_mode() {
-	regex := "^https://www\.rline\.tv/programs/[^/]+/video-\d+/$"
-	return RegExMatch(clipboard, regex)
+	focusFirefox()
+
+	;if (searchImageInAddressBar("browser\redline-video-mode.bmp", true)) { 
+	;	return true 
+	;}
+
+	Send, ^{l}
+	Send, ^{c}
+	return RegExMatch(clipboard, "^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
 }
 
 
 is_redline_main_page() {
-	regex := "^https://www\.rline\.tv/$"
-	return RegExMatch(clipboard, regex)
+	focusFirefox()
+	return searchImageInAddressBar("browser\redline-main-page.bmp", true)
 }
 
 is_redline_programs_list() {
-	regex := "^https://www\.rline\.tv/programs/$"
-	return RegExMatch(clipboard, regex)
+	focusFirefox()
+	return searchImageInAddressBar("browser\redline-programs-list.bmp", true)
 }
-
 
 redlineVideoPlayPause() {
 	Click, 300, 300
