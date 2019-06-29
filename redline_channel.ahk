@@ -16,16 +16,17 @@ is_redline_list_mode() {
 }
 
 is_redline_video_mode() {
-	focusFirefox()
-
-	;if (searchImageInAddressBar("browser\redline-video-mode.bmp", true)) { 
-	;	return true 
-	;}
-
-	Send, ^{l}
-	Send, ^{c}
-	return RegExMatch(clipboard, "^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
+	copyPageAddress()
+	return testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
 }
+
+is_redline_text_mode() {
+	copyPageAddress()
+	return testClipboardWithRegex("^https://www\.rline\.tv/news/[^/]+/$")
+}
+
+
+
 
 
 is_redline_main_page() {

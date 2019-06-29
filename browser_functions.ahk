@@ -28,7 +28,7 @@ searchImageInAddressBar(imageFileName, isRelativeToWindow) {
 
 
 
-openAndRead() {
+openLinkAndRead() {
 	openLink()
 	readPage()
 }
@@ -40,7 +40,6 @@ openMailMessageLink() {
 
 openLink(){
 	global tab_open_delay
-	;playSound("link-is-opening.mp3") // Это делается средствами JavaScript для большего единообразия
 
 	focusFirefox()
 	muteNVDA()
@@ -78,4 +77,14 @@ pageIsLoaded() {
 		;pronounceError "Фаерфокс не запущен!"
 		return false
 	}
+}
+
+copyPageAddress() {
+	focusFirefox()
+	Send, ^{l}
+	Send, ^{c}
+}
+
+testClipboardWithRegex(regex){
+	return RegExMatch(clipboard, regex)
 }

@@ -46,7 +46,7 @@ return
 
 playPause() {
 	if (is_list_mode()) {
-		openLink()
+		openLinkAndRead()
 	}
 	else if (is_mail_list_mode()) {
 		openMailMessageLink()
@@ -59,6 +59,9 @@ playPause() {
 	}
 	else if (is_redline_video_mode()) {
 		redlineVideoPlayPause()
+	}
+	else if (is_redline_text_mode()) {
+		
 	}
 }
 
@@ -145,7 +148,11 @@ if (is_mail_list_mode()) {
 return
 
 F9::
-detectMode()
+if (is_redline_text_mode()) {
+	MsgBox "redline_text_mode"
+} else {
+	MsgBox "not redline_text_mode"
+}
 return
 
 
