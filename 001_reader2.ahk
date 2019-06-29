@@ -45,8 +45,10 @@ return
 
 
 playPause() {
-	if (is_list_mode()) {
-		openLink()
+	copyPageAddress()
+
+	if (is_redline_video_mode()) {
+		redlineVideoPlayPause()
 	}
 	else if (is_mail_list_mode()) {
 		openMailMessageLink()
@@ -57,14 +59,16 @@ playPause() {
 	else if (is_youtube_watch_mode()) {
 		videoPlayPause()
 	}
-	else if (is_redline_video_mode()) {
-		redlineVideoPlayPause()
+	else if (is_list_mode()) {
+		openLink()
 	}
 }
 
 stepForward() {
-	if (is_text_reader_mode()) {
-		textSkipForward()
+	copyPageAddress()
+
+	if (is_redline_video_mode()) {
+		videoSkipForward()
 	}
 	else if (is_list_mode()) {
 		startNVDA(false)
@@ -74,14 +78,16 @@ stepForward() {
 	else if (is_youtube_watch_mode()) {
 		videoSkipForward()
 	}
-	else if (is_redline_video_mode()) {
-		videoSkipForward()
+	else if (is_text_reader_mode()) {
+		textSkipForward()
 	}
 }
 
 stepBack() {
-	if (is_text_reader_mode()) {
-		textSkipBack()
+	copyPageAddress()
+	
+	if (is_redline_video_mode()) {
+		videoSkipBack()
 	}
 	else if (is_list_mode()) {
 		startNVDA(false)
@@ -91,8 +97,8 @@ stepBack() {
 	else if (is_youtube_watch_mode()) {
 		videoSkipBack()
 	}
-	else if (is_redline_video_mode()) {
-		videoSkipBack()
+	else if (is_text_reader_mode()) {
+		textSkipBack()
 	}
 }
 
@@ -145,7 +151,12 @@ if (is_mail_list_mode()) {
 return
 
 F9::
-detectMode()
+copyPageAddress()
+if (is_redline_list_mode()) {
+	MsgBox "redline_list_mode"
+} else {
+	MsgBox "not redline_list_mode"
+}
 return
 
 
@@ -165,10 +176,3 @@ if (is_redline_video_mode()) {
 }
 return
 
-
-detectMode() {
-	focusFirefox()
-	Send, ^{l}
-	Send, ^{c}
-	return RegExMatch(clipboard, "^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
-}
