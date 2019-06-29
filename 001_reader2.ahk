@@ -145,18 +145,16 @@ if (is_mail_list_mode()) {
 return
 
 F9::
-openLink()
+detectMode()
 return
 
 
 F10::
 muteNVDA()
-; startNVDA()
 return
 
 F11::
 unmuteNVDA()
-; stopNVDA()
 return
 
 F12::
@@ -166,3 +164,11 @@ if (is_redline_video_mode()) {
 	MsgBox "NOT redline_video_mode"
 }
 return
+
+
+detectMode() {
+	focusFirefox()
+	Send, ^{l}
+	Send, ^{c}
+	return RegExMatch(clipboard, "^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
+}

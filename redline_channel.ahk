@@ -17,9 +17,14 @@ is_redline_list_mode() {
 
 is_redline_video_mode() {
 	focusFirefox()
-	if (searchImageInAddressBar("browser\redline-video-mode.bmp", true)) { 
-		return true 
-	}
+
+	;if (searchImageInAddressBar("browser\redline-video-mode.bmp", true)) { 
+	;	return true 
+	;}
+
+	Send, ^{l}
+	Send, ^{c}
+	return RegExMatch(clipboard, "^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
 }
 
 
