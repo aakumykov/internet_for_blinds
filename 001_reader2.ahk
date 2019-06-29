@@ -8,7 +8,7 @@
 #Include, reader_mode_functions.ahk
 #Include, video_mode_functions.ahk
 #Include, nvda_functions.ahk
-#Include, readline_channel.ahk
+#Include, redline_channel.ahk
 
 
 Numpad3::

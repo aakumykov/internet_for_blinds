@@ -24,7 +24,7 @@ is_list_mode() {
 	if (is_video_search_results_mode()) { 
 		return true 
 	}
-	if (is_redline_programs_list_mode()) {
+	if (is_redline_list_mode()) {
 		return true
 	}
 	return false
@@ -109,10 +109,7 @@ is_video_search_results_mode() {
 	return searchImageInAddressBar("browser\search-mode-video-results-dark.bmp", true)
 }
 
-is_redline_programs_list_mode() {
-	focusFirefox()
-	return searchImageInAddressBar("browser\redline-programs-list.bmp", true)
-}
+
 
 
 ; Виды содержимого
