@@ -16,6 +16,10 @@ let newVideosLinks = collectLinks('.video-list__item', '.video-list__name');
 let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-date');
 
 clearPage("Телеканал красная линия");
+
+addLink("Список телепередач (нажмите, чтобы перейти)", "https://www.rline.tv/programs/");
+addLink("Все новости (нажмите, чтобы перейти)", "https://www.rline.tv/news/");
+
 createList(newVideosLinks, "Новые видео", "Конец новых видео", " (видеоролик)", "http://127.0.0.1/opening-video.mp3");
 createList(newsLinks, "Последние новости", "Конец списка последних новостей", "", "http://127.0.0.1/opening-link.mp3");
 
@@ -77,4 +81,17 @@ function createList(listHash, listTitle, listFinishText, linkNameSuffix, opening
     documentCorpus.append("<br><br><button id='startPoint'>"+listFinishText+"</button><br><br>");
     
     //$('#startPoint').focus();
+}
+
+function addLink(text, href) {
+    addLinkExtended(text, href, "_blank", "body");
+}
+
+function addLinkExtended(text, href, target, parentNodeSelector) {
+    let a = $("<A>");
+        a.append(text);
+        a.attr("href", href);
+        a.attr('target', target);
+    $("body").append(a);
+    $("body").append("<br><br>");
 }
