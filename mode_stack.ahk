@@ -49,12 +49,20 @@ class ModeStack {
 		if ("LIST_MODE" == this.current_mode) {
 			return true
 		}
+		
 		if (this.isMailListMode()) {
 			return true
 		}
+		
 		if (this.isRedlineListMode()) {
 			return true
 		}
+
+		if (this.isSearchMode()) {
+			return true
+		}
+
+		reportUnknownMode()
 	}
 
 

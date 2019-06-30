@@ -35,10 +35,14 @@ openLinkAndRead() {
 	if (is_redline_video_mode()) {
 		modeStack.addEmptyMode()
 		redlineVideoPlayPause()
-	}
-	else if (is_redline_text_mode()) {
+	} else {
 		readPage()
 	}
+	
+	; if (is_redline_text_mode()) {
+	; 	readPage()
+	; 	return
+	; }
 }
 
 openMailMessageLink() {

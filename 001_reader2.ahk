@@ -58,27 +58,32 @@ playPause() {
 		return
 	}
 
-	else if (modeStack.isMailListMode()) {
+	if (modeStack.isMailListMode()) {
 		openMailMessageLink()
+		return
 	}
-	else if (modeStack.isListMode()) {
+	
+	if (modeStack.isListMode()) {
 		openLinkAndRead()
+		return
 	}
-	else if (is_text_reader_mode()) {
+	
+	if (is_text_reader_mode()) {
 		textPlayPause()
+		return
 	}
-	else if (is_youtube_watch_mode()) {
+
+	if (is_youtube_watch_mode()) {
 		videoPlayPause()
+		return
 	}
-	else if (is_redline_video_mode()) {
+
+	if (is_redline_video_mode()) {
 		redlineVideoPlayPause()
+		return
 	}
-	else if (is_redline_text_mode()) {
-		
-	}
-	else {
-		playSoundFile("unknown-mode.mp3")
-	}
+
+	reportUnknownMode()
 }
 
 stepForward() {
@@ -93,15 +98,22 @@ stepForward() {
 		startNVDA(false)
 		unmuteNVDA()
 		nextLink()
+		return
 	}
-	else if (is_youtube_watch_mode()) {
+
+	if (is_youtube_watch_mode()) {
 		videoSkipForward()
+		return
 	}
-	else if (is_redline_video_mode()) {
+
+	if (is_redline_video_mode()) {
 		videoSkipForward()
+		return
 	}
-	else if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
+	
+	if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
 		textSkipForward()
+		return
 	}
 }
 
@@ -117,15 +129,22 @@ stepBack() {
 		startNVDA(false)
 		unmuteNVDA()
 		prevLink()
+		return
 	}
-	else if (is_youtube_watch_mode()) {
+	
+	if (is_youtube_watch_mode()) {
 		videoSkipBack()
+		return
 	}
-	else if (is_redline_video_mode()) {
+
+	if (is_redline_video_mode()) {
 		videoSkipBack()
+		return
 	}
-	else if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
+	
+	if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
 		textSkipBack()
+		return
 	}
 }
 
