@@ -17,8 +17,8 @@ let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-dat
 
 clearPage("Телеканал красная линия");
 
-addLink("Список телепередач (нажмите, чтобы перейти)", "https://www.rline.tv/programs/");
-addLink("Все новости (нажмите, чтобы перейти)", "https://www.rline.tv/news/");
+addLinkWithSound("Список телепередач (нажмите, чтобы перейти)", "https://www.rline.tv/programs/", "http://127.0.0.1/redline-channels-list-is-opening.mp3");
+addLinkWithSound("Все новости (нажмите, чтобы перейти)", "https://www.rline.tv/news/", "http://127.0.0.1/redline-news-is-opening.mp3");
 
 createList(newVideosLinks, "Новые видео", "Конец новых видео", " (видеоролик)", "http://127.0.0.1/opening-video.mp3");
 createList(newsLinks, "Последние новости", "Конец списка последних новостей", "", "http://127.0.0.1/opening-link.mp3");
@@ -31,10 +31,6 @@ function clearPage(newTitle) {
     if (null == newTitle) newTitle = "*";
     documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
     documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
-}
-
-function collectLinks(linkNodeSelector, linkTextSelector) {
-    return collectLinks(linkNodeSelector, linkTextSelector, null);
 }
 
 function collectLinks(linkNodeSelector, linkTextSelector, linkDateSelector) {
@@ -72,7 +68,10 @@ function createList(listHash, listTitle, listFinishText, linkNameSuffix, opening
                 a.append(name + linkNameSuffix);
                 a.attr('href', value);
                 a.attr('target', '_blank');
-                a.click(function(){ playAudio(openingSoundLink); });
+            
+                if (null != openingSoundLink) {
+                    a.click(function(){ playAudio(openingSoundLink); });
+                }
             
             documentCorpus.append(a);
         }
@@ -83,15 +82,24 @@ function createList(listHash, listTitle, listFinishText, linkNameSuffix, opening
     //$('#startPoint').focus();
 }
 
-function addLink(text, href) {
-    addLinkExtended(text, href, "_blank", "body");
+function addLink(text, href, onClickSoundLink) {
+    addLinkExtended(text, href, "_blank", "body", "");
 }
 
-function addLinkExtended(text, href, target, parentNodeSelector) {
+function addLinkWithSound(text, href, onClickSoundLink) {
+    addLinkExtended(text, href, "_blank", "body", onClickSoundLink);
+}
+
+function addLinkExtended(text, href, target, parentNodeSelector, onClickSoundLink) {
     let a = $("<A>");
         a.append(text);
         a.attr("href", href);
         a.attr('target', target);
+        if ("" != onClickSoundLink) {
+            a.click(function(){
+                playAudio(onClickSoundLink);
+            });
+        }
     $("body").append(a);
     $("body").append("<br><br>");
 }
