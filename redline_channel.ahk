@@ -16,10 +16,12 @@ is_redline_list_mode() {
 }
 
 is_redline_video_mode() {
+	copyPageAddress()
 	return testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
 }
 
 is_redline_text_mode() {
+	copyPageAddress()
 	return testClipboardWithRegex("^https://www\.rline\.tv/news/[^/]+/$")
 }
 
