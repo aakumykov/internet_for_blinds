@@ -16,12 +16,10 @@ is_redline_list_mode() {
 }
 
 is_redline_video_mode() {
-	copyPageAddress()
 	return testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
 }
 
 is_redline_text_mode() {
-	copyPageAddress()
 	return testClipboardWithRegex("^https://www\.rline\.tv/news/[^/]+/$")
 }
 
@@ -30,13 +28,11 @@ is_redline_text_mode() {
 
 
 is_redline_main_page() {
-	focusFirefox()
-	return searchImageInAddressBar("browser\redline-main-page.bmp", true)
+	return testClipboardWithRegex("^https://www\.rline\.tv/?$")
 }
 
 is_redline_programs_list() {
-	focusFirefox()
-	return searchImageInAddressBar("browser\redline-programs-list.bmp", true)
+	return testClipboardWithRegex("^https://www\.rline\.tv/programs/?$")
 }
 
 redlineVideoPlayPause() {

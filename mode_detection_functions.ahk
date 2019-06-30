@@ -1,17 +1,35 @@
 
+getMode() {
+	global WORK_MODE
+
+	if ("undefined" == WORK_MODE) {
+		detectMode()
+	}
+	
+	return WORK_MODE
+}
+
+
+detectMode() {
+	global WORK_MODE
+
+	copyPageAddress()
+
+	if (is_search_start_mode()) {
+		WORK_MODE := "SEARCH_START"
+	}
+	else if (is_list_mode()) {
+		WORK_MODE := "LIST_MODE"
+	}
+	else if (is_content_mode()) {
+		WORK_MODE := "CONTENT_MODE"
+	}
+}
+
+
 ; Определение текущего режима
 is_search_start_mode() {
-	focusFirefox()
-	if (searchImageInAddressBar("browser\search-mode-ya.ru-default.bmp", true)) {
-		return true
-	}
-	if (searchImageInAddressBar("browser\search-mode-ya.ru-light.bmp", true)) {
-		return true
-	}
-	if (searchImageInAddressBar("browser\search-mode-ya.ru-dark.bmp", true)) {
-		return true
-	}
-	return false
+	return testClipboardWithRegex("^https://ya.ru/?$")
 }
 
 is_list_mode() {
@@ -49,64 +67,15 @@ is_content_mode() {
 
 ; Виды списка
 is_text_search_results_mode() {
-	focusFirefox()
-
-	if (searchImageInAddressBar("browser\search-mode-results-default.bmp", true)) {
-		return true
-	}
-
-	if (searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)) {
-		return true
-	}
-
-	if (searchImageInAddressBar("browser\search-mode-results-dark.bmp", true)) {
-		return true
-	}
-
-	; if (searchImageInAddressBar("browser\search-mode-results-lite.bmp", true)) {
-	; 	return true
-	; }
+	return testClipboardWithRegex("^https://yandex\.ru/search/\?")
 }
 
 is_mail_list_mode() {
-	focusFirefox()
-	
-	if (searchImageInAddressBar("browser\mail-mode-list-dark-1-work.bmp", true)) { 
-		return true 
-	}
-	if (searchImageInAddressBar("browser\mail-mode-list-dark-2.bmp", true)) { 
-		return true 
-	}
-
-	if (searchImageInAddressBar("browser\mail-mode-list-default-1.bmp", true)) { 
-		return true 
-	}
-	if (searchImageInAddressBar("browser\mail-mode-list-default-2.bmp", true)) { 
-		return true 
-	}
-
-	if (searchImageInAddressBar("browser\mail-mode-list-light-1.bmp", true)) { 
-		return true 
-	}
-	if (searchImageInAddressBar("browser\mail-mode-list-light-2.bmp", true)) { 
-		return true 
-	}
-
-	; if (searchImageInAddressBar("browser\mail-mode-list-light-1-home.bmp", true)) { 
-	; 	return true 
-	; }
-	; if (searchImageInAddressBar("browser\mail-mode-list-light-2-home.bmp", true)) { 
-	; 	return true 
-	; }
-
-	
-
-	return false
+	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/?$")
 }
 
 is_video_search_results_mode() {
-	focusFirefox()
-	return searchImageInAddressBar("browser\search-mode-video-results-dark.bmp", true)
+	return testClipboardWithRegex("^https://www\.youtube\.com/results\?search_query=")
 }
 
 
@@ -114,33 +83,15 @@ is_video_search_results_mode() {
 
 ; Виды содержимого
 is_text_reader_mode() {
-	focusFirefox()
 	return searchImage("browser\reader-mode-letter-default-home.bmp", 0, 90, 44, 250, true)
 }
 
 is_mail_message_mode(){
-	focusFirefox()
-	if (searchImageInAddressBar("browser\mail-mode-message-light.bmp", true)) { 
-		return true 
-	}
-	if (searchImageInAddressBar("browser\mail-mode-message-dark.bmp", true)) { 
-		return true 
-	}
-	return false
+	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/message/[^/]+$")
 }
 
 is_youtube_watch_mode() {
-	focusFirefox()
-	if (searchImageInAddressBar("browser\youtube-mode-watch-default-home.bmp", true)) { 
-		return true 
-	}
-	if (searchImageInAddressBar("browser\youtube-mode-watch-light.bmp", true)) { 
-		return true 
-	}
-	if (searchImageInAddressBar("browser\youtube-mode-watch-dark.bmp", true)) { 
-		return true 
-	}
-	return false
+	return testClipboardWithRegex("^https://www\.youtube\.com/watch\?")
 }
 
 

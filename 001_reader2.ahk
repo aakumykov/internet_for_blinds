@@ -1,4 +1,5 @@
 #Include, config_system.ahk
+#Include, system_variables.ahk
 #Include, config_user.ahk
 #Include, image_functions.ahk
 #Include, sound_file_functions.ahk
@@ -66,6 +67,8 @@ playPause() {
 }
 
 stepForward() {
+	mode := getMode()
+
 	if (is_text_reader_mode()) {
 		textSkipForward()
 	}
@@ -148,10 +151,12 @@ if (is_mail_list_mode()) {
 return
 
 F9::
-if (is_redline_text_mode()) {
-	MsgBox "redline_text_mode"
+detectMode()
+
+if (is_youtube_watch_mode()) {
+	TrayTip, "MODE", "is_youtube_watch_mode"
 } else {
-	MsgBox "not redline_text_mode"
+	TrayTip, "MODE", "NOT is_youtube_watch_mode"
 }
 return
 
@@ -172,10 +177,3 @@ if (is_redline_video_mode()) {
 }
 return
 
-
-detectMode() {
-	focusFirefox()
-	Send, ^{l}
-	Send, ^{c}
-	return RegExMatch(clipboard, "^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
-}
