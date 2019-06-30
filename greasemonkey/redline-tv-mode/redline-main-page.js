@@ -10,7 +10,7 @@
 var $ = window.jQuery;
 
 // ====================
-playAudio('http://127.0.0.1/redline-site-opened.mp3');
+playAudio('http://127.0.0.1/redline-has-opened.mp3');
 
 let newVideosLinks = collectLinks('.video-list__item', '.video-list__name');
 let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-date');

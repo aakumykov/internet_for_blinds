@@ -138,16 +138,17 @@ closePage() {
 
 
 openSearch() {
-	modeStack.clear()
+	modeStack.addSearchMode()
 	startWebServer()
 	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
+	playSound("search-is-opening.mp3")
 }
 
 openMail() {
 	modeStack.addMailListMode()
 	startWebServer()
 	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
-	playSound("opening-mail.mp3")
+	playSound("mail-is-opening.mp3")
 }
 
 
@@ -163,7 +164,7 @@ openMail() {
 
 F8::
 mode := getMode()
-MsgBox, , "CURRENT MODE", %mode%, 1
+TrayTip, "CURRENT MODE", %mode%, 1
 return
 
 F7::

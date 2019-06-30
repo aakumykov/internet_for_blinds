@@ -27,6 +27,17 @@ class ModeStack {
 	}
 
 
+	addSearchMode() {
+		this.addMode("SEARCH_MODE")
+	}
+	isSearchMode() {
+		if ("" == this.current_mode) {
+			detectMode()
+		}
+		return "SEARCH_MODE" == this.current_mode
+	}
+
+
 	addListMode() {
 		this.addMode("LIST_MODE")
 	}
