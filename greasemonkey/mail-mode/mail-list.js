@@ -2,6 +2,7 @@
 // @name     Яндекс.Почта (список)
 // @version  1
 // @grant    none
+// @inject-into content
 // @include    /^https://mail\.yandex\.ru/lite$/
 // @include    /^https://mail\.yandex\.ru/lite/$/
 // @inject-into content
