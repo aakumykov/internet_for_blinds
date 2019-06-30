@@ -3,7 +3,7 @@ modeStack := new ModeStack()
 getMode() {
 	mode := modeStack.getCurrentMode()
 
-	if ("undefined" == mode) {
+	if ("" == mode) {
 		detectMode()
 	}
 	
@@ -24,7 +24,7 @@ detectMode() {
 	}
 }
 
-clearMode() {
+clearModes() {
 	modeStack.clearModes()
 }
 

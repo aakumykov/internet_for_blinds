@@ -87,7 +87,7 @@ stepForward() {
 
 stepBack() {
 	mode := getMode()
-	
+
 	if (is_text_reader_mode()) {
 		textSkipBack()
 	}
@@ -105,18 +105,20 @@ stepBack() {
 }
 
 closePage() {
-	clearMode()
+	modeStack.popMode()
 	closeBrowserPage()
 }
 
 
 
 openSearch() {
+	modeStack.clear()
 	startWebServer()
 	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
 }
 
 openMail() {
+	modeStack.clear()
 	startWebServer()
 	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
 }

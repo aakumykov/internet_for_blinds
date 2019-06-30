@@ -1,43 +1,40 @@
 class ModeStack {
 
 	modes_stack := Array()
-	default_mode := "undefined"
-	
+	current_mode := ""
+
+
 	getCurrentMode() {
-		len := this.modes_stack.length()
-		if (0 == len) {
-			return this.default_mode
-		} else {
-			return this.modes_stack[this.modes_stack.length()]
-		}
+		return this.current_mode
 	}
 	
-	addMode(modeName) {
-		this.modes_stack.push(modeName)
+	addMode(newMode) {
+		this.modes_stack.push(this.current_mode)
+		this.current_mode := newMode
 	}
 	
-	getMode() {
-		mode := this.modes_stack.pop()
-		if ("" == mode) {
-			return this.default_mode
-		} else {
-			return mode
-		}
+	popMode() {
+		lastMode := this.modes_stack.pop()
+		this.current_mode := lastMode
 	}
-	
-	clearModes() {
+
+	clearCurrentMode() {
+		this.current_mode := ""
+	}
+
+	clear() {
 		this.modes_stack := Array()
 	}
 
+	
+;	isListMode() {
+;		current_mode := this.getCurrentMode()
+;		return "LIST_MODE" == current_mode
+;	}
 
-	isListMode() {
-		current_mode := this.getCurrentMode()
-		return "LIST_MODE" == current_mode
-	}
+;	isVideoMode() {
+;		current_mode := this.getCurrentMode()
+;		return "VIDEO_MODE" == current_mode
+;	}
 
-	isVideoMode() {
-		current_mode := this.getCurrentMode()
-		return "VIDEO_MODE" == current_mode
-	}
 }
-
