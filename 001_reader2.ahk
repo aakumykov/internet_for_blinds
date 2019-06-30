@@ -46,11 +46,13 @@ return
 
 
 playPause() {
-	if (is_list_mode()) {
-		openLinkAndRead()
-	}
-	else if (is_mail_list_mode()) {
+	mode := getMode()
+
+	if (modeStack.isMailListMode()) {
 		openMailMessageLink()
+	}
+	else if (modeStack.isListMode()) {
+		openLinkAndRead()
 	}
 	else if (is_text_reader_mode()) {
 		textPlayPause()
@@ -67,12 +69,7 @@ playPause() {
 }
 
 stepForward() {
-	mode := getMode()
-
-	if (is_text_reader_mode()) {
-		textSkipForward()
-	}
-	else if (is_list_mode()) {
+	if (modeStack.isListMode()) {
 		startNVDA(false)
 		unmuteNVDA()
 		nextLink()
@@ -83,15 +80,15 @@ stepForward() {
 	else if (is_redline_video_mode()) {
 		videoSkipForward()
 	}
+	else if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
+		textSkipForward()
+	}
 }
 
 stepBack() {
 	mode := getMode()
 
-	if (is_text_reader_mode()) {
-		textSkipBack()
-	}
-	else if (is_list_mode()) {
+	if ("LIST_MODE" == mode) {
 		startNVDA(false)
 		unmuteNVDA()
 		prevLink()
@@ -101,6 +98,9 @@ stepBack() {
 	}
 	else if (is_redline_video_mode()) {
 		videoSkipBack()
+	}
+	else if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
+		textSkipBack()
 	}
 }
 
@@ -118,7 +118,7 @@ openSearch() {
 }
 
 openMail() {
-	modeStack.clear()
+	modeStack.addMailListMode()
 	startWebServer()
 	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
 }
@@ -140,6 +140,7 @@ MsgBox, , "CURRENT MODE", %mode%, 1
 return
 
 F7::
+detectMode()
 if (is_mail_list_mode()) {
 	MsgBox "mail_list_mode"
 } else {
@@ -162,15 +163,10 @@ F10::
 muteNVDA()
 return
 
-F11::
+~F11::
 unmuteNVDA()
 return
 
-F12::
-if (is_redline_video_mode()) {
-	MsgBox "redline_video_mode"
-} else {
-	MsgBox "NOT redline_video_mode"
-}
+~F12::
 return
 

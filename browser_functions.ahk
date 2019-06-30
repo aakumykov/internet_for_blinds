@@ -41,6 +41,7 @@ openLinkAndRead() {
 }
 
 openMailMessageLink() {
+	modeStack.addListMode()
 	openLink()
 	readMailMessage()
 }
@@ -48,6 +49,7 @@ openMailMessageLink() {
 openLink(){
 	global tab_open_delay
 
+	;modeStack.clearCurrentMode()
 	focusFirefox()
 	muteNVDA()
 

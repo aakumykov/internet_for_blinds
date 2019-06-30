@@ -26,11 +26,23 @@ class ModeStack {
 		this.modes_stack := Array()
 	}
 
+
+	addListMode() {
+		this.addMode("LIST_MODE")
+	}
+
+	addMailListMode() {
+		this.addMode("MAIL_LIST_MODE")
+	}
+
+
+	isMailListMode() {
+		return "MAIL_LIST_MODE" == this.current_mode
+	}
 	
-;	isListMode() {
-;		current_mode := this.getCurrentMode()
-;		return "LIST_MODE" == current_mode
-;	}
+	isListMode() {
+		return ("LIST_MODE" == this.current_mode || this.isMailListMode() )
+	}
 
 ;	isVideoMode() {
 ;		current_mode := this.getCurrentMode()

@@ -38,6 +38,9 @@ is_list_mode() {
 	if (is_mail_list_mode()) 			{ 
 		return true 
 	}
+	if (is_mail_message_mode()) { 
+		return true 
+	}
 	if (is_text_search_results_mode())  { 
 		return true 
 	}
@@ -52,9 +55,6 @@ is_list_mode() {
 
 is_content_mode() {
 	if (is_text_reader_mode()) { 
-		return true 
-	}
-	if (is_mail_message_mode()) { 
 		return true 
 	}
 	if (is_youtube_watch_mode()) { 

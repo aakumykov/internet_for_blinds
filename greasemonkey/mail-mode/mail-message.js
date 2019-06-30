@@ -56,9 +56,9 @@ function buildLine(text){
 function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
   debugMsg("constructNewPage()");
   
-  console.log("ДАТА-1: "+msgDate);
+  //console.log("ДАТА-1: "+msgDate);
   let humanDate = humanizeDate(msgDate);
-  console.log("ДАТА-2: "+humanDate);
+  //console.log("ДАТА-2: "+humanDate);
   
   let listId = "oneMessage";
   
@@ -69,23 +69,24 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
   let subjectLine = buildLine("Заголовок: "+msgSubject);
   let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
   
-  ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
-  //$('#'+listId).append(dateLine);
-  //$('#'+listId).append(subjectLine);
-  //$('#'+listId).append( buildLine("Сообщение: "+bodyLine) );
-  
   let fullText = 
       dateLine.text() + ". <br>" +
       subjectLine.text() + ". <br>" +
       bodyLine
       ;
   
-  $(document.body).append("<button id='button1'></button><br>");
-  $('#button1').focus();
-  $(document.body).append("<a id='linkWithFullText' href='#'>"+fullText+"</a>");
-  setTimeout(function(){
-    $('#linkWithFullText').focus();
-  }, 2000);
+    $(document.body).append("<button id='button3'>Три шага до письма</button><br>");
+    $(document.body).append("<button id='button2'>Два шага до письма</button><br>");
+    $(document.body).append("<button id='button1'>Один шаг до письма</button><br>");
+    $(document.body).append("<br>");
+    
+  //$('#button1').focus();
+
+    $(document.body).append("<a id='linkWithFullText' href='#'>"+fullText+"</a>");
+  
+    /*setTimeout(function(){
+        $('#linkWithFullText').focus();
+    }, 2000);*/
 }
 
 
