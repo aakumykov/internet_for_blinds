@@ -1,116 +1,94 @@
 // ==UserScript==
-// @name Яндекс.Почта (сообщение)
-// @namespace Violentmonkey Scripts
-// @include  /^https://mail\.yandex\.ru/lite/message/\d+$/
-// @grant none
-// @inject-into content 
+// @name     Яндекс.Почта (список)
+// @version  1
+// @grant    none
+// @inject-into content
+// @include    /^https://mail\.yandex\.ru/lite$/
+// @include    /^https://mail\.yandex\.ru/lite/$/
+// @inject-into content
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/date_functions.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/html_functions.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
 
-console.log("Яндекс.Почта загружена");
+// Системная настройка JQuery
+var $ = window.jQuery;
 
 
-var DEBUG = false;
+// ========= Функции обработки почты ========
+var schema = 'https://';
+var host = 'mail.yandex.ru';
+var list = [];
 
-function debugMsg(msg){
-  if (DEBUG) console.log(msg);
+// --- Поиск элементов ---
+function fetchDate(element) {
+  return $(element).find('.b-messages__date').find('span').first().text();
 }
 
-function fetchSubject(){
-  let text = $('.b-message-head__subject-text').text();
-  debugMsg(text);
-  return text;
+function fetchTitle(element) {
+  return $(element).find('.b-messages__subject').first().text();
 }
 
-function fetchBody(){
-  let text = $('.b-message-body__content').text();
-  debugMsg(text);
-  return text;
+function fetchFrom(element) {
+  return $(element).find('.b-messages__from__text').find('span').first().text();
 }
 
-function fetchDate(){
-  let text = $('.b-message-head__date').text();
-  debugMsg(text);
-  return text;
+function fetchLink(element) {
+  return $(element).find('.b-messages__message__link').attr('href');
 }
 
-function fetchAttachmentsCount(){
-  let cnt = $('.b-message-attach__i').length;
-  debugMsg("вложений: "+cnt);
-  return cnt;
-}
-
-function clearAttachments(){
-  $('div.b-message-attach').each( function(index,element){
-    element.remove();
+function fetchMessageList() {
+  $('.b-messages__message').each( function(index, line) {
+    var date = fetchDate(line);
+    var title = fetchTitle(line);
+    var from = fetchFrom(line);
+    var link = fetchLink(line);
+    //console.log(from+" - "+date+" - "+title+" ("+schema+host+link+")");
+    list.push({
+      'date': date,
+      'title': title,
+      'from': from,
+      'link': link
+    });
   });
 }
 
-function buildLine(text){
-  return $("<li><a href='#' class='qwerty'>"+text+"</a></li>");
+
+// --- Создание новых элементов ---
+function createMessageLine(date, from, title, link) {
+    //console.log("DATE: "+date);
+
+    let linePrefix = "Письмо, от ";
+    let humanDate = humanizeDate(date);
+    
+    let li = $("<LI>");
+    
+    let a = $("<A>");
+        a.append(linePrefix+" "+humanDate+", прислал "+from+", заголовок: "+title);
+        a.attr("href", link);
+        a.attr("target", '_blank');
+        a.click(function(){ playAudio("http://127.0.0.1/mail-is-opening.mp3"); });
+    
+    li.append(a);
+    
+    return li;
 }
 
-function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
-    debugMsg("constructNewPage()");
+function createMessageList() {
+  $('body').append("<UL id='messageList'></UL>");
 
-    //console.log("ДАТА-1: "+msgDate);
-    let humanDate = humanizeDate(msgDate);
-    //console.log("ДАТА-2: "+humanDate);
-  
-    let listId = "oneMessage";
-  
-    $('body').append("<button id='button3'>Три шага до письма</button><br>");
-    $('body').append("<button id='button2'>Два шага до письма</button><br>");
-    $('body').append("<button id='button1'>Один шаг до письма</button><br>");
-    $('body').append("<br>");
-    
-    $('body').append("<UL id='"+listId+"'></UL>");
-    
-    let attachmentsMsg = (0==attachmentsCount) ? "вложений нет" : "вложения: "+attachmentsCount+" штуки";
-    let dateLine = buildLine("Письмо от "+humanDate);
-    let subjectLine = buildLine("Заголовок: "+msgSubject);
-    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
-  
-  
-    
-    ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
-    $('#'+listId).append(dateLine);
-    $('#'+listId).append(subjectLine);
-    $('#'+listId).append( buildLine("Сообщение: "+bodyLine) );
-
-    
-  /*let fullText = 
-      dateLine.text() + ". <br>" +
-      subjectLine.text() + ". <br>" +
-      bodyLine
-      ;*/
-    
-    //$(document.body).append("<a id='linkWithFullText' href='#'>"+fullText+"</a>");
-    
-    //$('#button1').focus();
-  
-    /*setTimeout(function(){
-        $('#linkWithFullText').focus();
-    }, 2000);*/
+  for(var i=0; i<list.length; i++) {
+    var item = list[i];
+    //console.log(item.title);
+    $('#messageList').append( createMessageLine(item.date, item.from, item.title, item.link) );
+  }
 }
 
 
-// ============ Основная логика ===============
-
-playAudio('http://127.0.0.1/email-opened.mp3');
-
-let attachmentsCount = fetchAttachmentsCount();
-clearAttachments(); // это нужно делать ДО получения тела сообщения
-
-let msgSubject = fetchSubject();
-let msgBody = fetchBody();
-let msgDate = fetchDate();
-
-document.title = "Письмо: "+msgSubject;
-
-clearPage();
-
-constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount);
+// ================ Работа =================
+playAudio('http://127.0.0.1/mailbox-opened.mp3');
+fetchMessageList();
+clearPage("списка сообщений");
+createMessageList();
+$('#startPoint4').focus();
