@@ -84,6 +84,11 @@ playPause() {
 stepForward() {
 	focusFirefox()
 
+	if (modeStack.isRedlineVideoMode()) {
+		videoSkipForward()
+		return
+	}
+
 	if (modeStack.isListMode()) {
 		startNVDA(false)
 		unmuteNVDA()
@@ -102,6 +107,11 @@ stepForward() {
 
 stepBack() {
 	focusFirefox()
+
+	if (modeStack.isRedlineVideoMode()) {
+		videoSkipBack()
+		return
+	}
 
 	if (modeStack.isListMode()) {
 		startNVDA(false)
