@@ -39,13 +39,30 @@ function processPage() {
   // Переделываю страницу
   clearPage("результатов поиска видео");
 
-  $(document.body).append("<style>BODY { padding: 20pt; } * { font-family: serif; } A { font-size: 2em; } H1 { text-align:center; padding-bottom: 20pt; }</style>");
-  $(document.body).append("<ul id='resultsList'></ul>");
+    $(document.body).append("<style>BODY { padding: 20pt; } * { font-family: serif; } A { font-size: 2em; } H1 { text-align:center; padding-bottom: 20pt; }</style>");
+    $(document.body).append("<br><br>");
+    $(document.body).append("<ul id='resultsList'></ul>");
 
   resSet.each(function(index, element){
     let text = $(element).text();
     let href = "https://www.youtube.com" + $(element).attr('href');
-    $("ul#resultsList").append( $("<li class='resultsItem'><a href='"+href+"' target='_blank'>"+text+"</a></li>") );
+      
+      //$("ul#resultsList").append( $("<li class='resultsItem'><a href='"+href+"' target='_blank'>"+text+"</a></li>") );
+      
+      let li = $("<LI>");
+          li.attr("class", "resultsItem");
+      
+      let a = $("<A>");
+          a.append(text);
+          a.attr("href", href);
+          a.attr("target", "_blank");
+          a.click(function(){
+              playAudio("http://127.0.0.1/video-is-opening.mp3");
+          });
+      
+      li.append(a);
+    
+      $("ul#resultsList").append(li);
   });
 
   
