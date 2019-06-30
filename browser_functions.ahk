@@ -43,7 +43,7 @@ openLinkAndRead() {
 openMailMessageLink() {
 	modeStack.addListMode()
 	openLink()
-	readMailMessage()
+	;readMailMessage()
 }
 
 openLink(){
@@ -56,10 +56,9 @@ openLink(){
 	Send, {Return}
 	Sleep, %tab_open_delay%
 
-	while (!pageIsLoaded()) {
-		Sleep, 100
-	}
+	waitForEventDuringSeconds("pageIsLoaded", 10000)
 }
+
 
 readPage() {
 	enableTextReaderMode()
@@ -85,6 +84,22 @@ pageIsLoaded() {
 	} else {
 		;pronounceError "Фаерфокс не запущен!"
 		return false
+	}
+}
+
+pageNotLoaded() {
+	return !pageIsLoaded()
+}
+
+waitForEventDuringSeconds(testFuncName, timeout) {
+	func := Func(testFuncName)
+
+	passed_time := 0
+	sleep_step := 100 ; milliseconds
+
+	while (!func.() && passed_time < timeout) {
+		Sleep, sleep_step
+		passed_time := passed_time + sleep_step
 	}
 }
 

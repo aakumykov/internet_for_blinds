@@ -66,6 +66,9 @@ playPause() {
 	else if (is_redline_text_mode()) {
 		
 	}
+	else {
+		playSoundFile("unknown-mode.mp3")
+	}
 }
 
 stepForward() {
@@ -109,6 +112,8 @@ stepBack() {
 closePage() {
 	focusFirefox()
 	modeStack.popMode()
+	;cm := getCurrentMode
+	;TrayTip, MODE, cm: %cm%, 1
 	closeBrowserPage()
 }
 
@@ -124,6 +129,7 @@ openMail() {
 	modeStack.addMailListMode()
 	startWebServer()
 	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
+	playSound("opening-mail.mp3")
 }
 
 
