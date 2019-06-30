@@ -1,29 +1,31 @@
+modeStack := new ModeStack()
 
 getMode() {
-	global WORK_MODE
+	mode := modeStack.getCurrentMode()
 
-	if ("undefined" == WORK_MODE) {
+	if ("undefined" == mode) {
 		detectMode()
 	}
 	
-	return WORK_MODE
+	return modeStack.getCurrentMode()
 }
 
-
 detectMode() {
-	global WORK_MODE
-
 	copyPageAddress()
 
 	if (is_search_start_mode()) {
-		WORK_MODE := "SEARCH_START"
+		modeStack.addMode("SEARCH_START")
 	}
 	else if (is_list_mode()) {
-		WORK_MODE := "LIST_MODE"
+		modeStack.addMode("LIST_MODE")
 	}
 	else if (is_content_mode()) {
-		WORK_MODE := "CONTENT_MODE"
+		modeStack.addMode("CONTENT_MODE")
 	}
+}
+
+clearMode() {
+	modeStack.clearModes()
 }
 
 

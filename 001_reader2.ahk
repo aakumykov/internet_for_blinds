@@ -86,6 +86,8 @@ stepForward() {
 }
 
 stepBack() {
+	mode := getMode()
+	
 	if (is_text_reader_mode()) {
 		textSkipBack()
 	}
@@ -102,7 +104,10 @@ stepBack() {
 	}
 }
 
-
+closePage() {
+	clearMode()
+	closeBrowserPage()
+}
 
 
 
@@ -128,18 +133,8 @@ openMail() {
 
 
 F8::
-if (is_list_mode()) {
-	MsgBox "LIST MODE"
-}
-else if (is_content_mode()) {
-	MsgBox "CONTENT MODE"
-}
-else if (is_search_start_mode()) {
-	MsgBox "SEARCH START MODE"	
-}
-else {
-	MsgBox "OTHER MODE"
-}
+mode := getMode()
+MsgBox, , "CURRENT MODE", %mode%, 1
 return
 
 F7::

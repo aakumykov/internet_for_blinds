@@ -8,7 +8,7 @@ focusFirefox() {
 	WinActivate, ahk_class MozillaWindowClass
 }
 
-closePage() {
+closeBrowserPage() {
 	global browser_is_closed_check_delay
 
 	if (firefoxIsOpened()) {
