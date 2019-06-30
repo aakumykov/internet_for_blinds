@@ -1,33 +1,28 @@
 // ==UserScript==
-// @name     Youtube (результаты поиска с прокруткой)
-// @version  1
-// @grant    none
-// @include  https://www.youtube.com/results?search_query=*
-// @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require			 https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
-// @require			 https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/html_functions.js
+// @name Youtube (результаты поиска)
+// @namespace Violentmonkey Scripts
+// @grant none
+// @inject-into content
+// @include      /^https://www\.youtube\.com/results\?search_query=/
+// @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
+// @require    https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
+// @require    https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/html_functions.js
 // ==/UserScript==
 
 var $ = window.jQuery;
 
 let scrollCallbackCounter = 0;
 
-
 // Запуск скрипта
-$(window).load(function() {
+document.title = 'Результаты поиска видео';
 
-  document.title = 'Результаты поиска видео';
-  //$(document).prop('title', 'Результаты поиска видео');
-  
-  $("html, body").animate({ scrollTop: $(document).height()*3 }, 5000, 'swing', function(){
-  	let resSet = $("A#video-title");
+$("html, body").animate({ scrollTop: $(document).height()*3 }, 5000, 'swing', function(){
+    let resSet = $("A#video-title");
     scrollCallbackCounter += 1;
-    
+
     if (2==scrollCallbackCounter) {
-    	processPage();
+        processPage();
     }
-  });
-  
 });
 
 
@@ -42,7 +37,7 @@ function processPage() {
   let resSet = $("A#video-title");
    
   // Переделываю страницу
-	clearPage("результатов поиска видео");
+  clearPage("результатов поиска видео");
 
   $(document.body).append("<style>BODY { padding: 20pt; } * { font-family: serif; } A { font-size: 2em; } H1 { text-align:center; padding-bottom: 20pt; }</style>");
   $(document.body).append("<ul id='resultsList'></ul>");
@@ -50,7 +45,6 @@ function processPage() {
   resSet.each(function(index, element){
     let text = $(element).text();
     let href = "https://www.youtube.com" + $(element).attr('href');
-    //$(document.body).append( $("<li><a href='"+href+"' target='_blank'>"+text+"</a></li>") );
     $("ul#resultsList").append( $("<li class='resultsItem'><a href='"+href+"' target='_blank'>"+text+"</a></li>") );
   });
 
@@ -59,5 +53,3 @@ function processPage() {
   
   document.title = "поиск видео: «" + searchQuery + "»";
 }
-
-
