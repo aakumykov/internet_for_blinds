@@ -37,10 +37,16 @@ class ModeStack {
 
 
 	isMailListMode() {
+		if ("" == this.current_mode) {
+			detectMode()
+		}
 		return "MAIL_LIST_MODE" == this.current_mode
 	}
 	
 	isListMode() {
+		if ("" == this.current_mode) {
+			detectMode()
+		}
 		return ("LIST_MODE" == this.current_mode || this.isMailListMode() )
 	}
 

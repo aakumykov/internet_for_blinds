@@ -46,7 +46,7 @@ return
 
 
 playPause() {
-	mode := getMode()
+	focusFirefox()
 
 	if (modeStack.isMailListMode()) {
 		openMailMessageLink()
@@ -69,6 +69,8 @@ playPause() {
 }
 
 stepForward() {
+	focusFirefox()
+
 	if (modeStack.isListMode()) {
 		startNVDA(false)
 		unmuteNVDA()
@@ -86,9 +88,9 @@ stepForward() {
 }
 
 stepBack() {
-	mode := getMode()
+	focusFirefox()
 
-	if ("LIST_MODE" == mode) {
+	if (modeStack.isListMode()) {
 		startNVDA(false)
 		unmuteNVDA()
 		prevLink()
@@ -105,6 +107,7 @@ stepBack() {
 }
 
 closePage() {
+	focusFirefox()
 	modeStack.popMode()
 	closeBrowserPage()
 }
