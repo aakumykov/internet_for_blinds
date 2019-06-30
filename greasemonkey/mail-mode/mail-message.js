@@ -1,13 +1,17 @@
 // ==UserScript==
-// @name     Яндекс.Почта (сообщение)
-// @version  1
-// @grant    none
-// @include  https://mail.yandex.ru/lite/message/*
+// @name Яндекс.Почта (сообщение)
+// @namespace Violentmonkey Scripts
+// @include  /^https://mail\.yandex\.ru/lite/message/\d+$/
+// @grant none
+// @inject-into content 
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/date_functions.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/html_functions.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
+
+console.log("Яндекс.Почта загружена");
+
 
 var DEBUG = false;
 
@@ -85,21 +89,19 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
 }
 
 
-// ============ Когда документ загружен ===============
-$(document).ready(function(){
-  playAudio('http://127.0.0.1/email-opened.mp3');
-  
-  let attachmentsCount = fetchAttachmentsCount();
-  clearAttachments(); // это нужно делать ДО получения тела сообщения
+// ============ Основная логика ===============
 
-  let msgSubject = fetchSubject();
-  let msgBody = fetchBody();
-  let msgDate = fetchDate();
-  
-  document.title = "Письмо: "+msgSubject;
-  
-  clearPage();
-  
-  constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount);
-  
-});
+playAudio('http://127.0.0.1/email-opened.mp3');
+
+let attachmentsCount = fetchAttachmentsCount();
+clearAttachments(); // это нужно делать ДО получения тела сообщения
+
+let msgSubject = fetchSubject();
+let msgBody = fetchBody();
+let msgDate = fetchDate();
+
+document.title = "Письмо: "+msgSubject;
+
+clearPage();
+
+constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount);

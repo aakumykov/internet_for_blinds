@@ -2,22 +2,17 @@
 // @name     Яндекс.Почта (список)
 // @version  1
 // @grant    none
-// @match    https://mail.yandex.ru/lite
+// @include    /^https://mail\.yandex\.ru/lite$/
+// @include    /^https://mail\.yandex\.ru/lite/$/
+// @inject-into content
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require  https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/date_functions.js
+// @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/date_functions.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/html_functions.js
+// @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
 
 // Системная настройка JQuery
 var $ = window.jQuery;
-
-
-// Произношение фразы
-function playAudio(audioURL){
-  var audioTag = document.createElement('audio');
-  audioTag.src = audioURL;
-  audioTag.play();
-}
 
 
 // ========= Функции обработки почты ========
@@ -62,7 +57,7 @@ function fetchMessageList() {
 // --- Создание новых элементов ---
 function createMessageLine(date, from, title, link) {
   //console.log("DATE: "+date);
-  let linePrefix = "Письмо, получено ";
+  let linePrefix = "Письмо, от ";
   let humanDate = humanizeDate(date);
   return $("<li><a href='"+link+"' target='_blank'>"+linePrefix+" "+humanDate+", прислал "+from+", заголовок: "+title+"</a></li>");
 }
@@ -78,11 +73,9 @@ function createMessageList() {
 }
 
 
-// ================ Когда страница загружена... =================
-$(document).ready(function(){
-  playAudio('http://127.0.0.1/mailbox-opened.mp3');
-  fetchMessageList();
-  clearPage("списка сообщений");
-  createMessageList();
-  $('#startPoint4').focus();
-});
+// ================ Работа =================
+playAudio('http://127.0.0.1/mailbox-opened.mp3');
+fetchMessageList();
+clearPage("списка сообщений");
+createMessageList();
+$('#startPoint4').focus();
