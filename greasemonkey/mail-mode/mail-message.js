@@ -54,35 +54,43 @@ function buildLine(text){
 }
 
 function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
-  debugMsg("constructNewPage()");
+    debugMsg("constructNewPage()");
+
+    //console.log("ДАТА-1: "+msgDate);
+    let humanDate = humanizeDate(msgDate);
+    //console.log("ДАТА-2: "+humanDate);
   
-  //console.log("ДАТА-1: "+msgDate);
-  let humanDate = humanizeDate(msgDate);
-  //console.log("ДАТА-2: "+humanDate);
+    let listId = "oneMessage";
   
-  let listId = "oneMessage";
+    $('body').append("<button id='button3'>Три шага до письма</button><br>");
+    $('body').append("<button id='button2'>Два шага до письма</button><br>");
+    $('body').append("<button id='button1'>Один шаг до письма</button><br>");
+    $('body').append("<br>");
+    
+    $('body').append("<UL id='"+listId+"'></UL>");
+    
+    let attachmentsMsg = (0==attachmentsCount) ? "вложений нет" : "вложения: "+attachmentsCount+" штуки";
+    let dateLine = buildLine("Письмо от "+humanDate);
+    let subjectLine = buildLine("Заголовок: "+msgSubject);
+    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
   
-  $('body').append("<UL id='"+listId+"'></UL>");
   
-  let attachmentsMsg = (0==attachmentsCount) ? "вложений нет" : "вложения: "+attachmentsCount+" штуки";
-  let dateLine = buildLine("Письмо от "+humanDate);
-  let subjectLine = buildLine("Заголовок: "+msgSubject);
-  let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
-  
-  let fullText = 
+    
+    ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
+    $('#'+listId).append(dateLine);
+    $('#'+listId).append(subjectLine);
+    $('#'+listId).append( buildLine("Сообщение: "+bodyLine) );
+
+    
+  /*let fullText = 
       dateLine.text() + ". <br>" +
       subjectLine.text() + ". <br>" +
       bodyLine
-      ;
-  
-    $(document.body).append("<button id='button3'>Три шага до письма</button><br>");
-    $(document.body).append("<button id='button2'>Два шага до письма</button><br>");
-    $(document.body).append("<button id='button1'>Один шаг до письма</button><br>");
-    $(document.body).append("<br>");
+      ;*/
     
-  //$('#button1').focus();
-
-    $(document.body).append("<a id='linkWithFullText' href='#'>"+fullText+"</a>");
+    //$(document.body).append("<a id='linkWithFullText' href='#'>"+fullText+"</a>");
+    
+    //$('#button1').focus();
   
     /*setTimeout(function(){
         $('#linkWithFullText').focus();
