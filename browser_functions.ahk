@@ -33,6 +33,7 @@ openLinkAndRead() {
 	openLink()
 
 	if (is_redline_video_mode()) {
+		modeStack.addEmptyMode()
 		redlineVideoPlayPause()
 	}
 	else if (is_redline_text_mode()) {
@@ -62,9 +63,13 @@ openLink(){
 
 readPage() {
 	enableTextReaderMode()
+	
 	while (!is_text_reader_mode()) {
 		Sleep, 100
 	}
+
+	;waitForEventDuringSeconds("is_text_reader_mode", 5000)
+
 	textPlayPause()
 }
 

@@ -13,14 +13,29 @@ getMode() {
 detectMode() {
 	copyPageAddress()
 
+	if (is_redline_video_mode()) {
+		modeStack.addRedlineVideoMode()
+		return
+	}
+
+	if (is_redline_text_mode()) {
+		modeStack.addRedlineTextMode()
+		return
+	}
+
 	if (is_search_start_mode()) {
 		modeStack.addMode("SEARCH_START")
+		return
 	}
-	else if (is_list_mode()) {
+
+	if (is_list_mode()) {
 		modeStack.addMode("LIST_MODE")
+		return
 	}
-	else if (is_content_mode()) {
+
+	if (is_content_mode()) {
 		modeStack.addMode("CONTENT_MODE")
+		return
 	}
 }
 
@@ -97,3 +112,8 @@ is_youtube_watch_mode() {
 }
 
 
+
+
+reportUnknownMode() {
+	playSound("unknown-mode.mp3")
+}

@@ -48,7 +48,17 @@ return
 playPause() {
 	focusFirefox()
 
-	if (modeStack.isMailListMode()) {
+	if (modeStack.isRedlineListMode()) {
+		openRedlineLink()
+		return
+	}
+
+	if (modeStack.isRedlineVideoMode()) {
+		redlineVideoPlayPause()
+		return
+	}
+
+	else if (modeStack.isMailListMode()) {
 		openMailMessageLink()
 	}
 	else if (modeStack.isListMode()) {
@@ -112,8 +122,6 @@ stepBack() {
 closePage() {
 	focusFirefox()
 	modeStack.popMode()
-	;cm := getCurrentMode
-	;TrayTip, MODE, cm: %cm%, 1
 	closeBrowserPage()
 }
 
