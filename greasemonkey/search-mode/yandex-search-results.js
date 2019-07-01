@@ -1,77 +1,124 @@
 // ==UserScript==
 // @name Яндекс.Поиск (результаты)
 // @namespace Violentmonkey Scripts
-// @include /^https://yandex\.ru/search/
+// @include /^https://yandex\.ru/search/\?/
 // @grant none
 // @inject-into content
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
-// @require      https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/html_functions.js
+// @require          https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
 
+// ------------------------ Подготовка ------------------------
 var $ = window.jQuery;
 
+// ------------------------ Основная работа ------------------------
 
-// Оповещаю об завершении поиска
 playAudio('http://127.0.0.1/search-complete.mp3');
 
+let results_links = collectLinks("a.organic__url", "div.organic__url-text");
+console.log(results_links);
 
-// Элемент на странице, к которому будет прикреплён программно созданный список
-var topContainer = document.querySelector('.content__left');
+let next_pages_links = collectLinks("a.pager__item");
+console.log(next_pages_links);
 
-
-// HTML-элемент контейнер наших результатов
-var newResultsContainer = document.createElement('UL');
-newResultsContainer.id = 'newResultsContainer';
-newResultsContainer.style.listStyleType = 'none';
-newResultsContainer.style.borderStyle = 'dashed';
-newResultsContainer.style.borderWidth = 4;
-newResultsContainer.style.borderColor = 'limegreen';
-newResultsContainer.style.width = '100%';
-newResultsContainer.style.lineHeight = '2em';
-newResultsContainer.style.fontSize = '200%';
+clearPage(null);
+createList(results_links,    null, "Первые 10 результатов поиска", null, null, null, "http://127.0.0.1/page-is-opening.mp3");
+createList(next_pages_links, null, "Другие результаты поиска",     null, "Страница результатов ", null, "http://127.0.0.1/search-results-next-page-is-opening.mp3");
 
 
-// Собираю ссылки со страницы
-var linkItems = document.querySelectorAll('A.organic__url');
-//alert("linkItems.length="+linkItems.length);
+// ------------------------- Функции ------------------------
 
-
-// Обрабатываю ссылки
-for (var i=0; i<linkItems.length; i++) {
-    var item = linkItems[i];
-
-    var linkText = item.innerText;
-    var linkAddress = item.href;
-    //alert(linkText+"\n"+linkAddress);
-
-    var resultLine = document.createElement('LI');
-
-    var resultAnchor = document.createElement('A');
-        resultAnchor.href = linkAddress;
-        resultAnchor.innerText = linkText;
-        resultAnchor.target = '_blank';
-
-    resultLine.appendChild(resultAnchor);
-
-    newResultsContainer.appendChild(resultLine);
+function clearPage(newTitle) {
+    let documentCorpus = $('body');
+    
+    documentCorpus.empty();
+    documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
+    
+    if (null != newTitle)
+        documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
 }
 
+function collectLinks(linkNodeSelector, linkTextSelector, linkDateSelector) {
+    //let args = [];
+    //for (let key in arguments) args.push(arguments[key]);
+    //console.log("collectLinks("+args.join(", ")+")");
+    
+    let list = {};
+    
+    $(linkNodeSelector).each(function(index, element){
+        let address = $(element).attr('href');
+        
+        let name = (null != linkTextSelector) ? $(element).find(linkTextSelector).text() : $(element).text();
+        
+        if (null != linkDateSelector) {
+            let date = $(element).find(linkDateSelector).text();
+            name = name+", "+date;
+        }
+        
+        list[name] = address;
+    });
+    
+    return list;
+}
 
-// Очищаю страницу
-//var element = document.createElement("link");
-//element.setAttribute("rel", "stylesheet");
-//element.setAttribute("type", "text/css");
-//element.setAttribute("href", "external.css");
-//document.getElementsByTagName("head")[0].appendChild(element);
-clearPage("результатов поиска");
+function createList(listHash, baseUrl, listStartText, listEndText, linkNamePrefix, linkNameSuffix, openingSoundLink) {
+    let documentCorpus = $('body');
+    
+    //document.title = listStartText;
+    documentCorpus.append("<br><button>"+listStartText+"</button><br>");
+    
+    for (let name in listHash) {
 
-document.body.style="";
-document.body.setAttribute("class","");
-document.body.setAttribute("style","");
-document.body.setAttribute("data-bem","");
-document.body.setAttribute("data-log-node","");
+        if (listHash.hasOwnProperty(name)) {
 
+            let value = listHash[name];
+            
+            let linkText = name;
+            if (null != linkNamePrefix) linkText = linkNamePrefix + linkText;
+            if (null != linkNameSuffix) linkText = linkText + linkNameSuffix;
+            
+            let a = $('<A><br>');
+            a.append(linkText);
+            
+            let address = (null != baseUrl) ? baseUrl + value : value;
+            a.attr('href', address);
+                
+            a.attr('target', '_blank');
 
-// Прикрепляю воссозданный список результатов
-document.body.appendChild(newResultsContainer);
+            if (null != openingSoundLink) {
+                a.click(function(){ playAudio(openingSoundLink); });
+            }
+            
+            documentCorpus.append(a);
+        }
+    }
+    
+    if (null != listEndText)
+        documentCorpus.append("<br><br><button id='startPoint'>"+listEndText+"</button><br><br>");
+    else 
+        documentCorpus.append("<br><br>");
+    
+    //$('#startPoint').focus();
+}
+
+function addLink(text, href, onClickSoundLink) {
+    addLinkExtended(text, href, "_blank", "body", "");
+}
+
+function addLinkWithSound(text, href, onClickSoundLink) {
+    addLinkExtended(text, href, "_blank", "body", onClickSoundLink);
+}
+
+function addLinkExtended(text, href, target, parentNodeSelector, onClickSoundLink) {
+    let a = $("<A>");
+        a.append(text);
+        a.attr("href", href);
+        a.attr('target', target);
+        if ("" != onClickSoundLink) {
+            a.click(function(){
+                playAudio(onClickSoundLink);
+            });
+        }
+    $("body").append(a);
+    $("body").append("<br><br>");
+}
