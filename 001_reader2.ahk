@@ -104,11 +104,16 @@ playPause() {
 
 closePage(silent) {
 	focusFirefox()
-	modeStack.popMode()
-	closeBrowserPage(silent)
 
-	; cm := modeStack.getCurrentMode()
-	; MsgBox cm: %cm%
+	cm := modeStack.getCurrentMode()
+	MsgBox cm: %cm%
+
+	modeStack.popMode()
+
+	cm := modeStack.getCurrentMode()
+	MsgBox cm: %cm%
+
+	closeBrowserPage(silent)
 }
 
 

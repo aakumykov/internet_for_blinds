@@ -38,6 +38,9 @@ class ModeStack {
 	addMode(newMode) {
 		this.modes_stack.push(this.current_mode)
 		this.current_mode := newMode
+
+		cm := this.getCurrentMode()
+		MsgBox cm: %cm%
 	}
 	
 	addUnknownMode() {
