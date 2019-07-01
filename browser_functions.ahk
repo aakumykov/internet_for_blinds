@@ -10,6 +10,7 @@ focusFirefox() {
 
 openLinkAndWaitPageIsLoaded() {
 	global tab_open_delay
+	global page_load_wait_time
 
 	focusFirefox()
 	muteNVDA()
@@ -17,7 +18,7 @@ openLinkAndWaitPageIsLoaded() {
 	Send, {Return}
 	Sleep, %tab_open_delay%
 
-	waitForEventDuringSeconds("pageIsLoaded", 10000)
+	waitForEventDuringSeconds("pageIsLoaded", page_load_wait_time)
 }
 
 pageIsLoaded() {

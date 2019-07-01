@@ -1,7 +1,7 @@
 
 openLinkAndPlay() {
-	modeStack.clearCurrentMode()
 	muteNVDA()
+	modeStack.addEmptyMode()
 	openLinkAndWaitPageIsLoaded()
 	detectMode()
 

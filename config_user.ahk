@@ -26,3 +26,9 @@ reader_mode_enable_button_y := 84
 
 ; Время на открытие браузером вкладки
 tab_open_delay := 200
+
+; Время ожидания звгрузки страницы
+page_load_wait_time := 10000
+
+; Время ожидания активации режима чтения
+reader_mode_wait_time := 6000

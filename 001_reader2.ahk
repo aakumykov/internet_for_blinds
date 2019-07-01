@@ -105,13 +105,17 @@ playPause() {
 closePage(silent) {
 	focusFirefox()
 
-	cm := modeStack.getCurrentMode()
-	MsgBox cm: %cm%
+	; Грязный хак
+	if (modeStack.isReaderMode()) {
+		modeStack.addListMode()
+		modeStack.addReaderMode()
+	}
+	else {
+		modeStack.popMode()
+	}
 
-	modeStack.popMode()
-
-	cm := modeStack.getCurrentMode()
-	MsgBox cm: %cm%
+	; cm := modeStack.getCurrentMode()
+	; MsgBox cm: %cm%
 
 	closeBrowserPage(silent)
 }

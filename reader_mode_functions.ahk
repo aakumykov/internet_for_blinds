@@ -6,7 +6,8 @@ enableTextReaderMode() {
 	global reader_mode_enable_button_y
 	Click, %reader_mode_enable_button_x%, %reader_mode_enable_button_y%
 
-	waitForEventDuringSeconds("is_text_reader_mode", 3000)
+	global reader_mode_wait_time
+	waitForEventDuringSeconds("is_text_reader_mode", reader_mode_wait_time)
 }
 
 disableTextReaderMode() {

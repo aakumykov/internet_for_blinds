@@ -1,9 +1,10 @@
 class ModeStack {
 
-	modes_stack := Array()
+	prev_mode := ""
 	current_mode := ""
 
 
+	; Методы-определители
 	isTextMode() {
 		; if (this.isRedlineTextMode()) {
 		; 	return true
@@ -30,37 +31,28 @@ class ModeStack {
 	}
 
 
-
+	; Методы общего назначения
 	getCurrentMode() {
 		return this.current_mode
 	}
 	
 	addMode(newMode) {
-		this.modes_stack.push(this.current_mode)
+		this.prev_mode := this.current_mode
 		this.current_mode := newMode
-
-		cm := this.getCurrentMode()
-		MsgBox cm: %cm%
-	}
-	
-	addUnknownMode() {
-		this.addMode("unknown")
 	}
 
-	popMode() {
-		lastMode := this.modes_stack.pop()
-		this.current_mode := lastMode
-	}
-
-	clearCurrentMode() {
+	addEmptyMode() {
+		this.prev_mode := this.current_mode
 		this.current_mode := ""
 	}
 
-	clear() {
-		this.modes_stack := Array()
+	popMode() {
+		this.current_mode := this.prev_mode
+		this.prev_mode := ""
 	}
 
 
+	; Методы установки разных режимов
 	addSearchMode() {
 		this.addMode("SEARCH_MODE")
 	}
