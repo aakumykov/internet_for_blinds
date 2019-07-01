@@ -214,6 +214,15 @@ return
 unmuteNVDA()
 return
 
+; qwerty(soundFile) {
+; 	global playerCmd
+; 	Run, "c:\Program Files\mpg123\mpg123.exe" %soundFile%, , Hide
+;}
+
 ~F12::
+;playSound("cold-start.mp3")
+;Run, mpg123.exe "C:\Users\SANDRA\Documents\internet_for_blinds\sounds\ru\cold-start.mp3", "C:\Program Files\mpg123"
+;qwerty("c:\Users\SANDRA\Documents\internet_for_blinds\sounds\ru\cold-start.mp3")
+playSound("cold-start.mp3")
 return
 

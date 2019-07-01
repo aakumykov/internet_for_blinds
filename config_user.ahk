@@ -8,6 +8,9 @@ web_server_command := "C:\Program Files (x86)\hfs.exe"
 ; Путь к исполняемому файлу утилиты NirCMD
 nircmd := "c:\Program Files\nircmd.exe"
 
+; Путь к исполняемому файлу mpg123.exe (консольной программы для выигрывания звука)
+sound_player_command := "C:\Program Files (x86)\mpg123\mpg123.exe"
+
 ; Координаты области адресной строки для browser_functions/search_image_in_address_bar()
 address_bar_x1 := 130
 address_bar_y1 := 30

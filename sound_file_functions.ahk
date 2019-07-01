@@ -5,6 +5,8 @@ playSound(soundFileName) {
 }
 
 playSoundFile(fullFilePath) {
-	Run, mpg123.exe %fullFilePath%, C:\Program Files\mpg123, Hide
+	global sound_player_command
+	;Run, sound_player_command %fullFilePath%, , Hide
+	Run, "c:\Program Files\mpg123\mpg123.exe" %fullFilePath%, , Hide
 }
 
