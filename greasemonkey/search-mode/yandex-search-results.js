@@ -12,18 +12,27 @@
 var $ = window.jQuery;
 
 // ------------------------ Основная работа ------------------------
+let searchQuery = $("input.input__control").attr('value').trim();
 
-playAudio('http://127.0.0.1/search-complete.mp3');
+// Перенаправляю на поиск видео
+if (searchQuery.toLowerCase().match("видео")) {
+    location.href = "https://www.youtube.com/results?search_query="+searchQuery;
+}
+else { // Обрабатываю, как поиск текста
+    playAudio('http://127.0.0.1/search-complete.mp3');
 
-let results_links = collectLinks("a.organic__url", "div.organic__url-text");
-console.log(results_links);
+    let results_links = collectLinks("a.organic__url", "div.organic__url-text");
+    console.log(results_links);
 
-let next_pages_links = collectLinks("a.pager__item");
-console.log(next_pages_links);
+    let next_pages_links = collectLinks("a.pager__item");
+    console.log(next_pages_links);
 
-clearPage(null);
-createList(results_links,    null, "Первые 10 результатов поиска", null, null, null, "http://127.0.0.1/page-is-opening.mp3");
-createList(next_pages_links, null, "Другие результаты поиска",     null, "Страница результатов ", null, "http://127.0.0.1/search-results-next-page-is-opening.mp3");
+    clearPage(null);
+    createList(results_links,    null, "Первые 10 результатов поиска", null, null, null, "http://127.0.0.1/page-is-opening.mp3");
+    createList(next_pages_links, null, "Другие результаты поиска",     null, "Страница результатов ", null, "http://127.0.0.1/search-results-next-page-is-opening.mp3");
+}
+
+
 
 
 // ------------------------- Функции ------------------------
