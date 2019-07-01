@@ -1,4 +1,20 @@
 
+openSearch() {
+	modeStack.addSearchMode()
+	startWebServer()
+	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
+	playSound("search-is-opening.mp3")
+}
+
+openMail() {
+	modeStack.addMailListMode()
+	startWebServer()
+	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
+	playSound("mail-is-opening.mp3")
+}
+
+
+
 firefoxIsOpened() {
 	Process, Exist, firefox.exe
 	return (0 != %ErrorLevel%)
@@ -27,7 +43,27 @@ searchImageInAddressBar(imageFileName, isRelativeToWindow) {
 	return searchImage(imageFileName, address_bar_x1, address_bar_y1, address_bar_x2, address_bar_y2, isRelativeToWindow)
 }
 
+openLinkAndPlay() {
+	modeStack.clearCurrentMode()
+	muteNVDA()
+	openLink()
+	detectMode()
+	return
 
+	if (modeStack.isTextMode()) {
+		return
+	}
+
+	if (modeStack.isYoutubeVideoMode()) {
+		youtubevideoPlayPause()
+		return
+	}
+
+	if (modeStack.isRedlineVideoMode()) {
+		redlineVideoPlayPause()
+		return
+	}
+}
 
 openLinkAndRead() {
 	openLink()
@@ -45,26 +81,6 @@ openLinkAndRead() {
 	; }
 }
 
-openLinkAndPlay() {
-	muteNVDA()
-	openLink()
-	detectMode()
-
-	if (modeStack.isTextMode()) {
-		return
-	}
-
-	if (modeStack.isYoutubeVideoMode()) {
-		youtubevideoPlayPause()
-		return
-	}
-
-	if (modeStack.isRedlineVideoMode()) {
-		redlineVideoPlayPause()
-		return
-	}
-}
-
 openMailMessageLink() {
 	modeStack.addListMode()
 	openLink()
@@ -74,14 +90,14 @@ openMailMessageLink() {
 openLink(){
 	global tab_open_delay
 
-	;modeStack.clearCurrentMode()
 	focusFirefox()
-	muteNVDA()
 
 	Send, {Return}
 	Sleep, %tab_open_delay%
 
 	waitForEventDuringSeconds("pageIsLoaded", 10000)
+
+	playSound("page-opened.mp3")
 }
 
 

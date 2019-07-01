@@ -25,7 +25,6 @@ Numpad9::
 openSearch()
 return
 
-
 F1::
 stepForward()
 return
@@ -44,56 +43,8 @@ return
 
 
 
-
-playPause() {
-	focusFirefox()
-
-	if (modeStack.isRedlineListMode()) {
-		openRedlineLink()
-		return
-	}
-
-	if (modeStack.isRedlineVideoMode()) {
-		redlineVideoPlayPause()
-		return
-	}
-
-	if (modeStack.isMailListMode()) {
-		openMailMessageLink()
-		return
-	}
-	
-	if (modeStack.isListMode()) {
-		; openLinkAndRead()
-		openLinkAndPlay()
-		return
-	}
-	
-	if (is_text_reader_mode()) {
-		textPlayPause()
-		return
-	}
-
-	if (modeStack.isYoutubeVideoMode()) {
-		videoPlayPause()
-		return
-	}
-
-	if (modeStack.isRedlineVideoMode()) {
-		redlineVideoPlayPause()
-		return
-	}
-
-	reportUnknownMode()
-}
-
 stepForward() {
 	focusFirefox()
-
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipForward()
-		return
-	}
 
 	if (modeStack.isListMode()) {
 		startNVDA(false)
@@ -102,29 +53,19 @@ stepForward() {
 		return
 	}
 
-	if (modeStack.isYoutubeVideoMode()) {
+	if (modeStack.isVideoMode()) {
 		videoSkipForward()
-		return
 	}
 
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipForward()
-		return
-	}
-	
-	if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
-		textSkipForward()
-		return
+	; Этот режим определяется через груфику,
+	; что медленно, должно производиться в конце.
+	if (modeStack.isTextMode()) {
+		textSkipForward()()
 	}
 }
 
 stepBack() {
 	focusFirefox()
-
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipBack()
-		return
-	}
 
 	if (modeStack.isListMode()) {
 		startNVDA(false)
@@ -132,20 +73,37 @@ stepBack() {
 		prevLink()
 		return
 	}
-	
-	if (modeStack.isYoutubeVideoMode()) {
+
+	if (modeStack.isVideoMode()) {
 		videoSkipBack()
+	}
+
+	; Этот режим определяется через груфику,
+	; что медленно, должно производиться в конце.
+	if (modeStack.isTextMode()) {
+		textSkipBack()()
+	}
+}
+
+playPause() {
+	focusFirefox()
+
+	openLinkAndPlay()
+	return
+
+	if (modeStack.isListMode()) {
+		openLinkAndPlay()
 		return
 	}
 
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipBack()
-		return
+	if (modeStack.isVideoMode()) {
+		videoPlayPause()
 	}
-	
-	if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
-		textSkipBack()
-		return
+
+	; Этот режим определяется через груфику,
+	; что медленно, должно производиться в конце.
+	if (modeStack.isTextMode()) {
+		textPlayPause()()
 	}
 }
 
@@ -154,24 +112,6 @@ closePage() {
 	modeStack.popMode()
 	closeBrowserPage()
 }
-
-
-
-openSearch() {
-	modeStack.addSearchMode()
-	startWebServer()
-	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
-	playSound("search-is-opening.mp3")
-}
-
-openMail() {
-	modeStack.addMailListMode()
-	startWebServer()
-	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
-	playSound("mail-is-opening.mp3")
-}
-
-
 
 
 
