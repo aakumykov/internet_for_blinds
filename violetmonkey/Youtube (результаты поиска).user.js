@@ -66,7 +66,7 @@ function processPage() {
   });
 
   
-  playAudio('http://127.0.0.1/video_search_complete.mp3');
+  playAudio('http://127.0.0.1/video-search-complete.mp3');
   
   document.title = "поиск видео: «" + searchQuery + "»";
 }
