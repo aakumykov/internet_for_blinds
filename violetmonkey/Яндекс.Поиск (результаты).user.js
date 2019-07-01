@@ -12,18 +12,27 @@
 var $ = window.jQuery;
 
 // ------------------------ Основная работа ------------------------
+let searchQuery = $("input.input__control").attr('value').trim();
 
-playAudio('http://127.0.0.1/search-complete.mp3');
+// Перенаправляю на поиск видео
+if (searchQuery.toLowerCase().match("видео")) {
+    location.href = "https://www.youtube.com/results?search_query="+searchQuery;
+}
+else { // Обрабатываю, как поиск текста
+    playAudio('http://127.0.0.1/search-complete.mp3');
 
-let results_links = collectLinks("a.organic__url", "div.organic__url-text");
-console.log(results_links);
+    let results_links = collectLinks("a.organic__url", "div.organic__url-text");
+    console.log(results_links);
 
-let next_pages_links = collectLinks("a.pager__item");
-console.log(next_pages_links);
+    let next_pages_links = collectLinks("a.pager__item");
+    console.log(next_pages_links);
 
-clearPage(null);
-createList(results_links,    null, "Первые 10 результатов поиска", null, null, null, "http://127.0.0.1/page-is-opening.mp3");
-createList(next_pages_links, null, "Другие результаты поиска",     null, "Страница результатов ", null, "http://127.0.0.1/search-results-next-page-is-opening.mp3");
+    clearPage(null);
+    createList(results_links,    null, null, "Результаты поиска (10 штук)", null, null, null, "http://127.0.0.1/page-is-opening.mp3");
+    createList(next_pages_links, null, "_self", "Следующие страницы поиска",     null, "Страница результатов ", null);
+}
+
+
 
 
 // ------------------------- Функции ------------------------
@@ -32,7 +41,7 @@ function clearPage(newTitle) {
     let documentCorpus = $('body');
     
     documentCorpus.empty();
-    documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
+    documentCorpus.append("<br><button id='startPoint'>*</button> <button id='startPoint'>*</button><br><br>");
     
     if (null != newTitle)
         documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
@@ -61,7 +70,7 @@ function collectLinks(linkNodeSelector, linkTextSelector, linkDateSelector) {
     return list;
 }
 
-function createList(listHash, baseUrl, listStartText, listEndText, linkNamePrefix, linkNameSuffix, openingSoundLink) {
+function createList(listHash, baseUrl, linkTarget, listStartText, listEndText, linkNamePrefix, linkNameSuffix, openingSoundLink) {
     let documentCorpus = $('body');
     
     //document.title = listStartText;
@@ -82,8 +91,9 @@ function createList(listHash, baseUrl, listStartText, listEndText, linkNamePrefi
             
             let address = (null != baseUrl) ? baseUrl + value : value;
             a.attr('href', address);
-                
-            a.attr('target', '_blank');
+            
+            if (null == linkTarget) linkTarget = "_blank";
+            a.attr('target', linkTarget);
 
             if (null != openingSoundLink) {
                 a.click(function(){ playAudio(openingSoundLink); });
