@@ -8,9 +8,10 @@ openRedLineChannel() {
 
 
 openRedlineLink() {
-	openLink()
-	detectMode()
-	redlinePlayPause()
+	MsgBox "openRedlineLink() не реализована"
+	; openLink()
+	; detectMode()
+	; redlinePlayPause()
 }
 
 
@@ -61,7 +62,7 @@ redlinePlayPause() {
 		return
 	}
 
-	reportUnknownMode()
+	; reportUnknownMode()
 }
 
 redlineVideoPlayPause() {

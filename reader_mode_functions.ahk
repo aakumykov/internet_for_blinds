@@ -5,6 +5,10 @@ enableTextReaderMode() {
 	global reader_mode_enable_button_x
 	global reader_mode_enable_button_y
 	Click, %reader_mode_enable_button_x%, %reader_mode_enable_button_y%
+
+	waitForEventDuringSeconds("is_text_reader_mode", 3000)
+
+	modeStack.addReaderMode()
 }
 
 disableTextReaderMode() {

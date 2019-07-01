@@ -1,4 +1,5 @@
 #Include, config_system.ahk
+#Include, utility_functions.ahk
 #Include, mode_stack.ahk
 #Include, config_user.ahk
 #Include, image_functions.ahk
@@ -11,6 +12,7 @@
 #Include, video_mode_functions.ahk
 #Include, nvda_functions.ahk
 #Include, redline_channel.ahk
+#Include, content_play_functions.ahk
 
 
 Numpad3::
@@ -45,55 +47,8 @@ return
 
 
 
-playPause() {
-	focusFirefox()
-
-	if (modeStack.isRedlineListMode()) {
-		openRedlineLink()
-		return
-	}
-
-	if (modeStack.isRedlineVideoMode()) {
-		redlineVideoPlayPause()
-		return
-	}
-
-	if (modeStack.isMailListMode()) {
-		openMailMessageLink()
-		return
-	}
-	
-	if (modeStack.isListMode()) {
-		; openLinkAndRead()
-		openLinkAndPlay()
-		return
-	}
-	
-	if (is_text_reader_mode()) {
-		textPlayPause()
-		return
-	}
-
-	if (modeStack.isYoutubeVideoMode()) {
-		videoPlayPause()
-		return
-	}
-
-	if (modeStack.isRedlineVideoMode()) {
-		redlineVideoPlayPause()
-		return
-	}
-
-	reportUnknownMode()
-}
-
 stepForward() {
 	focusFirefox()
-
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipForward()
-		return
-	}
 
 	if (modeStack.isListMode()) {
 		startNVDA(false)
@@ -102,29 +57,17 @@ stepForward() {
 		return
 	}
 
-	if (modeStack.isYoutubeVideoMode()) {
+	if (modeStack.isVideoMode()) {
 		videoSkipForward()
-		return
 	}
 
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipForward()
-		return
-	}
-	
-	if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
+	if (modeStack.isReaderMode()) {
 		textSkipForward()
-		return
 	}
 }
 
 stepBack() {
 	focusFirefox()
-
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipBack()
-		return
-	}
 
 	if (modeStack.isListMode()) {
 		startNVDA(false)
@@ -132,20 +75,30 @@ stepBack() {
 		prevLink()
 		return
 	}
-	
-	if (modeStack.isYoutubeVideoMode()) {
+
+	if (modeStack.isVideoMode()) {
 		videoSkipBack()
+	}
+
+	if (modeStack.isReaderMode()) {
+		textSkipBack()
+	}
+}
+
+playPause() {
+	focusFirefox()
+
+	if (modeStack.isListMode()) {
+		openLinkAndPlay()
 		return
 	}
 
-	if (modeStack.isRedlineVideoMode()) {
-		videoSkipBack()
-		return
+	if (modeStack.isVideoMode()) {
+		videoPlayPause()
 	}
-	
-	if (is_text_reader_mode()) { ; Эта функция самая медленная, должна стоять в конце.
-		textSkipBack()
-		return
+
+	if (modeStack.isReaderMode()) {
+		textPlayPause()
 	}
 }
 

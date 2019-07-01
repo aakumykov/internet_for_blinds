@@ -5,10 +5,11 @@ class ModeStack {
 
 
 	isTextMode() {
-		if (this.isRedlineTextMode()) {
-			return true
-		}
-		return false
+		; if (this.isRedlineTextMode()) {
+		; 	return true
+		; }
+		; return false
+		return "TEXT_MODE" == this.current_mode
 	}
 
 	isVideoMode() {
@@ -20,6 +21,14 @@ class ModeStack {
 		}
 		return false
 	}
+
+	isReaderMode() {
+		if ("" == this.current_mode) {
+			detectMode()
+		}
+		return "READER_MODE" == this.current_mode
+	}
+
 
 
 	getCurrentMode() {
@@ -83,8 +92,6 @@ class ModeStack {
 		if (this.isSearchMode()) {
 			return true
 		}
-
-		reportUnknownMode()
 	}
 
 
@@ -96,6 +103,14 @@ class ModeStack {
 			detectMode()
 		}
 		return "MAIL_LIST_MODE" == this.current_mode
+	}
+
+
+	addReaderMode() {
+		this.addMode("READER_MODE")
+	}
+	addTextMode() {
+		this.addMode("TEXT_MODE")
 	}
 
 

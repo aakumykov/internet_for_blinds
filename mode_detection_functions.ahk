@@ -1,4 +1,4 @@
-modeStack := new ModeStack()
+﻿eStack := new ModeStack()
 
 getMode() {
 	mode := modeStack.getCurrentMode()
@@ -11,25 +11,24 @@ getMode() {
 }
 
 detectMode() {
+	TrayTip, "detectMode()", ";-)"
 	copyPageAddress()
 
-	if (is_redline_video_mode()) {
-		modeStack.addRedlineVideoMode()
-		return
-	}
-
-	if (is_redline_text_mode()) {
-		modeStack.addRedlineTextMode()
-		return
-	}
-
+	; Начало поиска
 	if (is_search_start_mode()) {
 		modeStack.addSearchMode()
 		return
 	}
 
+	; Список
 	if (is_list_mode()) {
 		modeStack.addListMode()
+		return
+	}
+
+	; Видео
+	if (is_redline_video_mode()) {
+		modeStack.addRedlineVideoMode()
 		return
 	}
 
@@ -38,13 +37,14 @@ detectMode() {
 		return
 	}
 
-	if (is_content_mode()) {
-		modeStack.addMode("CONTENT_MODE")
+	if (is_text_reader_mode()) {
+		modeStack.addReaderMode()
 		return
 	}
 
-	modeStack.addUnknownMode()
-	reportUnknownMode()
+	; Если другие режимы не подходят,
+	; принимаем за текстовый
+	modeStack.addTextMode()
 }
 
 clearModes() {

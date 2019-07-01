@@ -8,73 +8,9 @@ focusFirefox() {
 	WinActivate, ahk_class MozillaWindowClass
 }
 
-closeBrowserPage() {
-	global browser_is_closed_check_delay
-
-	if (firefoxIsOpened()) {
-		focusFirefox()
-		Send, ^w
-		muteNVDA()
-		playSound("page-closed.mp3")
-	}
-}
-
-searchImageInAddressBar(imageFileName, isRelativeToWindow) {
-	global address_bar_x1
-	global address_bar_y1
-	global address_bar_x2
-	global address_bar_y2
-	return searchImage(imageFileName, address_bar_x1, address_bar_y1, address_bar_x2, address_bar_y2, isRelativeToWindow)
-}
-
-
-
-openLinkAndRead() {
-	openLink()
-
-	if (is_redline_video_mode()) {
-		modeStack.addEmptyMode()
-		redlineVideoPlayPause()
-	} else {
-		readPage()
-	}
-	
-	; if (is_redline_text_mode()) {
-	; 	readPage()
-	; 	return
-	; }
-}
-
-openLinkAndPlay() {
-	muteNVDA()
-	openLink()
-	detectMode()
-
-	if (modeStack.isTextMode()) {
-		return
-	}
-
-	if (modeStack.isYoutubeVideoMode()) {
-		youtubevideoPlayPause()
-		return
-	}
-
-	if (modeStack.isRedlineVideoMode()) {
-		redlineVideoPlayPause()
-		return
-	}
-}
-
-openMailMessageLink() {
-	modeStack.addListMode()
-	openLink()
-	;readMailMessage()
-}
-
-openLink(){
+openLinkAndWaitPageIsLoaded() {
 	global tab_open_delay
 
-	;modeStack.clearCurrentMode()
 	focusFirefox()
 	muteNVDA()
 
@@ -82,25 +18,6 @@ openLink(){
 	Sleep, %tab_open_delay%
 
 	waitForEventDuringSeconds("pageIsLoaded", 10000)
-}
-
-
-readPage() {
-	enableTextReaderMode()
-	
-	while (!is_text_reader_mode()) {
-		Sleep, 100
-	}
-
-	;waitForEventDuringSeconds("is_text_reader_mode", 5000)
-
-	textPlayPause()
-}
-
-readMailMessage() {
-	startNVDA(true)
-	Click, 31, 133
-	Send, ^a
 }
 
 pageIsLoaded() {
@@ -120,16 +37,23 @@ pageNotLoaded() {
 	return !pageIsLoaded()
 }
 
-waitForEventDuringSeconds(testFuncName, timeout) {
-	func := Func(testFuncName)
+closeBrowserPage() {
+	global browser_is_closed_check_delay
 
-	passed_time := 0
-	sleep_step := 100 ; milliseconds
-
-	while (!func.() && passed_time < timeout) {
-		Sleep, sleep_step
-		passed_time := passed_time + sleep_step
+	if (firefoxIsOpened()) {
+		focusFirefox()
+		Send, ^w
+		muteNVDA()
+		playSound("page-closed.mp3")
 	}
+}
+
+searchImageInAddressBar(imageFileName, isRelativeToWindow) {
+	global address_bar_x1
+	global address_bar_y1
+	global address_bar_x2
+	global address_bar_y2
+	return searchImage(imageFileName, address_bar_x1, address_bar_y1, address_bar_x2, address_bar_y2, isRelativeToWindow)
 }
 
 copyPageAddress() {
@@ -138,10 +62,3 @@ copyPageAddress() {
 	Send, ^{c}
 }
 
-testClipboardWithRegex(regex){
-	return RegExMatch(clipboard, regex)
-}
-
-youtubevideoPlayPause() {
-	videoPlayPause()
-}
