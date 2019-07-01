@@ -1,3 +1,4 @@
+
 videoPlayPause() {
 	Click, 65, 529
 }

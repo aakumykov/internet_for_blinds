@@ -24,12 +24,17 @@ detectMode() {
 	}
 
 	if (is_search_start_mode()) {
-		modeStack.addMode("SEARCH_START")
+		modeStack.addSearchMode()
 		return
 	}
 
 	if (is_list_mode()) {
-		modeStack.addMode("LIST_MODE")
+		modeStack.addListMode()
+		return
+	}
+
+	if (is_youtube_video_mode()) {
+		modeStack.addYoutubeVideoMode()
 		return
 	}
 
@@ -37,6 +42,9 @@ detectMode() {
 		modeStack.addMode("CONTENT_MODE")
 		return
 	}
+
+	modeStack.addUnknownMode()
+	reportUnknownMode()
 }
 
 clearModes() {
@@ -72,7 +80,7 @@ is_content_mode() {
 	if (is_text_reader_mode()) { 
 		return true 
 	}
-	if (is_youtube_watch_mode()) { 
+	if (is_youtube_video_mode()) { 
 		return true 
 	}
 	if (is_redline_video_mode()) {
@@ -107,7 +115,7 @@ is_mail_message_mode(){
 	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/message/[^/]+$")
 }
 
-is_youtube_watch_mode() {
+is_youtube_video_mode() {
 	return testClipboardWithRegex("^https://www\.youtube\.com/watch\?")
 }
 

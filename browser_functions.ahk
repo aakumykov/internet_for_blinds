@@ -45,6 +45,26 @@ openLinkAndRead() {
 	; }
 }
 
+openLinkAndPlay() {
+	muteNVDA()
+	openLink()
+	detectMode()
+
+	if (modeStack.isTextMode()) {
+		return
+	}
+
+	if (modeStack.isYoutubeVideoMode()) {
+		youtubevideoPlayPause()
+		return
+	}
+
+	if (modeStack.isRedlineVideoMode()) {
+		redlineVideoPlayPause()
+		return
+	}
+}
+
 openMailMessageLink() {
 	modeStack.addListMode()
 	openLink()
@@ -120,4 +140,8 @@ copyPageAddress() {
 
 testClipboardWithRegex(regex){
 	return RegExMatch(clipboard, regex)
+}
+
+youtubevideoPlayPause() {
+	videoPlayPause()
 }

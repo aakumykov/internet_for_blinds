@@ -4,6 +4,24 @@ class ModeStack {
 	current_mode := ""
 
 
+	isTextMode() {
+		if (this.isRedlineTextMode()) {
+			return true
+		}
+		return false
+	}
+
+	isVideoMode() {
+		if (this.isYoutubeVideoMode()) {
+			return true
+		}
+		if (this.isRedlineVideoMode()) {
+			return true
+		}
+		return false
+	}
+
+
 	getCurrentMode() {
 		return this.current_mode
 	}
@@ -13,6 +31,10 @@ class ModeStack {
 		this.current_mode := newMode
 	}
 	
+	addUnknownMode() {
+		this.addMode("unknown")
+	}
+
 	popMode() {
 		lastMode := this.modes_stack.pop()
 		this.current_mode := lastMode
@@ -108,4 +130,17 @@ class ModeStack {
 		}
 		return "REDLINE_TEXT_MODE" == this.current_mode
 	}
+
+
+	addYoutubeVideoMode() {
+		this.addMode("YOUTUBE_VIDEO_MODE")
+	}
+	isYoutubeVideoMode() {
+		if ("" == this.current_mode) {
+			detectMode()
+		}
+		return "YOUTUBE_VIDEO_MODE" == this.current_mode
+	}
+
+
 }

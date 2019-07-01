@@ -1,34 +1,22 @@
 // ==UserScript==
-// @name     Поиск видео
+// @name     Яндекс.Поиск (видео)
 // @version  1
 // @grant    none
-// @include  https://yandex.ru/search/*
+// @inject-into content
+// @include  /^https://yandex\.ru/search/\?/
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
 // ==/UserScript==
-
-
-
-// Системная настройка JQuery
 
 var $ = window.jQuery;
 
 
+let searchQuery = $("input.input__control").attr('value').trim();
 
-$(document).ready(function(){
-
-  let searchQuery = $("input.input__control").attr('value').trim();
-
-  if ("" == searchQuery) {
+if ("" == searchQuery) {
     // !сказать, что запрос пустой
     return;
-  }
+}
 
-  //alert(searchQuery) 
-  
-  if (searchQuery.toLowerCase().match("видео")) {
-    //alert("видео");
-  	location.href = "https://www.youtube.com/results?search_query="+searchQuery;
-  }
-
-});
- 
+if (searchQuery.toLowerCase().match("видео")) {
+    location.href = "https://www.youtube.com/results?search_query="+searchQuery;
+}

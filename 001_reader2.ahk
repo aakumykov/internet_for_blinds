@@ -64,7 +64,8 @@ playPause() {
 	}
 	
 	if (modeStack.isListMode()) {
-		openLinkAndRead()
+		; openLinkAndRead()
+		openLinkAndPlay()
 		return
 	}
 	
@@ -73,12 +74,12 @@ playPause() {
 		return
 	}
 
-	if (is_youtube_watch_mode()) {
+	if (modeStack.isYoutubeVideoMode()) {
 		videoPlayPause()
 		return
 	}
 
-	if (is_redline_video_mode()) {
+	if (modeStack.isRedlineVideoMode()) {
 		redlineVideoPlayPause()
 		return
 	}
@@ -101,12 +102,12 @@ stepForward() {
 		return
 	}
 
-	if (is_youtube_watch_mode()) {
+	if (modeStack.isYoutubeVideoMode()) {
 		videoSkipForward()
 		return
 	}
 
-	if (is_redline_video_mode()) {
+	if (modeStack.isRedlineVideoMode()) {
 		videoSkipForward()
 		return
 	}
@@ -132,12 +133,12 @@ stepBack() {
 		return
 	}
 	
-	if (is_youtube_watch_mode()) {
+	if (modeStack.isYoutubeVideoMode()) {
 		videoSkipBack()
 		return
 	}
 
-	if (is_redline_video_mode()) {
+	if (modeStack.isRedlineVideoMode()) {
 		videoSkipBack()
 		return
 	}
@@ -198,7 +199,7 @@ return
 F9::
 detectMode()
 
-if (is_youtube_watch_mode()) {
+if (modeStack.isYoutubeVideoMode()) {
 	TrayTip, "MODE", "is_youtube_watch_mode"
 } else {
 	TrayTip, "MODE", "NOT is_youtube_watch_mode"
