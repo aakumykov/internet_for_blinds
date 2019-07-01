@@ -1,4 +1,4 @@
-﻿modeStack := new ModeStack()
+modeStack := new ModeStack()
 
 getMode() {
 	mode := modeStack.getCurrentMode()
@@ -12,7 +12,6 @@ getMode() {
 
 detectMode() {
 	copyPageAddress()
-	; TrayTip, "detectMode()", ";-)"
 
 	if (is_redline_video_mode()) {
 		modeStack.addRedlineVideoMode()
@@ -53,7 +52,7 @@ clearModes() {
 }
 
 
-; РћРїСЂРµРґРµР»РµРЅРёРµ С‚РµРєСѓС‰РµРіРѕ СЂРµР¶РёРјР°
+; Определение текущего режима
 is_search_start_mode() {
 	return testClipboardWithRegex("^https://ya.ru/?$")
 }
@@ -91,7 +90,7 @@ is_content_mode() {
 }
 
 
-; Р’РёРґС‹ СЃРїРёСЃРєР°
+; Виды списка
 is_text_search_results_mode() {
 	return testClipboardWithRegex("^https://yandex\.ru/search/\?")
 }
@@ -107,7 +106,7 @@ is_video_search_results_mode() {
 
 
 
-; Р’РёРґС‹ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ
+; Виды содержимого
 is_text_reader_mode() {
 	return searchImage("browser\reader-mode-letter-default-home.bmp", 0, 90, 44, 250, true)
 }
@@ -117,4 +116,12 @@ is_mail_message_mode(){
 }
 
 is_youtube_video_mode() {
-	return testClipboardWitt
+	return testClipboardWithRegex("^https://www\.youtube\.com/watch\?")
+}
+
+
+
+
+reportUnknownMode() {
+	playSound("unknown-mode.mp3")
+}

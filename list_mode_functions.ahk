@@ -1,10 +1,9 @@
-
-nextLink() {
+nextLink(){
 	focusFirefox()
 	Send, `t
 }
 
-prevLink() {
+prevLink(){
 	focusFirefox()
 	Send, +`t
 }
