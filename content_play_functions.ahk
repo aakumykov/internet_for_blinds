@@ -5,11 +5,9 @@ openLinkAndPlay() {
 	openLinkAndWaitPageIsLoaded()
 	detectMode()
 
-	;cm := modeStack.getCurrentMode()
-	;MsgBox cm: %cm%
-
 	if (modeStack.isYoutubeVideoMode()) {
-		youtubevideoPlayPause()
+		;MsgBox "youtube video mode"
+		videoPlayPause()
 		return
 	}
 
@@ -48,10 +46,6 @@ openMailMessageLink() {
 	; modeStack.addListMode()
 	; openLink()
 	;readMailMessage()
-}
-
-youtubevideoPlayPause() {
-	videoPlayPause()
 }
 
 readMailMessage() {

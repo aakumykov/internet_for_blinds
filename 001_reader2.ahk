@@ -111,6 +111,7 @@ closePage() {
 
 
 openSearch() {
+	muteNVDA()
 	modeStack.addSearchMode()
 	startWebServer()
 	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
@@ -118,6 +119,7 @@ openSearch() {
 }
 
 openMail() {
+	muteNVDA()
 	modeStack.addMailListMode()
 	startWebServer()
 	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\

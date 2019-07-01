@@ -11,7 +11,6 @@ getMode() {
 }
 
 detectMode() {
-	TrayTip, "detectMode()", ";-)"
 	copyPageAddress()
 
 	; Начало поиска
@@ -45,6 +44,9 @@ detectMode() {
 	; Если другие режимы не подходят,
 	; принимаем за текстовый
 	modeStack.addTextMode()
+
+	cm := this.getCurrentMode()
+	TrayTip, "detectMode()", %cm%
 }
 
 clearModes() {
