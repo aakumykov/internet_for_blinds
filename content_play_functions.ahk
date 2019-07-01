@@ -6,7 +6,6 @@ openLinkAndPlay() {
 	detectMode()
 
 	if (modeStack.isYoutubeVideoMode()) {
-		;MsgBox "youtube video mode"
 		videoPlayPause()
 		return
 	}
@@ -18,7 +17,14 @@ openLinkAndPlay() {
 
 	if (modeStack.isTextMode()) {
 		enableTextReaderMode()
-		textPlayPause()
+		detectMode()
+		if (modeStack.isReaderMode()) {
+			textPlayPause()
+		}
+		else {
+			playSound("no-readable-version.mp3")
+			closePage(true)
+		}
 	}
 }
 

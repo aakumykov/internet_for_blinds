@@ -7,8 +7,6 @@ enableTextReaderMode() {
 	Click, %reader_mode_enable_button_x%, %reader_mode_enable_button_y%
 
 	waitForEventDuringSeconds("is_text_reader_mode", 3000)
-
-	modeStack.addReaderMode()
 }
 
 disableTextReaderMode() {
@@ -39,8 +37,6 @@ textPlayPause() {
 	global firefoxReadingIsActive
 	firefoxReadingIsActive := !firefoxReadingIsActive
 }
-
-
 
 
 

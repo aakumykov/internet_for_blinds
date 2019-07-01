@@ -37,14 +37,16 @@ pageNotLoaded() {
 	return !pageIsLoaded()
 }
 
-closeBrowserPage() {
+closeBrowserPage(silent) {
 	global browser_is_closed_check_delay
 
 	if (firefoxIsOpened()) {
 		focusFirefox()
 		Send, ^w
 		muteNVDA()
-		playSound("page-closed.mp3")
+		if (!silent) {
+			playSound("page-closed.mp3")
+		}
 	}
 }
 
