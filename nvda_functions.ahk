@@ -4,18 +4,23 @@ startNVDA(wait_until_starting) {
 	
 	if (!nvdaIsRun()) {
 
+		playSound("screen-reader-is-starting.mp3")
+
 		Run, %nvda_cmd%, , UseErrorLevel
 
-		if (wait_until_starting) {
-			while (!nvdaIsRun()) {
-				Sleep, 100
-			}
-		}
+		; if (wait_until_starting) {
+		; 	while (!nvdaIsRun()) {
+		; 		Sleep, 100
+		; 	}
+		; }
+
+		waitForEventDuringSeconds("nvdaIsRun", 3000)
 	}
 }
 
 nvdaIsRun() {
-	return Process, Exist, nvda.exe
+	Process, Exist, nvda.exe
+	return 0 != ErrorLevel
 }
 
 stopNVDA() {
