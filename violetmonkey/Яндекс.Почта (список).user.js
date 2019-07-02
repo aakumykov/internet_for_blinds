@@ -65,10 +65,10 @@ function createMessageLine(date, from, title, link) {
     let li = $("<LI>");
     
     let a = $("<A>");
-        a.append(linePrefix+" "+humanDate+", прислал "+from+", заголовок: "+title);
+        a.append(linePrefix + " " + humanDate + ", прислал " + from + ", заголовок: " + title);
         a.attr("href", link);
         a.attr("target", '_blank');
-        a.click(function(){ playAudio("http://127.0.0.1/mail-is-opening.mp3"); });
+        a.click(function(){ playAudio("http://127.0.0.1/mail-message-is-opening.mp3"); });
     
     li.append(a);
     
@@ -87,7 +87,7 @@ function createMessageList() {
 
 
 // ================ Работа =================
-playAudio('http://127.0.0.1/mail-has-opened.mp3');
+playAudio('http://127.0.0.1/mailbox-has-opened.mp3');
 fetchMessageList();
 clearPage("списка сообщений");
 createMessageList();

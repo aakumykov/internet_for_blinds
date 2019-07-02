@@ -9,12 +9,12 @@
 
 var $ = window.jQuery;
 
-$(document).ready(function(){
-    playAudio('http://127.0.0.1/redline-channels-list-has-opened.mp3');
-    let links = collectLinks('.video-list__program', '.video-list__program-name');
-    clearPage();
-    createList(links, "Список программ телеканала Красная линия", "Конец списка программ", " (программа)");
-});
+playAudio('http://127.0.0.1/redline-channels-list-has-opened.mp3');
+
+let links = collectLinks('.video-list__program', '.video-list__program-name');
+
+clearPage();
+createList(links, "Список программ телеканала Красная линия", "Конец списка программ", " (телепрограмма)");
 
 
 function clearPage(newTitle) {
