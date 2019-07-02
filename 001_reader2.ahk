@@ -130,7 +130,7 @@ openMail() {
 	modeStack.addMailListMode()
 	startWebServer()
 	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
-	playSound("mail-is-opening.mp3")
+	playSound("mailbox-is-opening.mp3")
 }
 
 
