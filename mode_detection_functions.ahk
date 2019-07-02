@@ -13,6 +13,13 @@ getMode() {
 detectMode() {
 	copyPageAddress()
 
+	; Определение режима Чтеца должно производиться
+	; первым, так как пересекается с другими режимами.
+	if (is_text_reader_mode()) {
+		modeStack.addReaderMode()
+		return
+	}
+
 	; Начало поиска
 	if (is_search_start_mode()) {
 		modeStack.addSearchMode()
@@ -33,11 +40,6 @@ detectMode() {
 
 	if (is_youtube_video_mode()) {
 		modeStack.addYoutubeVideoMode()
-		return
-	}
-
-	if (is_text_reader_mode()) {
-		modeStack.addReaderMode()
 		return
 	}
 

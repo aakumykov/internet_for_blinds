@@ -8,13 +8,14 @@ startNVDA(wait_until_starting) {
 
 		Run, %nvda_cmd%, , UseErrorLevel
 
-		; if (wait_until_starting) {
-		; 	while (!nvdaIsRun()) {
-		; 		Sleep, 100
-		; 	}
-		; }
-
 		waitForEventDuringSeconds("nvdaIsRun", 3000)
+
+		if (nvdaIsRun()) {
+			playSound("screen-reader-has-started.mp3")
+		}
+		else {
+			LogError(A_LineFile, A_LineNumber, "Error starting screen reader")
+		}
 	}
 }
 
