@@ -33,6 +33,9 @@ pageIsLoaded() {
 	if (firefoxIsOpened()) {
 		focusFirefox()
 		ImageSearch, imageX, imageY, firefox_page_is_loaded_x1, firefox_page_is_loaded_y1, firefox_page_is_loaded_x2, firefox_page_is_loaded_y2, %page_is_loaded_image_pattern%
+		if (2 == ErrorLevel) {
+			Throw, "CANNOT PRODUCE IMAGESEARCH"
+		}
 		return (imageX and imageY)
 	} else {
 		;pronounceError "Фаерфокс не запущен!"

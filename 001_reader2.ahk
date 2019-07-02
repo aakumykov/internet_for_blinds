@@ -1,7 +1,7 @@
 #Include, config_system.ahk
+#Include, config_user.ahk
 #Include, utility_functions.ahk
 #Include, mode_stack.ahk
-#Include, config_user.ahk
 #Include, image_functions.ahk
 #Include, sound_file_functions.ahk
 #Include, browser_functions.ahk
@@ -107,8 +107,8 @@ closePage(silent) {
 
 	modeStack.popMode()
 
-	cm := modeStack.getCurrentMode()
-	MsgBox closePage(), cm: %cm%
+	; cm := modeStack.getCurrentMode()
+	; MsgBox closePage(), cm: %cm%
 
 	closeBrowserPage(silent)
 }
@@ -192,11 +192,29 @@ F12::
 ; 	MsgBox "not text_reader_mode"
 ; }
 
-if (pageIsLoaded()) {
-	MsgBox "pageIsLoaded"
+; if (pageIsLoaded()) {
+; 	MsgBox "pageIsLoaded"
+; }
+; else {
+; 	MsgBox "not pageIsLoaded"
+; }
+
+CoordMode, Screen
+; ImageSearch, OutputVarX, OutputVarY, 0, 164, 38, 202, C:\Users\User\Documents\reader\images\browser\reader-mode-letter-default-home.bmp
+
+image_pattern_file_name := "browser\reader-mode-letter-default-home.bmp"
+images_dir := A_ScriptDir . "\" . "images"
+
+
+; ImageSearch, OutputVarX, OutputVarY, 0, 164, 38, 202, %images_dir%\%image_pattern_file_name%
+; if (OutputVarX and OutputVarY) {
+if (is_text_reader_mode()) {
+; if (findImage("browser\reader-mode-letter-default-home.bmp")) {
+; if (searchImage("browser\" . reader_mode_image_pattern, 0, 164, 38, 202, false)) {
+	MsgBox "text_reader_mode"
 }
 else {
-	MsgBox "not pageIsLoaded"
+	MsgBox "not text_reader_mode"
 }
 
 return

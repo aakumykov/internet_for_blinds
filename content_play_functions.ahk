@@ -3,7 +3,7 @@ openLinkAndPlay() {
 	;MsgBox "openLinkAndPlay()"
 
 	muteNVDA()
-	modeStack.addEmptyMode()
+	; modeStack.addEmptyMode()
 	openLinkAndWaitPageIsLoaded()
 	detectMode()
 

@@ -34,11 +34,25 @@ page_load_wait_time := 10000
 reader_mode_wait_time := 6000
 
 ; Картинка, по которой определяется, что страница загружена
-firefox_page_is_loaded_image := "firefox-page-load-complete-dark.bmp"
+firefox_page_is_loaded_image := "firefox-page-load-complete.bmp"
+; Область поиска этой картинки
+; Дом
+firefox_page_is_loaded_x1 := 76
+firefox_page_is_loaded_y1 := 47
+firefox_page_is_loaded_x2 := 100
+firefox_page_is_loaded_y2 := 72
 ; Работа
-firefox_page_is_loaded_x1 := 67
-firefox_page_is_loaded_y1 := 38
-firefox_page_is_loaded_x2 := 102
-firefox_page_is_loaded_y2 := 68
+;firefox_page_is_loaded_x1 := 67
+;firefox_page_is_loaded_y1 := 38
+;firefox_page_is_loaded_x2 := 102
+;firefox_page_is_loaded_y2 := 68
 
-; 76, 47, 100, 72 ; дом
+; Картинка, по которой определяется режим чтения
+reader_mode_image_pattern := "reader-mode-letter-default-home.bmp"
+; Область поиска этой картинки
+; Дом
+reader_mode_serch_area_x1 := 0
+reader_mode_serch_area_y1 := 164
+reader_mode_serch_area_x2 := 38
+reader_mode_serch_area_y2 := 202
+; Работа

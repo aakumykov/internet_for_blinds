@@ -11,7 +11,7 @@ getMode() {
 }
 
 detectMode() {
-	MsgBox "detectMode()"
+	;MsgBox "detectMode()"
 
 	copyPageAddress()
 	;MsgBox %clipboard%
@@ -113,7 +113,31 @@ is_video_search_results_mode() {
 
 ; Виды содержимого
 is_text_reader_mode() {
-	return searchImage("browser\reader-mode-letter-default-home.bmp", 0, 90, 44, 250, true)
+	global reader_mode_image_pattern
+	global reader_mode_serch_area_x1
+	global reader_mode_serch_area_y1
+	global reader_mode_serch_area_x2
+	global reader_mode_serch_area_y2
+
+	return searchImage("browser\" . reader_mode_image_pattern, reader_mode_serch_area_x1, reader_mode_serch_area_y1, reader_mode_serch_area_x2, reader_mode_serch_area_y2, true)
+}
+
+findImage(pattern_file_name) {
+	global images_dir
+	global reader_mode_serch_area_x1
+	global reader_mode_serch_area_y1
+	global reader_mode_serch_area_x2
+	global reader_mode_serch_area_y2
+
+	imageFile := images_dir . "\" . pattern_file_name
+
+	ImageSearch, OutputVarX, OutputVarY, reader_mode_serch_area_x1, reader_mode_serch_area_y1, reader_mode_serch_area_x2, reader_mode_serch_area_y2, %imageFile%
+
+	if (2==ErrorLevel) {
+		Throw, "CANNOT PRODUCE ImageSearch"
+	}
+
+	return 0 == ErrorLevel
 }
 
 is_mail_message_mode(){

@@ -3,7 +3,6 @@ class ModeStack {
 	pm := ""
 	cm := ""
 
-
 	; Методы-определители
 	isTextMode() {
 		; if (this.isRedlineTextMode()) {
@@ -37,28 +36,28 @@ class ModeStack {
 	}
 	
 	addMode(newMode) {
-		pm := this.pm
-		cm := this.cm
-		MsgBox addMode(%newMode%), pm: %pm%, cm: %cm%
+		; pm := this.pm
+		; cm := this.cm
+		;MsgBox 1 addMode(%newMode%), pm: %pm%, cm: %cm%
 
 		this.pm := this.cm
 		this.cm := newMode
 
-		pm := this.pm
-		cm := this.cm
-		MsgBox addMode(%newMode%), pm: %pm%, cm: %cm%
+		; pm := this.pm
+		; cm := this.cm
+		;MsgBox 2 addMode(%newMode%), pm: %pm%, cm: %cm%
 	}
 
 	setMode(newMode) {
-		pm := this.pm
-		cm := this.cm
-		MsgBox setMode(%newMode%), pm: %pm%, cm: %cm%
+		; pm := this.pm
+		; cm := this.cm
+		;MsgBox 1 setMode(%newMode%), pm: %pm%, cm: %cm%
 
 		this.cm := newMode
 
-		pm := this.pm
-		cm := this.cm
-		MsgBox setMode(%newMode%), pm: %pm%, cm: %cm%
+		; pm := this.pm
+		; cm := this.cm
+		;MsgBox 2 setMode(%newMode%), pm: %pm%, cm: %cm%
 	}
 
 	addEmptyMode() {
@@ -67,9 +66,9 @@ class ModeStack {
 	}
 
 	popMode() {
-		cm := this.cm
-		pm := this.pm
-		MsgBox popMode(), cm: %cm%, pm: %pm%
+		; cm := this.cm
+		; pm := this.pm
+		;MsgBox popMode(), cm: %cm%, pm: %pm%
 		this.cm := this.pm
 		this.pm := ""
 	}
