@@ -20,7 +20,8 @@ openLinkAndWaitPageIsLoaded() {
 
 	waitForEventDuringSeconds("pageIsLoaded", page_load_wait_time)
 
-	playSound("page-opened.mp3")
+	; Не нужно, мешается
+	; playSound("page-opened.mp3")
 }
 
 pageIsLoaded() {
