@@ -19,6 +19,8 @@ openLinkAndWaitPageIsLoaded() {
 	Sleep, %tab_open_delay%
 
 	waitForEventDuringSeconds("pageIsLoaded", page_load_wait_time)
+
+	playSound("page-opened.mp3")
 }
 
 pageIsLoaded() {
