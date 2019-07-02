@@ -11,7 +11,10 @@ getMode() {
 }
 
 detectMode() {
+	MsgBox "detectMode()"
+
 	copyPageAddress()
+	;MsgBox %clipboard%
 
 	; Начало поиска
 	if (is_search_start_mode()) {

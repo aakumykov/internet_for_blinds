@@ -1,7 +1,7 @@
 class ModeStack {
 
-	prev_mode := ""
-	current_mode := ""
+	pm := ""
+	cm := ""
 
 
 	; Методы-определители
@@ -10,7 +10,7 @@ class ModeStack {
 		; 	return true
 		; }
 		; return false
-		return "TEXT_MODE" == this.current_mode
+		return "TEXT_MODE" == this.cm
 	}
 
 	isVideoMode() {
@@ -24,31 +24,54 @@ class ModeStack {
 	}
 
 	isReaderMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
-		return "READER_MODE" == this.current_mode
+		return "READER_MODE" == this.cm
 	}
 
 
 	; Методы общего назначения
 	getCurrentMode() {
-		return this.current_mode
+		return this.cm
 	}
 	
 	addMode(newMode) {
-		this.prev_mode := this.current_mode
-		this.current_mode := newMode
+		pm := this.pm
+		cm := this.cm
+		MsgBox addMode(%newMode%), pm: %pm%, cm: %cm%
+
+		this.pm := this.cm
+		this.cm := newMode
+
+		pm := this.pm
+		cm := this.cm
+		MsgBox addMode(%newMode%), pm: %pm%, cm: %cm%
+	}
+
+	setMode(newMode) {
+		pm := this.pm
+		cm := this.cm
+		MsgBox setMode(%newMode%), pm: %pm%, cm: %cm%
+
+		this.cm := newMode
+
+		pm := this.pm
+		cm := this.cm
+		MsgBox setMode(%newMode%), pm: %pm%, cm: %cm%
 	}
 
 	addEmptyMode() {
-		this.prev_mode := this.current_mode
-		this.current_mode := ""
+		this.pm := this.cm
+		this.cm := ""
 	}
 
 	popMode() {
-		this.current_mode := this.prev_mode
-		this.prev_mode := ""
+		cm := this.cm
+		pm := this.pm
+		MsgBox popMode(), cm: %cm%, pm: %pm%
+		this.cm := this.pm
+		this.pm := ""
 	}
 
 
@@ -57,10 +80,10 @@ class ModeStack {
 		this.addMode("SEARCH_MODE")
 	}
 	isSearchMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
-		return "SEARCH_MODE" == this.current_mode
+		return "SEARCH_MODE" == this.cm
 	}
 
 
@@ -68,11 +91,11 @@ class ModeStack {
 		this.addMode("LIST_MODE")
 	}
 	isListMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
 
-		if ("LIST_MODE" == this.current_mode) {
+		if ("LIST_MODE" == this.cm) {
 			return true
 		}
 		
@@ -94,16 +117,20 @@ class ModeStack {
 		this.addMode("MAIL_LIST_MODE")
 	}
 	isMailListMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
-		return "MAIL_LIST_MODE" == this.current_mode
+		return "MAIL_LIST_MODE" == this.cm
 	}
 
 
+	; Внимание! Так как режим чтения /заменяет/ собой текстовый
+	; режим, здесь внутри метода addReaderMode() делается вызов
+	; setMode() вместо addMode()
 	addReaderMode() {
-		this.addMode("READER_MODE")
+		this.setMode("READER_MODE")
 	}
+
 	addTextMode() {
 		this.addMode("TEXT_MODE")
 	}
@@ -113,10 +140,10 @@ class ModeStack {
 		this.addMode("REDLINE_LIST_MODE")
 	}
 	isRedlineListMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
-		return "REDLINE_LIST_MODE" == this.current_mode
+		return "REDLINE_LIST_MODE" == this.cm
 	}
 
 
@@ -124,10 +151,10 @@ class ModeStack {
 		this.addMode("REDLINE_VIDEO_MODE")
 	}
 	isRedlineVideoMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
-		return "REDLINE_VIDEO_MODE" == this.current_mode
+		return "REDLINE_VIDEO_MODE" == this.cm
 	}
 
 
@@ -135,10 +162,10 @@ class ModeStack {
 		this.addMode("REDLINE_TEXT_MODE")
 	}
 	isRedlineTextMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
-		return "REDLINE_TEXT_MODE" == this.current_mode
+		return "REDLINE_TEXT_MODE" == this.cm
 	}
 
 
@@ -146,10 +173,10 @@ class ModeStack {
 		this.addMode("YOUTUBE_VIDEO_MODE")
 	}
 	isYoutubeVideoMode() {
-		if ("" == this.current_mode) {
+		if ("" == this.cm) {
 			detectMode()
 		}
-		return "YOUTUBE_VIDEO_MODE" == this.current_mode
+		return "YOUTUBE_VIDEO_MODE" == this.cm
 	}
 
 

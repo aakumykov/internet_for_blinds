@@ -32,3 +32,13 @@ page_load_wait_time := 10000
 
 ; Время ожидания активации режима чтения
 reader_mode_wait_time := 6000
+
+; Картинка, по которой определяется, что страница загружена
+firefox_page_is_loaded_image := "firefox-page-load-complete-dark.bmp"
+; Работа
+firefox_page_is_loaded_x1 := 67
+firefox_page_is_loaded_y1 := 38
+firefox_page_is_loaded_x2 := 102
+firefox_page_is_loaded_y2 := 68
+
+; 76, 47, 100, 72 ; дом

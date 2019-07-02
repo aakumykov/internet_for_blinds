@@ -105,17 +105,10 @@ playPause() {
 closePage(silent) {
 	focusFirefox()
 
-	; Грязный хак
-	if (modeStack.isReaderMode()) {
-		modeStack.addListMode()
-		modeStack.addReaderMode()
-	}
-	else {
-		modeStack.popMode()
-	}
+	modeStack.popMode()
 
-	; cm := modeStack.getCurrentMode()
-	; MsgBox cm: %cm%
+	cm := modeStack.getCurrentMode()
+	MsgBox closePage(), cm: %cm%
 
 	closeBrowserPage(silent)
 }
@@ -187,10 +180,24 @@ return
 ; 	Run, "c:\Program Files\mpg123\mpg123.exe" %soundFile%, , Hide
 ;}
 
-~F12::
+F12::
 ;playSound("cold-start.mp3")
 ;Run, mpg123.exe "C:\Users\SANDRA\Documents\internet_for_blinds\sounds\ru\cold-start.mp3", "C:\Program Files\mpg123"
 ;qwerty("c:\Users\SANDRA\Documents\internet_for_blinds\sounds\ru\cold-start.mp3")
 ;playSound("cold-start.mp3")
+
+; if (is_text_reader_mode()) {
+; 	MsgBox "is_text_reader_mode"
+; } else {
+; 	MsgBox "not text_reader_mode"
+; }
+
+if (pageIsLoaded()) {
+	MsgBox "pageIsLoaded"
+}
+else {
+	MsgBox "not pageIsLoaded"
+}
+
 return
 

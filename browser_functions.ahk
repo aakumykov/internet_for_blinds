@@ -22,11 +22,17 @@ openLinkAndWaitPageIsLoaded() {
 }
 
 pageIsLoaded() {
-	page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\firefox-page-load-complete.bmp"
+	global firefox_page_is_loaded_image
+	global firefox_page_is_loaded_x1
+	global firefox_page_is_loaded_y1
+	global firefox_page_is_loaded_x2
+	global firefox_page_is_loaded_y2
+
+	page_is_loaded_image_pattern := A_ScriptDir . "\images\browser\" . firefox_page_is_loaded_image
 
 	if (firefoxIsOpened()) {
 		focusFirefox()
-		ImageSearch, imageX, imageY, 76, 47, 100, 72, %page_is_loaded_image_pattern%
+		ImageSearch, imageX, imageY, firefox_page_is_loaded_x1, firefox_page_is_loaded_y1, firefox_page_is_loaded_x2, firefox_page_is_loaded_y2, %page_is_loaded_image_pattern%
 		return (imageX and imageY)
 	} else {
 		;pronounceError "Фаерфокс не запущен!"
