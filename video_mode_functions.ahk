@@ -1,6 +1,14 @@
 
 videoPlayPause() {
-	Click, 65, 529
+	if (modeStack.isRedlineVideoMode()) {
+		redlineVideoPlayPause()
+	}
+
+	if (modeStack.isYoutubeVideoMode()) {
+		youtubeVideoPlayPause()
+	}
+
+	LogError(A_LineFile, A_LineNumber, "unknown video mode: " . modeStack.getCurrentMode())
 }
 
 videoSkipForward() {

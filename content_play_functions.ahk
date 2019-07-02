@@ -1,11 +1,11 @@
 
 openLinkAndPlay() {
-	;MsgBox "openLinkAndPlay()"
-
 	muteNVDA()
-	; modeStack.addEmptyMode()
 	openLinkAndWaitPageIsLoaded()
 	detectMode()
+
+	; cm := modeStack.getCurrentMode()
+	; MsgBox current mode: %cm%
 
 	if (modeStack.isYoutubeVideoMode()) {
 		videoPlayPause()

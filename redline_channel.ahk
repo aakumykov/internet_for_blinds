@@ -22,6 +22,9 @@ is_redline_list_mode() {
 	if (is_redline_programs_list()) {
 		return true
 	}
+	if (is_redline_program_archive()) {
+		return true
+	}
 	return false
 }
 
@@ -47,6 +50,9 @@ is_redline_programs_list() {
 	return testClipboardWithRegex("^https://www\.rline\.tv/programs/?$")
 }
 
+is_redline_program_archive() {
+	return testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/$")
+}
 
 
 redlinePlayPause() {

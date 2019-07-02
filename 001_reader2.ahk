@@ -1,5 +1,6 @@
 #Include, config_system.ahk
 #Include, config_user.ahk
+#Include, log_functions.ahk
 #Include, utility_functions.ahk
 #Include, mode_stack.ahk
 #Include, image_functions.ahk
@@ -10,6 +11,7 @@
 #Include, list_mode_functions.ahk
 #Include, reader_mode_functions.ahk
 #Include, video_mode_functions.ahk
+#Include, youtube_functions.ahk
 #Include, nvda_functions.ahk
 #Include, redline_channel.ahk
 #Include, content_play_functions.ahk
@@ -175,47 +177,8 @@ return
 unmuteNVDA()
 return
 
-; qwerty(soundFile) {
-; 	global playerCmd
-; 	Run, "c:\Program Files\mpg123\mpg123.exe" %soundFile%, , Hide
-;}
 
-F12::
-;playSound("cold-start.mp3")
-;Run, mpg123.exe "C:\Users\SANDRA\Documents\internet_for_blinds\sounds\ru\cold-start.mp3", "C:\Program Files\mpg123"
-;qwerty("c:\Users\SANDRA\Documents\internet_for_blinds\sounds\ru\cold-start.mp3")
-;playSound("cold-start.mp3")
-
-; if (is_text_reader_mode()) {
-; 	MsgBox "is_text_reader_mode"
-; } else {
-; 	MsgBox "not text_reader_mode"
-; }
-
-; if (pageIsLoaded()) {
-; 	MsgBox "pageIsLoaded"
-; }
-; else {
-; 	MsgBox "not pageIsLoaded"
-; }
-
-CoordMode, Screen
-; ImageSearch, OutputVarX, OutputVarY, 0, 164, 38, 202, C:\Users\User\Documents\reader\images\browser\reader-mode-letter-default-home.bmp
-
-image_pattern_file_name := "browser\reader-mode-letter-default-home.bmp"
-images_dir := A_ScriptDir . "\" . "images"
-
-
-; ImageSearch, OutputVarX, OutputVarY, 0, 164, 38, 202, %images_dir%\%image_pattern_file_name%
-; if (OutputVarX and OutputVarY) {
-if (is_text_reader_mode()) {
-; if (findImage("browser\reader-mode-letter-default-home.bmp")) {
-; if (searchImage("browser\" . reader_mode_image_pattern, 0, 164, 38, 202, false)) {
-	MsgBox "text_reader_mode"
-}
-else {
-	MsgBox "not text_reader_mode"
-}
+~F12::
+LogError(A_LineFile, A_LineNumber, "unknown video mode: " . modeStack.getCurrentMode())
 
 return
-
