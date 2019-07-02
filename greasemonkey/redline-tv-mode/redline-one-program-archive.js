@@ -4,7 +4,7 @@
 // @include /^https://www\.rline\.tv/programs/[^/]+/$/
 // @grant none
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require			 https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
+// @require          https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
 // ==/UserScript==
 // 
 var $ = window.jQuery;
@@ -13,9 +13,16 @@ var $ = window.jQuery;
 playAudio('http://127.0.0.1/redline-program-archive-opened.mp3');
 let channelName = $('.content-left > h1:nth-child(1)').text();
 let links = collectLinks('.video-list__item', '.video-list__name');
-createPageWithLinks(links, "Список передач программы «"+channelName+"»", "Конец списка передач программы «"+channelName+"»");
+disableStyles();
+createPageWithLinks(links, "Архив телепередачи «"+channelName+"»", "Конец архива телепередачи «"+channelName+"»", "http://127.0.0.1/video-is-opening.mp3");
+//createList(links, "Архив телепередачи «"+channelName+"»", "Конец архива телепередачи «"+channelName+"»", null, "http://127.0.0.1/video-is-opening.mp3")
 // ====================
 
+function disableStyles() {
+    for (let i=0; i<document.styleSheets.length; i++) {
+        document.styleSheets[i].disabled = true;
+    }
+}
 
 function collectLinks(linkNodeSelector, linkTextSelector) {
     let list = {};
@@ -30,7 +37,7 @@ function collectLinks(linkNodeSelector, linkTextSelector) {
     return list;
 }
 
-function createPageWithLinks(linksHashMap, startText, endText) {
+function createPageWithLinks(linksHashMap, startText, endText, openingSoundLink) {
     let documentCorpus = $('body');
     
     documentCorpus.empty();
@@ -42,7 +49,17 @@ function createPageWithLinks(linksHashMap, startText, endText) {
     for (let key in linksHashMap) {
         if (linksHashMap.hasOwnProperty(key)) {
             let value = linksHashMap[key];
-            documentCorpus.append("<a href='"+value+"' target='_blank'>"+key+"</a><br>");
+            //documentCorpus.append("<a href='"+value+"' target='_blank'>"+key+"</a><br>");
+            
+            let a = $("<A><br>");
+                a.append(key);
+                a.attr("href", value);
+                a.attr("target", "_blank");
+            
+            if (null != openingSoundLink)
+                a.click(function() { playAudio(openingSoundLink); });
+            
+            documentCorpus.append(a);
         }
     }
     
