@@ -1,5 +1,18 @@
 firefoxReadingIsActive := false
 
+activateReaderAndRead() {
+	enableTextReaderMode()
+	
+	detectMode()
+	if (modeStack.isReaderMode()) {
+		textPlayPause()
+	}
+	else {
+		playSound("no-readable-version.mp3")
+		closePage(true)
+	}
+}
+
 
 enableTextReaderMode() {
 	global reader_mode_enable_button_x

@@ -153,3 +153,15 @@ is_youtube_video_mode() {
 reportUnknownMode() {
 	playSound("unknown-mode.mp3")
 }
+
+reportCannotStepForward() {
+	playSound("cannot-step-forward-in-this-mode.mp3")
+}
+
+reportCannotStepBack() {
+	playSound("cannot-step-back-in-this-mode.mp3")
+}
+
+reportCannotPlayPause() {
+	playSound("cannot-play-pause.mp3")
+}

@@ -11,10 +11,11 @@ startNVDA(wait_until_starting) {
 		waitForEventDuringSeconds("nvdaIsRun", 3000)
 
 		if (nvdaIsRun()) {
-			playSound("screen-reader-has-started.mp3")
+			;playSound("screen-reader-has-started.mp3")
 		}
 		else {
 			LogError(A_LineFile, A_LineNumber, "Error starting screen reader")
+			reportErrorStartingScreenReader()
 		}
 	}
 }
@@ -42,4 +43,8 @@ muteNVDA() {
 unmuteNVDA() {
 	global nircmd
 	Run, %nircmd% muteappvolume nvda.exe 0
+}
+
+reportErrorStartingScreenReader() {
+	playSound("error-starting-screen-reader.mp3")
 }

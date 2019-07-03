@@ -9,7 +9,7 @@ web_server_command := "C:\Program Files (x86)\hfs.exe"
 nircmd := "c:\Program Files\nircmd.exe"
 
 ; Путь к исполняемому файлу mpg123.exe (консольной программы для выигрывания звука)
-sound_player_command := "C:\Program Files (x86)\mpg123\mpg123.exe"
+sound_player_command := "C:\Program Files\mpg123-1.25.10-static-x86-64\mpg123.exe"
 
 ; Координаты области адресной строки для browser_functions/search_image_in_address_bar()
 address_bar_x1 := 130
@@ -48,7 +48,7 @@ firefox_page_is_loaded_y2 := 72
 ;firefox_page_is_loaded_y2 := 68
 
 ; Картинка, по которой определяется режим чтения
-reader_mode_image_pattern := "reader-mode-letter-default-home.bmp"
+reader_mode_image_pattern := "reader-mode-letter-ingeneer.bmp"
 ; Область поиска этой картинки
 ; Дом
 reader_mode_serch_area_x1 := 0

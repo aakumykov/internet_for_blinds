@@ -16,20 +16,30 @@ openRedlineLink() {
 
 
 is_redline_list_mode() {
-	if (is_redline_main_page()) {
+	MsgBox "is_redline_list_mode()"
+
+	if (testClipboardWithRegex("^https://www\.rline\.tv/?$")) {
 		return true
 	}
-	if (is_redline_programs_list()) {
+
+	if (testClipboardWithRegex("^https://www\.rline\.tv/programs/?$")) {
 		return true
 	}
-	if (is_redline_program_archive()) {
+
+	; https://www.rline.tv/programs/temy-dnya/
+	if (testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/$")) {
 		return true
 	}
+
+	MsgBox "is_redline_list_mode(), NO MODE COMPLAINT"
+
 	return false
 }
 
 is_redline_video_mode() {
 	copyPageAddress()
+	;MsgBox "is_redline_video_mode()"
+	;https://www.rline.tv/programs/tochka-zreniya/video-186742/
 	return testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/video-\d+/$")
 }
 
@@ -39,20 +49,6 @@ is_redline_text_mode() {
 }
 
 
-
-
-
-is_redline_main_page() {
-	return testClipboardWithRegex("^https://www\.rline\.tv/?$")
-}
-
-is_redline_programs_list() {
-	return testClipboardWithRegex("^https://www\.rline\.tv/programs/?$")
-}
-
-is_redline_program_archive() {
-	return testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/$")
-}
 
 
 redlinePlayPause() {
@@ -72,5 +68,5 @@ redlinePlayPause() {
 }
 
 redlineVideoPlayPause() {
-	Click, 300, 300
+	Click, 500, 500
 }

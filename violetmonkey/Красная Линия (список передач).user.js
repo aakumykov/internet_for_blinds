@@ -14,7 +14,7 @@ playAudio('http://127.0.0.1/redline-channels-list-has-opened.mp3');
 let links = collectLinks('.video-list__program', '.video-list__program-name');
 
 clearPage();
-createList(links, "Список программ телеканала Красная линия", "Конец списка программ", " (телепрограмма)");
+createList(links, "Список программ телеканала Красная линия", "Конец списка программ", " (архив выпусков)", "http://127.0.0.1/redline-program-archive-is-opening.mp3");
 
 
 function clearPage(newTitle) {

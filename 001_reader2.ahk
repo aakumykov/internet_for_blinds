@@ -61,11 +61,15 @@ stepForward() {
 
 	if (modeStack.isVideoMode()) {
 		videoSkipForward()
+		return
 	}
 
 	if (modeStack.isReaderMode()) {
 		textSkipForward()
+		return
 	}
+
+	reportCannotStepForward()
 }
 
 stepBack() {
@@ -80,15 +84,24 @@ stepBack() {
 
 	if (modeStack.isVideoMode()) {
 		videoSkipBack()
+		return
 	}
 
 	if (modeStack.isReaderMode()) {
 		textSkipBack()
+		return
 	}
+
+	reportCannotStepBack()
 }
 
 playPause() {
 	focusFirefox()
+
+	if (modeStack.isReaderMode()) {
+		textPlayPause()
+		return
+	}
 
 	if (modeStack.isListMode()) {
 		openLinkAndPlay()
@@ -97,11 +110,15 @@ playPause() {
 
 	if (modeStack.isVideoMode()) {
 		videoPlayPause()
+		return
 	}
 
-	if (modeStack.isReaderMode()) {
-		textPlayPause()
+	if (modeStack.isTextMode()) {
+		activateReaderAndRead()
+		return
 	}
+
+	reportCannotPlayPause()
 }
 
 closePage(silent) {
@@ -178,7 +195,11 @@ unmuteNVDA()
 return
 
 
-~F12::
-LogError(A_LineFile, A_LineNumber, "unknown video mode: " . modeStack.getCurrentMode())
-
+F12::
+if (is_text_reader_mode()) {
+	MsgBox "text_reader_mode"
+}
+else {
+	MsgBox "not text_reader_mode"
+}
 return

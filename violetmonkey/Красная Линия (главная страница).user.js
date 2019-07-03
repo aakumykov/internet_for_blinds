@@ -17,8 +17,8 @@ let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-dat
 
 clearPage("Телеканал красная линия");
 
-addLinkWithSound("Список телепередач (нажмите, чтобы перейти)", "https://www.rline.tv/programs/", "http://127.0.0.1/redline-channels-list-is-opening.mp3");
-addLinkWithSound("Все новости (нажмите, чтобы перейти)", "https://www.rline.tv/news/", "http://127.0.0.1/redline-news-is-opening.mp3");
+addLinkWithSound("Телепередачи канала Красная Линия (подраздел)", "https://www.rline.tv/programs/", "http://127.0.0.1/redline-channels-list-is-opening.mp3");
+addLinkWithSound("Все новости сайта Красная Линия (подраздел)", "https://www.rline.tv/news/", "http://127.0.0.1/redline-news-is-opening.mp3");
 
 createList(newVideosLinks, "Новые видео", "Конец новых видео", " (видеоролик)", "http://127.0.0.1/opening-video.mp3");
 createList(newsLinks, "Последние новости", "Конец списка последних новостей", "", "http://127.0.0.1/opening-link.mp3");

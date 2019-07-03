@@ -10,7 +10,7 @@
 var $ = window.jQuery;
 
 // ====================
-playAudio('http://127.0.0.1/redline-program-archive-opened.mp3');
+playAudio('http://127.0.0.1/redline-program-archive-has-opened.mp3');
 let channelName = $('.content-left > h1:nth-child(1)').text();
 let links = collectLinks('.video-list__item', '.video-list__name');
 disableStyles();
@@ -51,7 +51,7 @@ function createPageWithLinks(linksHashMap, startText, endText, openingSoundLink)
             let value = linksHashMap[key];
             //documentCorpus.append("<a href='"+value+"' target='_blank'>"+key+"</a><br>");
             
-            let a = $("<A><br>");
+            let a = $("<A></A><br>");
                 a.append(key);
                 a.attr("href", value);
                 a.attr("target", "_blank");

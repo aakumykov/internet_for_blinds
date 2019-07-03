@@ -13,47 +13,17 @@ openLinkAndPlay() {
 	}
 
 	if (modeStack.isRedlineVideoMode()) {
+		MsgBox "redline video mode"
 		redlineVideoPlayPause()
 		return
 	}
 
 	if (modeStack.isTextMode()) {
-		enableTextReaderMode()
-		detectMode()
-		if (modeStack.isReaderMode()) {
-			textPlayPause()
-		}
-		else {
-			playSound("no-readable-version.mp3")
-			closePage(true)
-		}
+		activateReaderAndRead()
+		return
 	}
-}
 
-openLinkAndRead() {
-	MsgBox "openLinkAndRead() не реализована"
-	
-	; openLink()
-
-	; if (is_redline_video_mode()) {
-	; 	modeStack.addEmptyMode()
-	; 	redlineVideoPlayPause()
-	; } else {
-	; 	readPage()
-	; }
-	
-	; if (is_redline_text_mode()) {
-	; 	readPage()
-	; 	return
-	; }
-}
-
-
-openMailMessageLink() {
-	MsgBox "openMailMessageLink() не реализована"
-	; modeStack.addListMode()
-	; openLink()
-	;readMailMessage()
+	reportUnknownMode()
 }
 
 readMailMessage() {

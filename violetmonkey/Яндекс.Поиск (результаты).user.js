@@ -86,7 +86,7 @@ function createList(listHash, baseUrl, linkTarget, listStartText, listEndText, l
             if (null != linkNamePrefix) linkText = linkNamePrefix + linkText;
             if (null != linkNameSuffix) linkText = linkText + linkNameSuffix;
             
-            let a = $('<A><br>');
+            let a = $('<A></A><br>');
             a.append(linkText);
             
             let address = (null != baseUrl) ? baseUrl + value : value;
