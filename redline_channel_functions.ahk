@@ -1,6 +1,7 @@
 
 openRedLineChannel() {
 	modeStack.addRedlineListMode()
+	muteNVDA()
 	startWebServer()
 	Run, firefox.exe "https://www.rline.tv", C:\Program Files\Mozilla Firefox\
 	playSound("redline-is-opening.mp3")
@@ -14,6 +15,10 @@ is_redline_list_mode() {
 	}
 
 	if (testClipboardWithRegex("^https://www\.rline\.tv/programs/?$")) {
+		return true
+	}
+
+	if (testClipboardWithRegex("^https://www\.rline\.tv/news/$")) {
 		return true
 	}
 
