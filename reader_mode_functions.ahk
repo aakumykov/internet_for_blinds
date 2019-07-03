@@ -66,17 +66,17 @@ textPlayPause() {
 
 
 clickReadingControls() {
-	Click 22, 227
+	Click 22, 239
 }
 
 clickReadNextParagraph() {
-	Click, 301, 222
+	Click, 301, 239
 }
 
 clickReadPrevParagraph() {
-	Click, 102, 222
+	Click, 102, 239
 }
 
 clickPlayPause() {
-	Click, 204, 222
+	Click, 204, 239
 }

@@ -80,6 +80,8 @@ copyPageAddress() {
 	focusFirefox()
 	Send, ^{l}
 	Send, ^{c}
-	Send, {Tab}
+	; Send, {Tab}
+	; Send, {Tab}
+	; Send, {Tab}
 }
 

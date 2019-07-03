@@ -5,10 +5,6 @@ class ModeStack {
 
 	; Методы-определители
 	isTextMode() {
-		; if (this.isRedlineTextMode()) {
-		; 	return true
-		; }
-		; return false
 		return "TEXT_MODE" == this.cm
 	}
 

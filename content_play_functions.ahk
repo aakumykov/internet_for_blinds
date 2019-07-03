@@ -5,6 +5,9 @@ openLinkAndPlay() {
 
 	detectMode()
 
+	; cm := modeStack.getCurrentMode()
+	; MsgBox, , Current Mode, %cm%, 1
+
 	if (modeStack.isRedlineVideoMode()) {
 		videoPlayPause()
 		return
@@ -18,11 +21,13 @@ openLinkAndPlay() {
 	if (modeStack.isYandexVideoMode()) {
 		return
 	}
-	
 
 	if (modeStack.isTextMode()) {
-		MsgBox "text mode"
 		activateReaderAndRead()
+		return
+	}
+
+	if (modeStack.isListMode()) {
 		return
 	}
 
