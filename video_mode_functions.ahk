@@ -8,8 +8,7 @@ videoPlayPause() {
 		youtubeVideoPlayPause()
 	}
 
-	reportUnknownMode()
-	;LogError(A_LineFile, A_LineNumber, "unknown video mode: " . modeStack.getCurrentMode())
+	LogError(A_LineFile, A_LineNumber, "unknown video mode: " . modeStack.getCurrentMode())
 }
 
 videoSkipForward() {

@@ -1,16 +1,5 @@
 firefoxReadingIsActive := false
 
-is_text_reader_mode() {
-	global reader_mode_image_pattern
-	global reader_mode_serch_area_x1
-	global reader_mode_serch_area_y1
-	global reader_mode_serch_area_x2
-	global reader_mode_serch_area_y2
-
-	return searchImage("browser\" . reader_mode_image_pattern, reader_mode_serch_area_x1, reader_mode_serch_area_y1, reader_mode_serch_area_x2, reader_mode_serch_area_y2, true)
-}
-
-
 activateReaderAndRead() {
 	enableTextReaderMode()
 	

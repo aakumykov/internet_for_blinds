@@ -48,12 +48,11 @@ firefox_page_is_loaded_y2 := 72
 ;firefox_page_is_loaded_y2 := 68
 
 ; Картинка, по которой определяется режим чтения
-; reader_mode_image_pattern := "reader-mode-letter-ingeneer.bmp"
-reader_mode_image_pattern := "reader-mode-letter-default-home.bmp"
+reader_mode_image_pattern := "reader-mode-letter-ingeneer.bmp"
 ; Область поиска этой картинки
 ; Дом
 reader_mode_serch_area_x1 := 0
-reader_mode_serch_area_y1 := 184
+reader_mode_serch_area_y1 := 164
 reader_mode_serch_area_x2 := 38
-reader_mode_serch_area_y2 := 222
+reader_mode_serch_area_y2 := 202
 ; Работа
