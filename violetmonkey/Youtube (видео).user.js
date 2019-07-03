@@ -11,6 +11,6 @@
 
 var $ = window.jQuery;
 
-$('video.html5-main-video').get(0).pause()
+//$('video.html5-main-video').get(0).pause()
 
 //playAudio("http://127.0.0.1/video-has-opened.mp3")
