@@ -7,14 +7,8 @@ openLinkAndPlay() {
 	; cm := modeStack.getCurrentMode()
 	; MsgBox current mode: %cm%
 
-	if (modeStack.isYoutubeVideoMode()) {
+	if (modeStack.isVideoMode()) {
 		videoPlayPause()
-		return
-	}
-
-	if (modeStack.isRedlineVideoMode()) {
-		MsgBox "redline video mode"
-		redlineVideoPlayPause()
 		return
 	}
 

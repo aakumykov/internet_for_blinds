@@ -162,13 +162,19 @@ openMail() {
 
 
 
+F7::
+if (pageIsLoaded()) {
+	MsgBox "page is loaded"
+}
+else {
+	MsgBox "page is not loaded"
+}
+return
+
 F8::
 detectMode()
 mode := modeStack.getCurrentMode()
 MsgBox,, DETECTED MODE, %mode%
-return
-
-F7::
 return
 
 F9::

@@ -58,4 +58,5 @@ redlinePlayPause() {
 
 redlineVideoPlayPause() {
 	Click, 500, 500
+	Sleep, 100 ; Для предотвращения перехода в полноэкранный режим из-за двойного щелчка
 }

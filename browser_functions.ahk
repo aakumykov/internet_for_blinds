@@ -9,14 +9,14 @@ focusFirefox() {
 }
 
 openLinkAndWaitPageIsLoaded() {
-	global tab_open_delay
+	global tab_creation_delay
 	global page_load_wait_time
 
 	focusFirefox()
 	muteNVDA()
 
 	Send, {Return}
-	Sleep, %tab_open_delay%
+	Sleep, %tab_creation_delay%
 
 	waitForEventDuringSeconds("pageIsLoaded", page_load_wait_time)
 
@@ -63,17 +63,23 @@ closeBrowserPage(silent) {
 	}
 }
 
-searchImageInAddressBar(imageFileName, isRelativeToWindow) {
-	global address_bar_x1
-	global address_bar_y1
-	global address_bar_x2
-	global address_bar_y2
-	return searchImage(imageFileName, address_bar_x1, address_bar_y1, address_bar_x2, address_bar_y2, isRelativeToWindow)
-}
+; address_bar_x1 := 130
+; address_bar_y1 := 30
+; address_bar_x2 := 600
+; address_bar_y2 := 75
+
+; searchImageInAddressBar(imageFileName, isRelativeToWindow) {
+; 	global address_bar_x1
+; 	global address_bar_y1
+; 	global address_bar_x2
+; 	global address_bar_y2
+; 	return searchImage(imageFileName, address_bar_x1, address_bar_y1, address_bar_x2, address_bar_y2, isRelativeToWindow)
+; }
 
 copyPageAddress() {
 	focusFirefox()
 	Send, ^{l}
 	Send, ^{c}
+	Send, {Tab}
 }
 

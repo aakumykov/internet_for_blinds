@@ -9,4 +9,9 @@ is_youtube_video_mode() {
 
 youtubeVideoPlayPause() {
 	Click, 713, 457
+	Sleep, 100 ; Для предотвращения перехода в полноэкранный режим из-за двойного щелчка
+}
+
+youtubeClickAtEmptyPlace() {
+	Click, 200, 140
 }
