@@ -19,6 +19,9 @@ class ModeStack {
 		if (this.isRedlineVideoMode()) {
 			return true
 		}
+		if (this.isYandexVideoMode()) {
+			return true
+		}
 		return false
 	}
 
@@ -33,6 +36,10 @@ class ModeStack {
 	; Методы общего назначения
 	getCurrentMode() {
 		return this.cm
+	}
+
+	clearCurrentMode() {
+		this.cm := ""
 	}
 	
 	addMode(newMode) {
@@ -179,4 +186,13 @@ class ModeStack {
 	}
 
 
+	addYandexVideoMode() {
+		this.addMode("YANDEX_VIDEO_MODE")
+	}
+	isYandexVideoMode() {
+		if ("" == this.cm) {
+			detectMode()
+		}
+		return "YANDEX_VIDEO_MODE" == this.cm
+	}
 }

@@ -2,14 +2,20 @@
 videoPlayPause() {
 	if (modeStack.isRedlineVideoMode()) {
 		redlineVideoPlayPause()
+		return
 	}
 
 	if (modeStack.isYoutubeVideoMode()) {
 		youtubeVideoPlayPause()
+		return
+	}
+
+	if (modeStack.isYandexVideoMode()) {
+		yandexVideoPlayPause()
+		return
 	}
 
 	reportUnknownMode()
-	;LogError(A_LineFile, A_LineNumber, "unknown video mode: " . modeStack.getCurrentMode())
 }
 
 videoSkipForward() {

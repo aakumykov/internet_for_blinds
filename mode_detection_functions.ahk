@@ -2,6 +2,8 @@
 
 
 detectMode() {
+	modeStack.clearCurrentMode()
+
 	copyPageAddress()
 
 	; Определение режима Чтеца должно производиться
@@ -50,6 +52,11 @@ detectMode() {
 
 	if (is_youtube_video_mode()) {
 		modeStack.addYoutubeVideoMode()
+		return
+	}
+
+	if (is_yandex_video_mode()) {
+		modeStack.addYandexVideoMode()
 		return
 	}
 

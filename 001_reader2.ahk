@@ -1,5 +1,5 @@
-#Include, config_system.ahk
-#Include, config_user.ahk
+#Include, 002_config_user.ahk
+#Include, 003_config_system.ahk
 #Include, log_functions.ahk
 #Include, utility_functions.ahk
 #Include, mode_stack.ahk
@@ -165,7 +165,7 @@ openMail() {
 F8::
 detectMode()
 mode := modeStack.getCurrentMode()
-MsgBox,, CURRENT MODE, current mode: %mode%
+MsgBox,, DETECTED MODE, %mode%
 return
 
 F7::

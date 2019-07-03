@@ -14,3 +14,11 @@ is_mail_list_mode() {
 is_mail_message_mode(){
 	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/message/[^/]+$")
 }
+
+is_yandex_video_mode() {
+	return testClipboardWithRegex("^https://yandex\.ru/video/search\?")
+}
+
+yandexVideoPlayPause() {
+	Click, 724, 594
+}

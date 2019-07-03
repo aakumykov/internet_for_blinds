@@ -6,17 +6,8 @@ openRedLineChannel() {
 	playSound("redline-is-opening.mp3")
 }
 
-
-openRedlineLink() {
-	MsgBox "openRedlineLink() не реализована"
-	; openLink()
-	; detectMode()
-	; redlinePlayPause()
-}
-
-
 is_redline_list_mode() {
-	MsgBox "is_redline_list_mode()"
+	; MsgBox "is_redline_list_mode()"
 
 	if (testClipboardWithRegex("^https://www\.rline\.tv/?$")) {
 		return true
@@ -30,8 +21,6 @@ is_redline_list_mode() {
 	if (testClipboardWithRegex("^https://www\.rline\.tv/programs/[^/]+/$")) {
 		return true
 	}
-
-	MsgBox "is_redline_list_mode(), NO MODE COMPLAINT"
 
 	return false
 }
