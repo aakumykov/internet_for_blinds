@@ -16,6 +16,7 @@ let newVideosLinks = collectLinks('.video-list__item', '.video-list__name');
 let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-date');
 
 clearPage("Телеканал красная линия");
+disableStyles();
 
 addLinkWithSound("Телепередачи канала Красная Линия (подраздел)", "https://www.rline.tv/programs/", "http://127.0.0.1/redline-channels-list-is-opening.mp3");
 addLinkWithSound("Все новости сайта Красная Линия (подраздел)", "https://www.rline.tv/news/", "http://127.0.0.1/redline-news-is-opening.mp3");
@@ -24,6 +25,12 @@ createList(newVideosLinks, "Новые видео", "Конец новых ви�
 createList(newsLinks, "Последние новости", "Конец списка последних новостей", "", "http://127.0.0.1/opening-link.mp3");
 
 // ====================
+
+function disableStyles() {
+    for (let i=0; i<document.styleSheets.length; i++) {
+        document.styleSheets[i].disabled = true;
+    }
+}
 
 function clearPage(newTitle) {
     let documentCorpus = $('body');
@@ -64,7 +71,7 @@ function createList(listHash, listTitle, listFinishText, linkNameSuffix, opening
 
             let value = listHash[name];
             
-            let a = $('<A><br>');
+            let a = $('<A></A><br>');
                 a.append(name + linkNameSuffix);
                 a.attr('href', value);
                 a.attr('target', '_blank');

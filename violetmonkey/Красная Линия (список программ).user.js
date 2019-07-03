@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Красная Линия (список передач)
+// @name Красная Линия (список программ)
 // @namespace Violentmonkey Scripts
 // @include      /^https://www\.rline\.tv/programs/$/
 // @grant none
@@ -14,8 +14,15 @@ playAudio('http://127.0.0.1/redline-channels-list-has-opened.mp3');
 let links = collectLinks('.video-list__program', '.video-list__program-name');
 
 clearPage();
+disableStyles();
 createList(links, "Список программ телеканала Красная линия", "Конец списка программ", " (архив выпусков)", "http://127.0.0.1/redline-program-archive-is-opening.mp3");
 
+
+function disableStyles() {
+    for (let i=0; i<document.styleSheets.length; i++) {
+        document.styleSheets[i].disabled = true;
+    }
+}
 
 function clearPage(newTitle) {
     let documentCorpus = $('body');
@@ -48,7 +55,7 @@ function createList(listHash, listTitle, listFinishText, linkNameSuffix, opening
     let documentCorpus = $('body');
     
     //document.title = listTitle;
-    documentCorpus.append("<br><button>"+listTitle+"</button><br>");
+    documentCorpus.append("<br><button>"+listTitle+"</button><br><br>");
     
     for (let name in listHash) {
 
@@ -56,7 +63,7 @@ function createList(listHash, listTitle, listFinishText, linkNameSuffix, opening
 
             let value = listHash[name];
             
-            let a = $('<A><br>');
+            let a = $('<A></A><br>');
                 a.append(name + linkNameSuffix);
                 a.attr('href', value);
                 a.attr('target', '_blank');
@@ -69,7 +76,7 @@ function createList(listHash, listTitle, listFinishText, linkNameSuffix, opening
         }
     }
     
-    documentCorpus.append("<br><br><button id='startPoint'>"+listFinishText+"</button><br><br>");
+    documentCorpus.append("<br><button id='startPoint'>"+listFinishText+"</button><br><br>");
     
     //$('#startPoint').focus();
 }
