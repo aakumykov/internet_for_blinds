@@ -13,7 +13,8 @@
 #Include, video_mode_functions.ahk
 #Include, youtube_functions.ahk
 #Include, nvda_functions.ahk
-#Include, redline_channel.ahk
+#Include, redline_channel_functions.ahk
+#Include, yandex_functions.ahk
 #Include, content_play_functions.ahk
 
 
@@ -162,29 +163,16 @@ openMail() {
 
 
 F8::
-mode := getMode()
-TrayTip, "CURRENT MODE", %mode%, 1
+detectMode()
+mode := modeStack.getCurrentMode()
+MsgBox,, CURRENT MODE, current mode: %mode%
 return
 
 F7::
-detectMode()
-if (is_mail_list_mode()) {
-	MsgBox "mail_list_mode"
-} else {
-	MsgBox "no_mail_list_mode"
-}
 return
 
 F9::
-detectMode()
-
-if (modeStack.isYoutubeVideoMode()) {
-	TrayTip, "MODE", "is_youtube_watch_mode"
-} else {
-	TrayTip, "MODE", "NOT is_youtube_watch_mode"
-}
 return
-
 
 F10::
 muteNVDA()
@@ -193,7 +181,6 @@ return
 ~F11::
 unmuteNVDA()
 return
-
 
 F12::
 if (is_text_reader_mode()) {
