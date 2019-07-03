@@ -64,7 +64,7 @@ redlinePlayPause() {
 		return
 	}
 
-	; reportUnknownMode()
+	reportUnknownMode()
 }
 
 redlineVideoPlayPause() {
