@@ -2,22 +2,31 @@
 openLinkAndPlay() {
 	muteNVDA()
 	openLinkAndWaitPageIsLoaded()
+
 	detectMode()
 
-	; cm := modeStack.getCurrentMode()
-	; MsgBox current mode: %cm%
-
-	if (modeStack.isVideoMode()) {
+	if (modeStack.isRedlineVideoMode()) {
 		videoPlayPause()
 		return
 	}
 
+	if (modeStack.isYoutubeVideoMode()) {
+		; playSound("video-has-opened.mp3")
+		return
+	}
+
+	if (modeStack.isYandexVideoMode()) {
+		return
+	}
+	
+
 	if (modeStack.isTextMode()) {
+		MsgBox "text mode"
 		activateReaderAndRead()
 		return
 	}
 
-	reportUnknownMode()
+	reportUnknownMode("openLinkAndPlay()")
 }
 
 readMailMessage() {

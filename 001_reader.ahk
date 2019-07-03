@@ -110,6 +110,7 @@ playPause() {
 	}
 
 	if (modeStack.isVideoMode()) {
+		; MsgBox,,, "playPause(), video mode", 1
 		videoPlayPause()
 		return
 	}
@@ -178,6 +179,7 @@ MsgBox,, DETECTED MODE, %mode%
 return
 
 F9::
+playSound("video-has-opened.mp3")
 return
 
 F10::

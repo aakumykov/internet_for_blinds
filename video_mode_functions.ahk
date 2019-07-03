@@ -15,7 +15,7 @@ videoPlayPause() {
 		return
 	}
 
-	reportUnknownMode()
+	reportUnknownMode("videoPlayPause()")
 }
 
 videoSkipForward() {

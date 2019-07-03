@@ -66,8 +66,9 @@ detectMode() {
 
 
 
-reportUnknownMode() {
+reportUnknownMode(label) {
 	playSound("unknown-mode.mp3")
+	TrayTip, reportUnknownMode, %label%, 1
 }
 
 reportCannotStepForward() {
