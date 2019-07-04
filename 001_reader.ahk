@@ -128,9 +128,6 @@ closePage(silent) {
 
 	modeStack.popMode()
 
-	; cm := modeStack.getCurrentMode()
-	; MsgBox closePage(), cm: %cm%
-
 	closeBrowserPage(silent)
 }
 
@@ -179,7 +176,8 @@ MsgBox,, DETECTED MODE, %mode%
 return
 
 F9::
-playSound("video-has-opened.mp3")
+mode := modeStack.getCurrentMode()
+MsgBox,, CURRENT MODE, %mode%
 return
 
 F10::

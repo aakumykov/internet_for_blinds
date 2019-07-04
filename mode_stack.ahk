@@ -39,16 +39,21 @@ class ModeStack {
 	}
 	
 	addMode(newMode) {
-		; pm := this.pm
-		; cm := this.cm
-		;MsgBox 1 addMode(%newMode%), pm: %pm%, cm: %cm%
-
 		this.pm := this.cm
 		this.cm := newMode
 
-		; pm := this.pm
-		; cm := this.cm
-		;MsgBox 2 addMode(%newMode%), pm: %pm%, cm: %cm%
+		cm := this.cm
+		pm := this.pm
+		TrayTip, addMode(%newMode%), pm: %pm%`, cm: %cm%, 3
+	}
+
+	popMode() {
+		cm := this.cm
+		pm := this.pm
+		TrayTip, "popMode()", pm: %pm% ==> cm: %cm%, 3
+
+		this.cm := this.pm
+		this.pm := ""
 	}
 
 	setMode(newMode) {
@@ -66,14 +71,6 @@ class ModeStack {
 	addEmptyMode() {
 		this.pm := this.cm
 		this.cm := ""
-	}
-
-	popMode() {
-		; cm := this.cm
-		; pm := this.pm
-		;MsgBox popMode(), cm: %cm%, pm: %pm%
-		this.cm := this.pm
-		this.pm := ""
 	}
 
 

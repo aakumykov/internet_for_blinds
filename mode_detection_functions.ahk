@@ -73,12 +73,22 @@ reportUnknownMode(label) {
 
 reportCannotStepForward() {
 	playSound("cannot-step-forward-in-this-mode.mp3")
+	showCurrentModeInTray()
 }
 
 reportCannotStepBack() {
 	playSound("cannot-step-back-in-this-mode.mp3")
+	showCurrentModeInTray()
 }
 
 reportCannotPlayPause() {
 	playSound("cannot-play-pause.mp3")
+	showCurrentModeInTray()
+}
+
+
+
+showCurrentModeInTray() {
+	cm := modeStack.getCurrentMode()
+	TrayTip, current mode, %cm%, 1
 }
