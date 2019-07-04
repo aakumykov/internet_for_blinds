@@ -1,26 +1,26 @@
 ; ============= ГЛАВНЫЕ НАСТРОЙКИ ==========
 
 ; Картинка, по которой определяется, что страница загружена
-firefox_page_is_loaded_image := "firefox-page-load-complete-default.bmp"
+page_is_loaded_search_area_image_pattern := "firefox-page-load-complete-default.bmp"
 
 ; Область поиска этой картинки
-firefox_page_is_loaded_x1 := 70
-firefox_page_is_loaded_y1 := 60
-firefox_page_is_loaded_x2 := 101
-firefox_page_is_loaded_y2 := 85
+page_is_loaded_search_area_x1 := 70
+page_is_loaded_search_area_y1 := 60
+page_is_loaded_search_area_x2 := 101
+page_is_loaded_search_area_y2 := 85
 
 ; Координаты кнопки перехода в режим чтения Firefox
 reader_mode_enable_button_x := 149
 reader_mode_enable_button_y := 73
 
 ; Картинка, по которой определяется режим чтения
-reader_mode_image_pattern := "reader-mode-letter-default-home.bmp"
+reader_mode_image_pattern := "reader-mode-adress-bar-icon-default.bmp"
 
 ; Область поиска этой картинки
-reader_mode_serch_area_x1 := 0
-reader_mode_serch_area_y1 := 162
-reader_mode_serch_area_x2 := 38
-reader_mode_serch_area_y2 := 202
+reader_mode_serch_area_x1 := 1039 
+reader_mode_serch_area_y1 := 60 
+reader_mode_serch_area_x2 := 1067 
+reader_mode_serch_area_y2 := 85 
 
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========

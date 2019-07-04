@@ -116,7 +116,7 @@ playPause() {
 	}
 
 	if (modeStack.isTextMode()) {
-		activateReaderAndRead()
+		enableReaderAndRead()
 		return
 	}
 

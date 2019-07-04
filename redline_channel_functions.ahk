@@ -52,7 +52,7 @@ redlinePlayPause() {
 	}
 
 	if (modeStack.isRedlineTextMode()) {
-		enableTextReaderMode()
+		activateTextReaderMode()
 		waitForEventDuringSeconds("is_text_reader_mode", 5000)
 		textPlayPause()
 		return

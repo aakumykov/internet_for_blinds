@@ -23,7 +23,7 @@ openLinkAndPlay() {
 	}
 
 	if (modeStack.isTextMode()) {
-		activateReaderAndRead()
+		enableReaderAndRead()
 		return
 	}
 

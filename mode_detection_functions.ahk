@@ -7,7 +7,7 @@ detectMode() {
 	; Определение режима Чтеца должно производиться
 	; первым, так как пересекается с другими режимами.
 	if (is_text_reader_mode()) {
-		modeStack.addReaderMode()
+		modeStack.setReaderMode()
 		return
 	}
 
@@ -61,6 +61,7 @@ detectMode() {
 
 
 	; ------------ Режим по умолчанию ------------
+	MsgBox, , detectMode(), "default TEXT_MODE will be added now"
 	modeStack.addTextMode()
 }
 

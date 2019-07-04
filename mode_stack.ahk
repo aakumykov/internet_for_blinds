@@ -44,13 +44,13 @@ class ModeStack {
 
 		cm := this.cm
 		pm := this.pm
-		TrayTip, addMode(%newMode%), pm: %pm%`, cm: %cm%, 3
+		MsgBox, , addMode(%newMode%), pm: %pm%`, cm: %cm%
 	}
 
 	popMode() {
 		cm := this.cm
 		pm := this.pm
-		TrayTip, "popMode()", pm: %pm% ==> cm: %cm%, 3
+		MsgBox, , "popMode()", pm: %pm% ==> cm: %cm%
 
 		this.cm := this.pm
 		this.pm := ""
@@ -63,9 +63,9 @@ class ModeStack {
 
 		this.cm := newMode
 
-		; pm := this.pm
-		; cm := this.cm
-		;MsgBox 2 setMode(%newMode%), pm: %pm%, cm: %cm%
+		pm := this.pm
+		cm := this.cm
+		MsgBox 2 setMode(%newMode%), pm: %pm%, cm: %cm%
 	}
 
 	addEmptyMode() {
@@ -124,9 +124,10 @@ class ModeStack {
 
 
 	; Внимание! Так как режим чтения /заменяет/ собой текстовый
-	; режим, здесь внутри метода addReaderMode() делается вызов
+	; режим, здесь внутри метода setReaderMode() делается вызов
 	; setMode() вместо addMode()
-	addReaderMode() {
+	setReaderMode() {
+		MsgBox "setReaderMode()"
 		this.setMode("READER_MODE")
 	}
 
