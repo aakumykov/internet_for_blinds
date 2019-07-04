@@ -19,7 +19,7 @@ reader_mode_serch_area_x2 := 38
 reader_mode_serch_area_y2 := 200
 
 ; Координаты кнопки перехода в режим чтения Firefox
-reader_mode_enable_button_x := 278
+reader_mode_enable_button_x := 150
 reader_mode_enable_button_y := 73
 
 
