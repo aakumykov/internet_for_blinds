@@ -4,7 +4,8 @@
 // @include /^https://www\.rline\.tv/$/
 // @grant none
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require			 https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
+// @require          https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
+// @require      https://raw.githubusercontent.com/aakumykov/internet_for_blinds/mode-stack/javascript/lib/html_functions.js
 // ==/UserScript==
 
 var $ = window.jQuery;
@@ -15,8 +16,10 @@ playAudio('http://127.0.0.1/redline-has-opened.mp3');
 let newVideosLinks = collectLinks('.video-list__item', '.video-list__name');
 let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-date');
 
-clearPage("Телеканал красная линия");
-disableStyles();
+//clearPage("Телеканал красная линия");
+//disableStyles();
+
+clearPage2("Телеканал красная линия", null);
 
 addLinkWithSound("Телепередачи канала Красная Линия (подраздел)", "https://www.rline.tv/programs/", "http://127.0.0.1/redline-channels-list-is-opening.mp3");
 addLinkWithSound("Все новости сайта Красная Линия (подраздел)", "https://www.rline.tv/news/", "http://127.0.0.1/redline-news-is-opening.mp3");
@@ -25,20 +28,6 @@ createList(newVideosLinks, "Новые видео", "Конец новых ви�
 createList(newsLinks, "Последние новости", "Конец списка последних новостей", "", "http://127.0.0.1/opening-link.mp3");
 
 // ====================
-
-function disableStyles() {
-    for (let i=0; i<document.styleSheets.length; i++) {
-        document.styleSheets[i].disabled = true;
-    }
-}
-
-function clearPage(newTitle) {
-    let documentCorpus = $('body');
-    documentCorpus.empty();
-    if (null == newTitle) newTitle = "*";
-    documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
-    documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
-}
 
 function collectLinks(linkNodeSelector, linkTextSelector, linkDateSelector) {
     let list = {};
