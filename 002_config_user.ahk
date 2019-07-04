@@ -44,7 +44,7 @@ sound_player_command := "C:\Program Files\mpg123-1.25.10-static-x86-64\mpg123.ex
 tab_creation_delay := 200
 
 ; Время ожидания звгрузки страницы
-page_load_wait_time := 10000
+page_load_wait_time := 30000
 
 ; Время ожидания активации режима чтения
 reader_mode_wait_time := 6000

@@ -124,8 +124,10 @@ playPause() {
 }
 
 closePage(silent) {
+	global should_wait_for_page_loading
 	global should_wait_for_reader_mode
 
+	should_wait_for_page_loading := false
 	should_wait_for_reader_mode := false
 
 	focusFirefox()

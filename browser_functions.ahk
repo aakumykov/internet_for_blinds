@@ -1,3 +1,5 @@
+should_wait_for_page_loading := true
+
 
 firefoxIsOpened() {
 	Process, Exist, firefox.exe
@@ -8,21 +10,42 @@ focusFirefox() {
 	WinActivate, ahk_class MozillaWindowClass
 }
 
-openLinkAndWaitPageIsLoaded() {
+openLink_And_WaitForLoad() {
 	global tab_creation_delay
 	global page_load_wait_time
+	global should_wait_for_page_loading
 
+	; Открываю страницу
 	focusFirefox()
 	muteNVDA()
 
 	Send, {Return}
 	Sleep, %tab_creation_delay%
 
-	waitForEventDuringSeconds("pageIsLoaded", page_load_wait_time)
+	; Жду её загрузки
+	should_wait_for_page_loading := true
 
-	; Не нужно, мешается
-	; playSound("page-opened.mp3")
+	passed_time := 0
+	sleep_step := 100
+
+	while (passed_time < page_load_wait_time) {
+
+		if (pageIsLoaded()) {
+			return
+		}
+
+		if (!should_wait_for_page_loading) {
+			return
+		}
+
+		Sleep, sleep_step
+		passed_time := passed_time + sleep_step
+	}
+
+	playSound("page-loading-timeout.mp3")
+	closePage(true)
 }
+
 
 pageIsLoaded() {
 	global page_is_loaded_image_pattern

@@ -1,7 +1,8 @@
 
 openLinkAndPlay() {
 	muteNVDA()
-	openLinkAndWaitPageIsLoaded()
+	; openLinkAndWaitPageIsLoaded()
+	openLink_And_WaitForLoad()
 
 	detectMode()
 
