@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name     Яндекс (начало поиска)
+// @name     Яндекс.Поиск (начало)
 // @version  1
 // @grant    none
 // @inject-into content

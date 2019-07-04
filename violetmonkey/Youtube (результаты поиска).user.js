@@ -14,6 +14,8 @@ var $ = window.jQuery;
 let scrollCallbackCounter = 0;
 
 // Запуск скрипта
+playAudio("http://127.0.0.1/video-search-step-second.mp3");
+
 document.title = 'Результаты поиска видео';
 
 $("html, body").animate({ scrollTop: $(document).height()*3 }, 5000, 'swing', function(){

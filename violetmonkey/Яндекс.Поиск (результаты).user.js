@@ -12,10 +12,13 @@
 var $ = window.jQuery;
 
 // ------------------------ Основная работа ------------------------
+let videoKeyword = "видео";
+
 let searchQuery = $("input.input__control").attr('value').trim();
 
 // Перенаправляю на поиск видео
-if (searchQuery.toLowerCase().match("видео")) {
+if (searchQuery.toLowerCase().match(videoKeyword)) {
+    playAudio('http://127.0.0.1/video-search-step-first.mp3');
     location.href = "https://www.youtube.com/results?search_query="+searchQuery;
 }
 else { // Обрабатываю, как поиск текста
