@@ -22,6 +22,14 @@ reader_mode_serch_area_y1 := 162
 reader_mode_serch_area_x2 := 38
 reader_mode_serch_area_y2 := 200 
 
+;
+no_readable_version_image_pattern := "no-readable-vertion-image-pattern.bmp"
+; Что-т пока не работает с ними
+; no_readable_version_x1 := 500 
+; no_readable_version_y1 := 200 
+; no_readable_version_x2 := 930 
+; no_readable_version_y1 := 250
+
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========
 

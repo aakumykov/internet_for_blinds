@@ -42,8 +42,9 @@ openLink_And_WaitForLoad() {
 		passed_time := passed_time + sleep_step
 	}
 
-	playSound("page-loading-timeout.mp3")
-	closePage(true)
+	playSound("wait-timeout.mp3")
+	Sleep, 500
+	closePage(false)
 }
 
 

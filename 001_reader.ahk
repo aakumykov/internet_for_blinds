@@ -191,15 +191,25 @@ F10::
 muteNVDA()
 return
 
-~F11::
-unmuteNVDA()
-return
-
-F12::
+F11::
 if (is_text_reader_mode()) {
 	MsgBox "text_reader_mode"
 }
 else {
 	MsgBox "not text_reader_mode"
+}
+return
+
+F12::
+; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\reader\images\browser\no-readable-vertion-image-pattern.bmp
+; MsgBox %ErrorLevel%
+
+; detect_no_readable_vertion()
+
+if (detect_no_readable_vertion()) {
+	MsgBox "no_readable_vertion"
+}
+else {
+	MsgBox "NOT no_readable_vertion"
 }
 return
