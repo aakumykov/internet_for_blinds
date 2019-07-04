@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Яндекс.Поиск (результаты)
+// @name Яндекс.Поиск (продолжение)
 // @namespace Violentmonkey Scripts
 // @include /^https://yandex\.ru/search/\?/
 // @grant none
@@ -77,7 +77,7 @@ function createList(listHash, baseUrl, linkTarget, listStartText, listEndText, l
     let documentCorpus = $('body');
     
     //document.title = listStartText;
-    documentCorpus.append("<br><button>"+listStartText+"</button><br>");
+    documentCorpus.append("<br><button>"+listStartText+"</button><br><br>");
     
     for (let name in listHash) {
 
