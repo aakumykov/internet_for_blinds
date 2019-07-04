@@ -1,4 +1,5 @@
 firefoxReadingIsActive := false
+should_wait_for_reader_mode := true
 
 is_text_reader_mode() {
 	global reader_mode_image_pattern
@@ -10,36 +11,47 @@ is_text_reader_mode() {
 	return searchImage("browser\" . reader_mode_image_pattern, reader_mode_serch_area_x1, reader_mode_serch_area_y1, reader_mode_serch_area_x2, reader_mode_serch_area_y2, true)
 }
 
-
 enableReaderAndRead() {
-	cm := modeStack.getCurrentMode()
-	MsgBox, , enableReaderAndRead() 1, cm: %cm%
+	global should_wait_for_reader_mode
+	global reader_mode_wait_time
 
-	activateTextReaderMode()
-	
-	detectMode()
+	should_wait_for_reader_mode := true
 
-	if (modeStack.isReaderMode()) {
-		textPlayPause()
+	clickTextReaderButton()
+
+	passed_time := 0
+	sleep_step := 100
+
+	while (passed_time < reader_mode_wait_time) {
+
+		if (is_text_reader_mode()) {
+			modeStack.setReaderMode()
+			textPlayPause()
+			return
+		}	
+			
+		if (!should_wait_for_reader_mode) {
+			return
+		}
+
+		Sleep, sleep_step
+		passed_time := passed_time + sleep_step
 	}
-	else {
-		playSound("no-readable-version.mp3")
-		
-		cm := modeStack.getCurrentMode()
-		MsgBox, , enableReaderAndRead() 2, cm: %cm%
 
-		closePage(true)
-	}
+	playSound("no-readable-version.mp3")
+	closePage(true)
 }
 
 
 activateTextReaderMode() {
+	global reader_mode_wait_time
+	waitForEventDuringSeconds("is_text_reader_mode", reader_mode_wait_time)
+}
+
+clickTextReaderButton() {
 	global reader_mode_enable_button_x
 	global reader_mode_enable_button_y
 	Click, %reader_mode_enable_button_x%, %reader_mode_enable_button_y%
-
-	global reader_mode_wait_time
-	waitForEventDuringSeconds("is_text_reader_mode", reader_mode_wait_time)
 }
 
 ; activateTextReaderMode() {

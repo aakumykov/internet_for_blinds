@@ -124,6 +124,10 @@ playPause() {
 }
 
 closePage(silent) {
+	global should_wait_for_reader_mode
+
+	should_wait_for_reader_mode := false
+
 	focusFirefox()
 
 	modeStack.popMode()
@@ -176,8 +180,9 @@ MsgBox,, DETECTED MODE, %mode%
 return
 
 F9::
-mode := modeStack.getCurrentMode()
-MsgBox,, CURRENT MODE, %mode%
+; mode := modeStack.getCurrentMode()
+; MsgBox,, CURRENT MODE, %mode%
+enableReaderAndRead()
 return
 
 F10::

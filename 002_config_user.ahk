@@ -1,7 +1,7 @@
 ; ============= ГЛАВНЫЕ НАСТРОЙКИ ==========
 
 ; Картинка, по которой определяется, что страница загружена
-page_is_loaded_search_area_image_pattern := "firefox-page-load-complete-default.bmp"
+page_is_loaded_image_pattern := "firefox-page-load-complete-default.bmp"
 
 ; Область поиска этой картинки
 page_is_loaded_search_area_x1 := 70
@@ -14,13 +14,13 @@ reader_mode_enable_button_x := 149
 reader_mode_enable_button_y := 73
 
 ; Картинка, по которой определяется режим чтения
-reader_mode_image_pattern := "reader-mode-adress-bar-icon-default.bmp"
+reader_mode_image_pattern := "reader-mode-image-pattern-home.bmp"
 
 ; Область поиска этой картинки
-reader_mode_serch_area_x1 := 1039 
-reader_mode_serch_area_y1 := 60 
-reader_mode_serch_area_x2 := 1067 
-reader_mode_serch_area_y2 := 85 
+reader_mode_serch_area_x1 := 0 
+reader_mode_serch_area_y1 := 162 
+reader_mode_serch_area_x2 := 38
+reader_mode_serch_area_y2 := 200 
 
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========

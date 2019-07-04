@@ -42,15 +42,15 @@ class ModeStack {
 		this.pm := this.cm
 		this.cm := newMode
 
-		cm := this.cm
-		pm := this.pm
-		MsgBox, , addMode(%newMode%), pm: %pm%`, cm: %cm%
+		; cm := this.cm
+		; pm := this.pm
+		; MsgBox, , addMode(%newMode%), pm: %pm%`, cm: %cm%
 	}
 
 	popMode() {
-		cm := this.cm
-		pm := this.pm
-		MsgBox, , "popMode()", pm: %pm% ==> cm: %cm%
+		; cm := this.cm
+		; pm := this.pm
+		; MsgBox, , "popMode()", pm: %pm% ==> cm: %cm%
 
 		this.cm := this.pm
 		this.pm := ""
@@ -63,9 +63,9 @@ class ModeStack {
 
 		this.cm := newMode
 
-		pm := this.pm
-		cm := this.cm
-		MsgBox 2 setMode(%newMode%), pm: %pm%, cm: %cm%
+		; pm := this.pm
+		; cm := this.cm
+		; MsgBox 2 setMode(%newMode%), pm: %pm%, cm: %cm%
 	}
 
 	addEmptyMode() {
@@ -127,7 +127,7 @@ class ModeStack {
 	; режим, здесь внутри метода setReaderMode() делается вызов
 	; setMode() вместо addMode()
 	setReaderMode() {
-		MsgBox "setReaderMode()"
+		; MsgBox "setReaderMode()"
 		this.setMode("READER_MODE")
 	}
 

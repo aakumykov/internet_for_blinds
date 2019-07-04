@@ -25,17 +25,17 @@ openLinkAndWaitPageIsLoaded() {
 }
 
 pageIsLoaded() {
-	global page_is_loaded_search_area_image_pattern
+	global page_is_loaded_image_pattern
 	global page_is_loaded_search_area_x1
 	global page_is_loaded_search_area_y1
 	global page_is_loaded_search_area_x2
 	global page_is_loaded_search_area_y2
 
-	page_is_loaded_search_area_image_pattern := A_ScriptDir . "\images\browser\" . page_is_loaded_search_area_image_pattern
+	image_pattern := A_ScriptDir . "\images\browser\" . page_is_loaded_image_pattern
 
 	if (firefoxIsOpened()) {
 		focusFirefox()
-		ImageSearch, imageX, imageY, page_is_loaded_search_area_x1, page_is_loaded_search_area_y1, page_is_loaded_search_area_x2, page_is_loaded_search_area_y2, %page_is_loaded_search_area_image_pattern%
+		ImageSearch, imageX, imageY, page_is_loaded_search_area_x1, page_is_loaded_search_area_y1, page_is_loaded_search_area_x2, page_is_loaded_search_area_y2, %image_pattern%
 		if (2 == ErrorLevel) {
 			Throw, "CANNOT PRODUCE IMAGESEARCH"
 		}

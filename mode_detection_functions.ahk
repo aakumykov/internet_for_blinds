@@ -4,12 +4,15 @@
 detectMode() {
 	copyPageAddress()
 
+	; ===== НЕЛЬЗЯ!!!===
+	; Вызов setReaderMode() здесь ведёт к ошибкам работы в случае отсутствия читабельной версии.
+	; ===== НЕЛЬЗЯ!!!===
 	; Определение режима Чтеца должно производиться
 	; первым, так как пересекается с другими режимами.
-	if (is_text_reader_mode()) {
-		modeStack.setReaderMode()
-		return
-	}
+	; if (is_text_reader_mode()) {
+	; 	modeStack.setReaderMode()
+	; 	return
+	; }
 
 
 	; -------- Режим начала поиска ----------
@@ -61,7 +64,7 @@ detectMode() {
 
 
 	; ------------ Режим по умолчанию ------------
-	MsgBox, , detectMode(), "default TEXT_MODE will be added now"
+	; MsgBox, , detectMode(), "default TEXT_MODE will be added now"
 	modeStack.addTextMode()
 }
 
