@@ -3,10 +3,10 @@ function clearPage2(titleText, stepButtonsLabel) {
 	clearHTML2()
 	clearCSS2()
 	
-	if (null != titleText)
+	if (null != stepButtonsLabel)
 		createStepButtons2(stepButtonsLabel)
 	
-	if (null != stepButtonsLabel)
+	if (null != titleText)
 		createTitleButton2(titleText)
 }
 
