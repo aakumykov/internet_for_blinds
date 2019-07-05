@@ -1,13 +1,13 @@
 
-openLinkAndPlay() {
+openLinkAndPlay(delayAfterLoad) {
 	muteNVDA()
-	; openLinkAndWaitPageIsLoaded()
 	openLink_And_WaitForLoad()
-
+	Sleep, delayAfterLoad
 	detectMode()
 
 	; cm := modeStack.getCurrentMode()
-	; MsgBox, , Current Mode, %cm%, 1
+	; MsgBox, , detectMode(), %cm%, 1
+	; return
 
 	if (modeStack.isRedlineVideoMode()) {
 		videoPlayPause()
@@ -28,6 +28,11 @@ openLinkAndPlay() {
 		return
 	}
 
+	; if (modeStack.isMailMessageMode()) {
+	; 	return
+	; }
+
+	; Этот режим должен стоять последним, как более общий.
 	if (modeStack.isListMode()) {
 		return
 	}
@@ -35,8 +40,9 @@ openLinkAndPlay() {
 	reportUnknownMode("openLinkAndPlay()")
 }
 
-readMailMessage() {
-	startNVDA(true)
-	Click, 31, 133
-	Send, ^a
-}
+
+; readMailMessage() {
+; 	startNVDA(true)
+; 	Click, 31, 133
+; 	Send, ^a
+; }

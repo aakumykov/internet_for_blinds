@@ -105,12 +105,12 @@ playPause() {
 	}
 
 	if (modeStack.isMailListMode()) {
-		openLink()
+		openLinkAndPlay(1000)
 		return
 	}
 
 	if (modeStack.isListMode()) {
-		openLinkAndPlay()
+		openLinkAndPlay(0)
 		return
 	}
 
@@ -187,9 +187,8 @@ MsgBox,, DETECTED MODE, %mode%
 return
 
 F9::
-; mode := modeStack.getCurrentMode()
-; MsgBox,, CURRENT MODE, %mode%
-enableReaderAndRead()
+mode := modeStack.getCurrentMode()
+MsgBox,, CURRENT MODE, %mode%
 return
 
 F10::

@@ -27,6 +27,7 @@ openLink_And_WaitForLoad() {
 	while (passed_time < page_load_wait_time) {
 
 		if (pageIsLoaded()) {
+			; MsgBox "pageIsLoaded()"
 			return
 		}
 
