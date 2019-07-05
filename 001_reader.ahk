@@ -192,11 +192,11 @@ muteNVDA()
 return
 
 F11::
-if (is_text_reader_mode()) {
-	MsgBox "text_reader_mode"
+if (is_microphone_active()()) {
+	MsgBox "is_microphone_active"
 }
 else {
-	MsgBox "not text_reader_mode"
+	MsgBox "not is_microphone_active"
 }
 return
 
@@ -206,10 +206,12 @@ F12::
 
 ; detect_no_readable_vertion()
 
-if (detect_no_readable_vertion()) {
-	MsgBox "no_readable_vertion"
-}
-else {
-	MsgBox "NOT no_readable_vertion"
-}
+; if (detect_no_readable_vertion()) {
+; 	MsgBox "no_readable_vertion"
+; }
+; else {
+; 	MsgBox "NOT no_readable_vertion"
+; }
+
+focusFirefox()
 return
