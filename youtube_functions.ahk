@@ -8,10 +8,13 @@ is_youtube_video_mode() {
 }
 
 youtubeVideoPlayPause() {
-	Click, 713, 457
+	global youtube_play_button_x
+	global youtube_play_button_y
 	Sleep, 100 ; Для предотвращения перехода в полноэкранный режим из-за двойного щелчка
 }
 
 youtubeClickAtEmptyPlace() {
-	Click, 177, 104
+	global youtube_empty_place_x
+	global youtube_empty_place_y
+	Click, youtube_empty_place_x, youtube_empty_place_y
 }

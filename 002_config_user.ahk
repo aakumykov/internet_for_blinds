@@ -22,13 +22,20 @@ reader_mode_serch_area_y1 := 162
 reader_mode_serch_area_x2 := 38
 reader_mode_serch_area_y2 := 200 
 
-;
+; Картинка для определения отсутствия читабельной версии
 no_readable_version_image_pattern := "no-readable-vertion-image-pattern.bmp"
-; Что-т пока не работает с ними
 no_readable_version_x1 := 500 
 no_readable_version_y1 := 200 
 no_readable_version_x2 := 930 
 no_readable_version_y2 := 250
+
+; Координаты "пустого места" на странице открытого видео на Youtube
+youtube_empty_place_x := 177
+youtube_empty_place_y := 104
+
+; Координаты кнопки "Играть/Остановить" видео на Youtube
+youtube_play_button_x := 713
+youtube_play_button_y := 457
 
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========
