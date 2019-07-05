@@ -2,6 +2,7 @@ function humanizeDate(inDate) {
   let newDate = "ошибка обработки даты";
 
   inDate = inDate.trim();
+  // console.log("inDate: "+inDate);
   
   let oldDateParts = inDate.match(/^(\d+)\.(\d+)\.(\d+)$/);
   let recentDateParts = inDate.match(/^(\d+)\s+([а-я]+)\.$/);
@@ -9,6 +10,7 @@ function humanizeDate(inDate) {
   let todayDateParts = inDate.match(/^(\d+):(\d+)$/);
   let msgRecentDateParts = inDate.match(/^(\d+)\s+([а-я]+)\.\s+в\s+(\d+):(\d+)$/); // 3 янв. в 15:19
   let msgOldDateParts = inDate.match(/^(\d+)\s+([а-я]+)\s+(\d+)\s+в\s+(\d+):(\d+)$/); // 30 декабря 2018 в 22:35
+  let msgDayMonthTimeParts = inDate.match(/^(\d+)\s+([а-я]+)\sв\s(\d+):(\d+)$/); // 3 июля в 23:26
   
   if (oldDateParts) {
     //console.log("newDate: "+newDate);
@@ -43,6 +45,13 @@ function humanizeDate(inDate) {
     let month = msgOldDateParts[2];
     let year = msgOldDateParts[3];
     newDate = day + " " + month + " " + year + " года";
+  }
+  else if (msgDayMonthTimeParts) {
+    let day = msgDayMonthTimeParts[1];
+    let month = msgDayMonthTimeParts[2];
+    let hours = msgDayMonthTimeParts[3];
+    let minutes = msgDayMonthTimeParts[4];
+    newDate = day + " " + month + ", " + hours + " часов " + minutes + " минут";
   }
   else {
     console.log("Ни один формат даты не подошёл для '"+inDate+"'");
