@@ -192,12 +192,7 @@ muteNVDA()
 return
 
 F11::
-if (is_text_reader_mode()) {
-	MsgBox "text_reader_mode"
-}
-else {
-	MsgBox "not text_reader_mode"
-}
+playSound("redline-is-opening.mp3")
 return
 
 F12::
