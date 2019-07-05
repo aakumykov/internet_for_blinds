@@ -8,7 +8,6 @@ firefoxIsOpened() {
 
 focusFirefox() {
 	WinActivate, ahk_class MozillaWindowClass
-	; WinMaximize, ahk_class MozillaWindowClass
 }
 
 openLink_And_WaitForLoad() {
@@ -88,6 +87,19 @@ closeBrowserPage(silent) {
 	}
 }
 
+; address_bar_x1 := 130
+; address_bar_y1 := 30
+; address_bar_x2 := 600
+; address_bar_y2 := 75
+
+; searchImageInAddressBar(imageFileName, isRelativeToWindow) {
+; 	global address_bar_x1
+; 	global address_bar_y1
+; 	global address_bar_x2
+; 	global address_bar_y2
+; 	return searchImage(imageFileName, address_bar_x1, address_bar_y1, address_bar_x2, address_bar_y2, isRelativeToWindow)
+; }
+
 copyPageAddress() {
 	focusFirefox()
 	Send, ^{l}
@@ -97,12 +109,3 @@ copyPageAddress() {
 	; Send, {Tab}
 }
 
-
-is_microphone_active() {
-	global active_microphone_image_pattern
-	global active_microphone_x1 := 680
-	global active_microphone_y1 := 0
-	global active_microphone_x2 := 760
-	global active_microphone_y2 := 40
-	return searchImage(active_microphone_image_pattern, active_microphone_x1, active_microphone_y1, active_microphone_x2, active_microphone_y2, false)
-}
