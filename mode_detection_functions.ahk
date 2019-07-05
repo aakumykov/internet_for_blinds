@@ -24,7 +24,7 @@ detectMode() {
 
 	; ---------- Режимы списка ------------
 	if (is_mail_list_mode()) { 
-		modeStack.addListMode()
+		modeStack.addMailListMode()
 		return 
 	}
 	if (is_mail_message_mode()) { 

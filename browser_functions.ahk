@@ -16,11 +16,7 @@ openLink_And_WaitForLoad() {
 	global should_wait_for_page_loading
 
 	; Открываю страницу
-	focusFirefox()
-	muteNVDA()
-
-	Send, {Return}
-	Sleep, %tab_creation_delay%
+	openLink()
 
 	; Жду её загрузки
 	should_wait_for_page_loading := true
@@ -47,6 +43,12 @@ openLink_And_WaitForLoad() {
 	closePage(false)
 }
 
+openLink() {
+	focusFirefox()
+	muteNVDA()
+	Send, {Return}
+	Sleep, %tab_creation_delay%
+}
 
 pageIsLoaded() {
 	global page_is_loaded_image_pattern

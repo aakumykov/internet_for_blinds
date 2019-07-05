@@ -104,6 +104,11 @@ playPause() {
 		return
 	}
 
+	if (modeStack.isMailListMode()) {
+		openLink()
+		return
+	}
+
 	if (modeStack.isListMode()) {
 		openLinkAndPlay()
 		return
