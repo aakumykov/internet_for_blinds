@@ -63,12 +63,19 @@ detectMode() {
 	}
 
 
+	if (is_pdf_mode()) {
+		modeStack.addPdfMode()
+		return
+	}
+
 	; ------------ Режим по умолчанию ------------
 	; MsgBox, , detectMode(), "default TEXT_MODE will be added now"
 	modeStack.addTextMode()
 }
 
 
+
+; ------------ Голосовые сообщения о проблемах ------------
 
 reportUnknownMode(label) {
 	playSound("unknown-mode.mp3")

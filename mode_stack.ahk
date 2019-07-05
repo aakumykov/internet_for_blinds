@@ -189,4 +189,15 @@ class ModeStack {
 		}
 		return "YANDEX_VIDEO_MODE" == this.cm
 	}
+
+	addPdfMode() {
+		this.addMode("PDF_MODE")
+	}
+	isPdfMode() {
+		if ("" == this.cm) {
+			detectMode()
+		}
+		return "PDF_MODE" == this.cm
+	}
+	
 }

@@ -15,6 +15,7 @@
 #Include, nvda_functions.ahk
 #Include, redline_channel_functions.ahk
 #Include, yandex_functions.ahk
+#Include, pdf_functions.ahk
 #Include, content_play_functions.ahk
 
 
@@ -184,7 +185,16 @@ return
 F9::
 ; mode := modeStack.getCurrentMode()
 ; MsgBox,, CURRENT MODE, %mode%
-enableReaderAndRead()
+; enableReaderAndRead()
+
+; copyPageAddress()
+; if (is_pdf_mode()) {
+	; MsgBox "pdf mode"
+	pdf2html()
+; }
+; else {
+; 	MsgBox "not pdf mode"
+; }
 return
 
 F10::

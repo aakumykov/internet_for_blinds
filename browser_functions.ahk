@@ -8,6 +8,7 @@ firefoxIsOpened() {
 
 focusFirefox() {
 	WinActivate, ahk_class MozillaWindowClass
+	WinMaximize, ahk_class MozillaWindowClass
 }
 
 openLink_And_WaitForLoad() {
