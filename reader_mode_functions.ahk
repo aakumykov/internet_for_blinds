@@ -15,6 +15,8 @@ enableReaderAndRead() {
 	global should_wait_for_reader_mode
 	global reader_mode_wait_time
 
+	playSound("reading-mode.mp3")
+
 	should_wait_for_reader_mode := true
 
 	clickTextReaderButton()
