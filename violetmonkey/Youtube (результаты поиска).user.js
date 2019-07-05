@@ -46,7 +46,7 @@ function processPage() {
     $(document.body).append("<ul id='resultsList'></ul>");
 
   resSet.each(function(index, element){
-    let text = $(element).text();
+    let text = $(element).text() + " (видео)";
     let href = "https://www.youtube.com" + $(element).attr('href');
       
       //$("ul#resultsList").append( $("<li class='resultsItem'><a href='"+href+"' target='_blank'>"+text+"</a></li>") );
