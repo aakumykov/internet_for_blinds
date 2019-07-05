@@ -203,10 +203,12 @@ F12::
 
 ; detect_no_readable_vertion()
 
-if (detect_no_readable_vertion()) {
-	MsgBox "no_readable_vertion"
-}
-else {
-	MsgBox "NOT no_readable_vertion"
-}
+; if (detect_no_readable_vertion()) {
+; 	MsgBox "no_readable_vertion"
+; }
+; else {
+; 	MsgBox "NOT no_readable_vertion"
+; }
+
+clickReadingControls()
 return

@@ -96,19 +96,28 @@ textPlayPause() {
 
 
 clickReadingControls() {
-	Click 22, 239
+	global reader_main_button_x
+	global reader_main_button_y
+	Click, %reader_main_button_x%, %reader_main_button_y%
+
 }
 
 clickReadNextParagraph() {
-	Click, 301, 239
+	global reader_next_button_x
+	global reader_next_button_y
+	Click, %reader_next_button_x%, %reader_next_button_y%
 }
 
 clickReadPrevParagraph() {
-	Click, 102, 239
+	global reader_prev_button_x
+	global reader_prev_button_y
+	Click, %reader_prev_button_x%, %reader_prev_button_y%
 }
 
 clickPlayPause() {
-	Click, 204, 239
+	global reader_play_pause_button_x
+	global reader_play_pause_button_y
+	Click, %reader_play_pause_button_x%, %reader_play_pause_button_y%
 }
 
 

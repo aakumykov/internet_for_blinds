@@ -37,6 +37,20 @@ youtube_empty_place_y := 104
 youtube_play_button_x := 713
 youtube_play_button_y := 457
 
+; Кнопки управления чтением в режиме Чтеца
+reader_main_button_x := 22
+reader_main_button_y := 239
+
+reader_forward_button_x := 301
+reader_forward_button_y := 239
+
+reader_prev_button_x := 102
+reader_prev_button_y := 239
+
+reader_play_pause_button_x := 204
+reader_play_pause_button_y := 239
+
+
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========
 
