@@ -145,6 +145,8 @@ openSearch() {
 	startWebServer()
 	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
 	playSound("search-is-opening.mp3")
+	Sleep, 2000
+	focusFirefox()
 }
 
 openMail() {
