@@ -120,24 +120,12 @@ detect_no_readable_vertion() {
 	global no_readable_version_x2
 	global no_readable_version_y2
 
-	image_pattern := A_ScriptDir . "\images\browser\" . no_readable_version_image_pattern
-	; MsgBox %image_pattern%
+	image_pattern := "browser\" . no_readable_version_image_pattern
 
 	if (firefoxIsOpened()) {
 		focusFirefox()
-		
-		; ImageSearch, imageX, imageY, no_readable_version_search_area_x1, no_readable_version_search_area_y1, no_readable_version_search_area_x2, no_readable_version_search_area_y2, %image_pattern%
-		
-		ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\reader\images\browser\no-readable-vertion-image-pattern.bmp
-		
-		; MsgBox %ErrorLevel%
 
-		if (2 == ErrorLevel) {
-			Throw, "CANNOT PRODUCE IMAGESEARCH"
-		}
-
-		return (imageX and imageY)
-
+		return searchImage(image_pattern, no_readable_version_x1, no_readable_version_y1, no_readable_version_x2, no_readable_version_y2, true)
 	}
 	else {
 		return false
