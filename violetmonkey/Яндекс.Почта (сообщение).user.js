@@ -72,7 +72,7 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
     let attachmentsMsg = (0==attachmentsCount) ? "вложений нет" : "вложения: "+attachmentsCount+" штуки";
     let dateLine = buildLine("Письмо от "+humanDate);
     let subjectLine = buildLine("Заголовок: "+msgSubject);
-    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
+    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : msgBody;
   
   
     
