@@ -13,5 +13,5 @@ youtubeVideoPlayPause() {
 }
 
 youtubeClickAtEmptyPlace() {
-	Click, 200, 140
+	Click, 177, 104
 }

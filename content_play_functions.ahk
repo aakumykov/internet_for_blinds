@@ -16,6 +16,7 @@ openLinkAndPlay() {
 
 	if (modeStack.isYoutubeVideoMode()) {
 		; playSound("video-has-opened.mp3")
+		youtubeClickAtEmptyPlace()
 		return
 	}
 
