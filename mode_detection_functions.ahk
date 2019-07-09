@@ -28,18 +28,22 @@ detectMode() {
 		return 
 	}
 	if (is_mail_message_mode()) { 
+		; MsgBox "is_mail_message_mode"
 		modeStack.addListMode()
 		return  
 	}
 	if (is_text_search_results_mode()) { 
+		; MsgBox "is_text_search_results_mode"
 		modeStack.addListMode()
 		return  
 	}
 	if (is_video_search_results_mode()) { 
+		; MsgBox "is_video_search_results_mode"
 		modeStack.addListMode()
 		return  
 	}
 	if (is_redline_list_mode()) {
+		; MsgBox "is_redline_list_mode"
 		modeStack.addListMode()
 		return 
 	}

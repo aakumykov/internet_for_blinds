@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Яндекс.Почта (сообщение)
 // @namespace Violentmonkey Scripts
-// @include  /^https://mail\.yandex\.ru/lite/message/\d+$/
+// @include  /^https://mail\.yandex\.ru/lite/message/\d+/
 // @grant none
 // @inject-into content 
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
@@ -62,9 +62,9 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
   
     let listId = "oneMessage";
   
-    $('body').append("<button id='button3'>Три шага до письма</button><br>");
-    $('body').append("<button id='button2'>Два шага до письма</button><br>");
-    $('body').append("<button id='button1'>Один шаг до письма</button><br>");
+    //$('body').append("<button id='button3'>Три шага до письма</button><br>");
+    //$('body').append("<button id='button2'>Два шага до письма</button><br>");
+    //$('body').append("<button id='button1'>Один шаг до письма</button><br>");
     $('body').append("<br>");
     
     $('body').append("<UL id='"+listId+"'></UL>");
@@ -72,14 +72,21 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
     let attachmentsMsg = (0==attachmentsCount) ? "вложений нет" : "вложения: "+attachmentsCount+" штуки";
     let dateLine = buildLine("Письмо от "+humanDate);
     let subjectLine = buildLine("Заголовок: "+msgSubject);
-    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : msgBody;
+    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
   
+    console.log(bodyLine);
+    
+    //let repliedMessageIndex = bodyLine.indexOf("-----Original Message-----");
+    //bodyLine = bodyLine.substr(0, repliedMessageIndex);
   
+    console.log(bodyLine);
     
     ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
     $('#'+listId).append(dateLine);
     $('#'+listId).append(subjectLine);
-    $('#'+listId).append( buildLine("Сообщение: "+bodyLine) );
+    $('#'+listId).append( buildLine(bodyLine) );
+    
+    
 
     
   /*let fullText = 

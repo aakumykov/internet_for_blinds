@@ -39,6 +39,7 @@ class ModeStack {
 	}
 	
 	addMode(newMode) {
+		TrayTip, addMode(), %newMode%: %clipboard%, 1
 		this.pm := this.cm
 		this.cm := newMode
 

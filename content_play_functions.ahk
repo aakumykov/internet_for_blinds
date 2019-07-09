@@ -1,6 +1,9 @@
 
 openLinkAndPlay(delayAfterLoad) {
 	muteNVDA()
+
+	; MsgBox "before openLink_And_WaitForLoad()"
+
 	openLink_And_WaitForLoad()
 	Sleep, delayAfterLoad
 	detectMode()
@@ -16,6 +19,7 @@ openLinkAndPlay(delayAfterLoad) {
 
 	if (modeStack.isYoutubeVideoMode()) {
 		; playSound("video-has-opened.mp3")
+		; youtubeVideoPlayPause()
 		return
 	}
 
@@ -24,6 +28,7 @@ openLinkAndPlay(delayAfterLoad) {
 	}
 
 	if (modeStack.isTextMode()) {
+		; MsgBox "TEXT MODE"
 		enableReaderAndRead()
 		return
 	}

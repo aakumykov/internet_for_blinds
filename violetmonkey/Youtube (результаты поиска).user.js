@@ -13,9 +13,9 @@ var $ = window.jQuery;
 
 let scrollCallbackCounter = 0;
 
-// Запуск скрипта
 playAudio("http://127.0.0.1/video-search-step-second.mp3");
 
+// Запуск скрипта
 document.title = 'Результаты поиска видео';
 
 $("html, body").animate({ scrollTop: $(document).height()*3 }, 5000, 'swing', function(){
@@ -46,7 +46,7 @@ function processPage() {
     $(document.body).append("<ul id='resultsList'></ul>");
 
   resSet.each(function(index, element){
-    let text = $(element).text() + " (видео)";
+    let text = $(element).text();
     let href = "https://www.youtube.com" + $(element).attr('href');
       
       //$("ul#resultsList").append( $("<li class='resultsItem'><a href='"+href+"' target='_blank'>"+text+"</a></li>") );

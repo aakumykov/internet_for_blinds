@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Яндекс.Поиск (продолжение)
+// @name Яндекс.Поиск (результаты)
 // @namespace Violentmonkey Scripts
 // @include /^https://yandex\.ru/search/\?/
 // @grant none
@@ -12,12 +12,10 @@
 var $ = window.jQuery;
 
 // ------------------------ Основная работа ------------------------
-let videoKeyword = "видео";
-
 let searchQuery = $("input.input__control").attr('value').trim();
 
 // Перенаправляю на поиск видео
-if (searchQuery.toLowerCase().match(videoKeyword)) {
+if (searchQuery.toLowerCase().match("видео")) {
     playAudio('http://127.0.0.1/video-search-step-first.mp3', function(){
         location.href = "https://www.youtube.com/results?search_query="+searchQuery;
     });
@@ -45,7 +43,7 @@ function clearPage(newTitle) {
     let documentCorpus = $('body');
     
     documentCorpus.empty();
-    documentCorpus.append("<br><button id='startPoint'>*</button> <button id='startPoint'>*</button><br><br>");
+    //documentCorpus.append("<br><button id='startPoint'>*</button> <button id='startPoint'>*</button><br><br>");
     
     if (null != newTitle)
         documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
@@ -78,7 +76,7 @@ function createList(listHash, baseUrl, linkTarget, listStartText, listEndText, l
     let documentCorpus = $('body');
     
     //document.title = listStartText;
-    documentCorpus.append("<br><button>"+listStartText+"</button><br><br>");
+    documentCorpus.append("<br><button>"+listStartText+"</button><br>");
     
     for (let name in listHash) {
 

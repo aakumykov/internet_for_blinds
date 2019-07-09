@@ -171,49 +171,52 @@ openMail() {
 
 
 
-F7::
-if (pageIsLoaded()) {
-	MsgBox "page is loaded"
-}
-else {
-	MsgBox "page is not loaded"
-}
-return
+; F7::
+; if (pageIsLoaded()) {
+; 	MsgBox "page is loaded"
+; }
+; else {
+; 	MsgBox "page is not loaded"
+; }
+; return
 
-F8::
-detectMode()
-mode := modeStack.getCurrentMode()
-MsgBox,, DETECTED MODE, %mode%
-return
+; F8::
+; detectMode()
+; mode := modeStack.getCurrentMode()
+; MsgBox,, DETECTED MODE, %mode%
+; return
 
-F9::
-mode := modeStack.getCurrentMode()
-MsgBox,, CURRENT MODE, %mode%
-return
+; F9::
+; mode := modeStack.getCurrentMode()
+; MsgBox,, CURRENT MODE, %mode%
+; return
 
-F10::
-muteNVDA()
-return
+; F10::
+; muteNVDA()
+; return
 
-F11::
-if (is_text_reader_mode()) {
-	MsgBox "text_reader_mode"
-}
-else {
-	MsgBox "not text_reader_mode"
-}
-return
+; F11::
+; if (is_text_reader_mode()) {
+; 	MsgBox "text_reader_mode"
+; }
+; else {
+; 	MsgBox "not text_reader_mode"
+; }
 
-F12::
-; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\reader\images\browser\no-readable-vertion-image-pattern.bmp
-; MsgBox %ErrorLevel%
+; while (firefoxIsOpened()) {
+; 	Process, Close, firefox.exe
+; 	Sleep, 500
+; }
+; FileRemoveDir, C:\Users\User\AppData\Local\Mozilla, 1
+; Sleep, 2000
+; Run, firefox.exe, C:\Program Files\Mozilla Firefox\
+; return
 
-; detect_no_readable_vertion()
-
-if (detect_no_readable_vertion()) {
-	MsgBox "no_readable_vertion"
-}
-else {
-	MsgBox "NOT no_readable_vertion"
-}
-return
+; F12::
+; if (detect_no_readable_vertion()) {
+; 	MsgBox "no_readable_vertion"
+; }
+; else {
+; 	MsgBox "NOT no_readable_vertion"
+; }
+; return

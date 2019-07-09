@@ -4,7 +4,7 @@
 // @include /^https://www\.rline\.tv/$/
 // @grant none
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
-// @require			 https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
+// @require          https://github.com/aakumykov/internet_for_blinds/raw/master/greasemonkey/lib/play_audio.js
 // @require      https://raw.githubusercontent.com/aakumykov/internet_for_blinds/mode-stack/javascript/lib/html_functions.js
 // ==/UserScript==
 

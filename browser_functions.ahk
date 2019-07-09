@@ -17,7 +17,8 @@ openLink_And_WaitForLoad() {
 
 	; Открываю страницу
 	openLink()
-
+	Sleep, 3000 ; Грязный хак для "решения" проблемы включения режима чтения без ожидания.
+	
 	; Жду её загрузки
 	should_wait_for_page_loading := true
 
@@ -104,11 +105,15 @@ closeBrowserPage(silent) {
 ; }
 
 copyPageAddress() {
+	; MsgBox "copyPageAddress()"
 	focusFirefox()
+	Sleep, 100
+	
 	Send, ^{l}
+	Sleep, 100
+
 	Send, ^{c}
-	; Send, {Tab}
-	; Send, {Tab}
-	; Send, {Tab}
+	Sleep, 100
+	; TrayTip, Clipboard, %clipboard%, 1
 }
 
