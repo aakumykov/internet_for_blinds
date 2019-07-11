@@ -15,6 +15,11 @@ videoPlayPause() {
 		return
 	}
 
+	if (modeStack.isRedlineLiveMode()) {
+		redlineLivePlayPause()
+		return
+	}
+
 	reportUnknownMode("videoPlayPause()")
 }
 

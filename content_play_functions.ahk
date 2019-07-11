@@ -9,6 +9,12 @@ openLinkAndPlay() {
 	; cm := modeStack.getCurrentMode()
 	; MsgBox, , Current Mode, %cm%, 1
 
+
+	if (modeStack.isRedlineLiveMode()) {
+		videoPlayPause()
+		return
+	}
+
 	if (modeStack.isRedlineVideoMode()) {
 		videoPlayPause()
 		return

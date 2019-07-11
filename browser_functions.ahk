@@ -48,6 +48,10 @@ openLink_And_WaitForLoad() {
 }
 
 
+openWebPage(address) {
+	Run, firefox.exe %address%, C:\Program Files\Mozilla Firefox\
+}
+
 pageIsLoaded() {
 	global page_is_loaded_image_pattern
 	global page_is_loaded_search_area_x1

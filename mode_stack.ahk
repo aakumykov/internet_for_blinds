@@ -18,6 +18,9 @@ class ModeStack {
 		if (this.isYandexVideoMode()) {
 			return true
 		}
+		if (this.isRedlineLiveMode()) {
+			return true
+		}
 		return false
 	}
 
@@ -167,6 +170,17 @@ class ModeStack {
 			detectMode()
 		}
 		return "REDLINE_TEXT_MODE" == this.cm
+	}
+
+
+	addRedlineLiveMode() {
+		this.addMode("REDLINE_LIVE_MODE")
+	}
+	isRedlineLiveMode() {
+		if ("" == this.cm) {
+			detectMode()
+		}
+		return "REDLINE_LIVE_MODE" == this.cm
 	}
 
 
