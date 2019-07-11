@@ -12,7 +12,7 @@ is_mail_list_mode() {
 }
 
 is_mail_message_mode(){
-	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/message/[^/]+$")
+	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/message/$")
 }
 
 is_yandex_video_mode() {
