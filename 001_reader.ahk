@@ -23,7 +23,8 @@ openMail()
 return
 
 Numpad6::
-openRedLineChannel()
+; openRedLineChannel()
+openRedlineLive()
 return
 
 Numpad9::
@@ -168,47 +169,63 @@ openMail() {
 
 
 
-F7::
-if (pageIsLoaded()) {
-	MsgBox "page is loaded"
-}
-else {
-	MsgBox "page is not loaded"
-}
-return
-
-F8::
-detectMode()
-mode := modeStack.getCurrentMode()
-MsgBox,, DETECTED MODE, %mode%
-return
-
-F9::
-mode := modeStack.getCurrentMode()
-MsgBox,, CURRENT MODE, %mode%
-; enableReaderAndRead()
-return
-
-F10::
-muteNVDA()
-return
-
-F11::
-playSound("redline-is-opening.mp3")
-return
-
-F12::
-; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\reader\images\browser\no-readable-vertion-image-pattern.bmp
-; MsgBox %ErrorLevel%
-
-; detect_no_readable_vertion()
-
-; if (detect_no_readable_vertion()) {
-; 	MsgBox "no_readable_vertion"
+; F7::
+; if (pageIsLoaded()) {
+; 	MsgBox "page is loaded"
 ; }
 ; else {
-; 	MsgBox "NOT no_readable_vertion"
+; 	MsgBox "page is not loaded"
 ; }
+; return
 
-clickReadingControls()
+; F8::
+; detectMode()
+; mode := modeStack.getCurrentMode()
+; MsgBox,, DETECTED MODE, %mode%
+; return
+
+; F9::
+; mode := modeStack.getCurrentMode()
+; MsgBox,, CURRENT MODE, %mode%
+; ; enableReaderAndRead()
+; return
+
+; F10::
+; muteNVDA()
+; return
+
+; F11::
+; playSound("redline-is-opening.mp3")
+; return
+
+; F12::
+; ; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\reader\images\browser\no-readable-vertion-image-pattern.bmp
+; ; MsgBox %ErrorLevel%
+
+; ; detect_no_readable_vertion()
+
+; ; if (detect_no_readable_vertion()) {
+; ; 	MsgBox "no_readable_vertion"
+; ; }
+; ; else {
+; ; 	MsgBox "NOT no_readable_vertion"
+; ; }
+
+; clickReadingControls()
+; return
+
+F12::
+if (is_text_reader_mode()) {
+	TrayTip, is_text_reader_mode, YES, 1
+}
+else {
+	TrayTip, is_text_reader_mode, NO, 1
+}
+; clickReadingControls()
 return
+
+; F9:
+; MsgBox, , , "F9", 2
+; clickPlayPause()
+; TrayTip, "after play pause", 123, 1
+; return

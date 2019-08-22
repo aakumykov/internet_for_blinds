@@ -10,11 +10,11 @@ page_is_loaded_search_area_x2 := 101
 page_is_loaded_search_area_y2 := 85
 
 ; Координаты кнопки перехода в режим чтения Firefox
-reader_mode_enable_button_x := 149
+reader_mode_enable_button_x := 275
 reader_mode_enable_button_y := 73
 
 ; Картинка, по которой определяется режим чтения
-reader_mode_image_pattern := "reader-mode-image-pattern-home.bmp"
+reader_mode_image_pattern := "reader-mode-image-pattern.bmp"
 
 ; Область поиска этой картинки
 reader_mode_serch_area_x1 := 0 
@@ -41,30 +41,30 @@ youtube_play_button_y := 457
 reader_main_button_x := 22
 reader_main_button_y := 239
 
-reader_forward_button_x := 301
-reader_forward_button_y := 239
+reader_prev_button_x := 100
+reader_prev_button_y := 214
 
-reader_prev_button_x := 102
-reader_prev_button_y := 239
+reader_next_button_x := 300
+reader_next_button_y := 214
 
-reader_play_pause_button_x := 204
-reader_play_pause_button_y := 239
+reader_play_pause_button_x := 195
+reader_play_pause_button_y := 216
 
 
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========
 
 ; Путь к исполняемому файлу NVDA
-nvda_cmd := "C:\Program Files (x86)\NVDA\nvda.exe"
+nvda_cmd := "C:\Program Files\NVDA\nvda.exe"
 
 ; Путь к исполняемому файлу веб-сервера (рекомендуется HTTP File Server от Rejetto)
-web_server_command := "C:\Program Files (x86)\hfs.exe"
+web_server_command := "C:\Program Files\hfs.exe"
 
 ; Путь к исполняемому файлу утилиты NirCMD
 nircmd := "c:\Program Files\nircmd.exe"
 
 ; Путь к исполняемому файлу mpg123.exe (консольной программы для выигрывания звука)
-sound_player_command := "C:\Program Files\mpg123-1.25.10-static-x86-64\mpg123.exe"
+sound_player_command := "C:\Program Files\mpg123\mpg123.exe"
 
 
 ; ============= ВРЕМЕННЫЕ ЗАДЕРЖКИ (в миллисекундах) ==========

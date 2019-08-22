@@ -72,7 +72,9 @@ disactivateTextReaderMode() {
 
 
 textSkipForward() {
+	;TrayTip, "textSkipForward()", "textSkipForward()", 1
 	clickReadingControls()
+	; MsgBox, , "textSkipForward()", , 2
 	clickReadNextParagraph()
 	clickReadingControls()
 }
@@ -103,6 +105,7 @@ clickReadingControls() {
 }
 
 clickReadNextParagraph() {
+	; TrayTip, "clickReadNextParagraph()", , 1
 	global reader_next_button_x
 	global reader_next_button_y
 	Click, %reader_next_button_x%, %reader_next_button_y%
