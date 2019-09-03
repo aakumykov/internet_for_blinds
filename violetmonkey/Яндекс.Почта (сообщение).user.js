@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Яндекс.Почта (сообщение)
 // @namespace Violentmonkey Scripts
-// @include  /^https://mail\.yandex\.ru/lite/message/\d+$/
+// @include  /^https://mail\.yandex\.ru/lite/message/\d+/
 // @grant none
 // @inject-into content 
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
@@ -43,6 +43,14 @@ function fetchAttachmentsCount(){
   return cnt;
 }
 
+function fetchAttachmentsList() {
+    let list = [];
+    $('.b-message-attach__info').each(function(i){
+        list[list.length] = $(this).text().trim();
+    });
+    return list;
+}
+
 function clearAttachments(){
   $('div.b-message-attach').each( function(index,element){
     element.remove();
@@ -53,7 +61,19 @@ function buildLine(text){
   return $("<li><a href='#' class='qwerty'>"+text+"</a></li>");
 }
 
-function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
+function pluralAttachmentsTitle(count) {
+    if (1==count) {
+        return "прикреплён "+count+" файл:";
+    }
+    else if (count > 1 && count <= 4) {
+        return "прикреплено "+count+" файла:";
+    }
+    else {
+        return "прикреплено "+count+" файлов:";
+    }
+}
+
+function constructNewPage(msgSubject, msgBody, msgDate, attachmentsList){
     debugMsg("constructNewPage()");
 
     //console.log("ДАТА-1: "+msgDate);
@@ -62,25 +82,43 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
   
     let listId = "oneMessage";
   
-    $('body').append("<button id='button3'>Три шага до письма</button><br>");
-    $('body').append("<button id='button2'>Два шага до письма</button><br>");
-    $('body').append("<button id='button1'>Один шаг до письма</button><br>");
+    //$('body').append("<button id='button3'>Три шага до письма</button><br>");
+    //$('body').append("<button id='button2'>Два шага до письма</button><br>");
+    //$('body').append("<button id='button1'>Один шаг до письма</button><br>");
     $('body').append("<br>");
     
     $('body').append("<UL id='"+listId+"'></UL>");
     
-    let attachmentsMsg = (0==attachmentsCount) ? "вложений нет" : "вложения: "+attachmentsCount+" штуки";
     let dateLine = buildLine("Письмо от "+humanDate);
     let subjectLine = buildLine("Заголовок: "+msgSubject);
-    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : msgBody;
+    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
   
+    console.log(bodyLine);
+    
+    //let repliedMessageIndex = bodyLine.indexOf("-----Original Message-----");
+    //bodyLine = bodyLine.substr(0, repliedMessageIndex);
   
+    console.log(bodyLine);
     
     ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
     $('#'+listId).append(dateLine);
     $('#'+listId).append(subjectLine);
-    $('#'+listId).append( buildLine("Сообщение: "+bodyLine) );
-
+    $('#'+listId).append( buildLine(bodyLine) );
+    
+    // вложения
+    let attCount = attachmentsList.length;
+    if (attCount > 0) {
+        $('#'+listId).append( buildLine(pluralAttachmentsTitle(attCount)) );
+        for (let i=0; i<attCount; i++) {
+            let attName = attachmentsList[i].trim();
+            $('#'+listId).append( buildLine(attName) );
+        }
+    }
+    else {
+        $('#'+listId).append( buildLine("нет прикреплённых файлов") );
+    }
+    
+    $('#'+listId).append( buildLine("конец сообщения") );
     
   /*let fullText = 
       dateLine.text() + ". <br>" +
@@ -103,6 +141,8 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount){
 playAudio('http://127.0.0.1/email-opened.mp3');
 
 let attachmentsCount = fetchAttachmentsCount();
+let attachmentsList = fetchAttachmentsList();
+//console.log("attachmentsList: "+attachmentsList);
 clearAttachments(); // это нужно делать ДО получения тела сообщения
 
 let msgSubject = fetchSubject();
@@ -113,4 +153,4 @@ document.title = "Письмо: "+msgSubject;
 
 clearPage();
 
-constructNewPage(msgSubject, msgBody, msgDate, attachmentsCount);
+constructNewPage(msgSubject, msgBody, msgDate, attachmentsList);
