@@ -13,7 +13,8 @@ is_mail_list_mode() {
 
 is_mail_message_mode(){
 	; https://mail.yandex.ru/lite/message/170010885933238302
-	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/message/?\d*$")
+	; https://mail.yandex.ru/lite/message/170010885933238302/new
+	return testClipboardWithRegex("^https://mail\.yandex\.ru/lite/message/\d+")
 }
 
 is_yandex_video_mode() {
