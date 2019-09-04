@@ -26,9 +26,25 @@ function fetchSubject(){
 }
 
 function fetchBody(){
-  let text = $('.b-message-body__content').text();
-  debugMsg(text);
-  return text;
+    let bodyText = $('.b-message-body__content').text();
+    debugMsg(bodyText);
+    return bodyText;
+}
+
+function fetchBodyHTML() {
+    return $('.b-message-body__content').html();
+}
+
+function createBodyWithMultipleLines(listId, bodyHTML) {
+    let bodyParts = bodyHTML.split("<br>");
+    
+    for (let i=0; i<bodyParts.length; i++) {
+        let part = bodyParts[i].trim();
+        if ("" != part) {
+            let lineText = $("<p>"+part+"</p>").text();
+            $('#'+listId).append( buildLine(lineText) );
+        }
+    }
 }
 
 function fetchDate(){
@@ -73,7 +89,9 @@ function pluralAttachmentsTitle(count) {
     }
 }
 
-function constructNewPage(msgSubject, msgBody, msgDate, attachmentsList){
+function constructNewPage(msgSubject, bodyHTML, msgDate, attachmentsList){
+    console.log(bodyHTML);
+    
     debugMsg("constructNewPage()");
 
     //console.log("ДАТА-1: "+msgDate);
@@ -91,19 +109,15 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsList){
     
     let dateLine = buildLine("Письмо от "+humanDate);
     let subjectLine = buildLine("Заголовок: "+msgSubject);
-    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
-  
-    console.log(bodyLine);
+    
+    //let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
     
     //let repliedMessageIndex = bodyLine.indexOf("-----Original Message-----");
     //bodyLine = bodyLine.substr(0, repliedMessageIndex);
-  
-    console.log(bodyLine);
     
     ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
     $('#'+listId).append(dateLine);
     $('#'+listId).append(subjectLine);
-    $('#'+listId).append( buildLine(bodyLine) );
     
     // вложения
     let attCount = attachmentsList.length;
@@ -115,24 +129,13 @@ function constructNewPage(msgSubject, msgBody, msgDate, attachmentsList){
         }
     }
     else {
-        $('#'+listId).append( buildLine("нет прикреплённых файлов") );
+        $('#'+listId).append( buildLine("прикреплённых файлов нет") );
     }
     
+    $('#'+listId).append( buildLine("Текст сообщения:") );
+    createBodyWithMultipleLines(listId, bodyHTML);
+    
     $('#'+listId).append( buildLine("конец сообщения") );
-    
-  /*let fullText = 
-      dateLine.text() + ". <br>" +
-      subjectLine.text() + ". <br>" +
-      bodyLine
-      ;*/
-    
-    //$(document.body).append("<a id='linkWithFullText' href='#'>"+fullText+"</a>");
-    
-    //$('#button1').focus();
-  
-    /*setTimeout(function(){
-        $('#linkWithFullText').focus();
-    }, 2000);*/
 }
 
 
@@ -146,11 +149,11 @@ let attachmentsList = fetchAttachmentsList();
 clearAttachments(); // это нужно делать ДО получения тела сообщения
 
 let msgSubject = fetchSubject();
-let msgBody = fetchBody();
+let bodyHTML = fetchBodyHTML();
 let msgDate = fetchDate();
 
 document.title = "Письмо: "+msgSubject;
 
-clearPage();
+clearPage("письма");
 
-constructNewPage(msgSubject, msgBody, msgDate, attachmentsList);
+constructNewPage(msgSubject, bodyHTML, msgDate, attachmentsList);
