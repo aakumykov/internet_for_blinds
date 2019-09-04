@@ -17,6 +17,8 @@
 #Include, yandex_functions.ahk
 #Include, content_play_functions.ahk
 
+SetNumLockState, On
+
 
 Numpad3::
 openMail()
