@@ -3,8 +3,9 @@
 // @version  1
 // @grant    none
 // @inject-into content
-// @include	   /^https://mail\.yandex\.ru/lite$/
-// @include	   /^https://mail\.yandex\.ru/lite/$/
+// @include    /^https://mail\.yandex\.ru/lite$/
+// @include    /^https://mail\.yandex\.ru/lite/$/
+// @include    /^https://mail\.yandex\.ru/lite/inbox/
 // @inject-into content
 // @require  https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js
 // @require  https://raw.githubusercontent.com/aakumykov/internet_for_blinds/master/greasemonkey/lib/date_functions.js

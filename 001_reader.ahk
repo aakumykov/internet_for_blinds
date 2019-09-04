@@ -17,6 +17,8 @@
 #Include, yandex_functions.ahk
 #Include, content_play_functions.ahk
 
+SetNumLockState, On
+
 
 Numpad3::
 openMail()
@@ -191,7 +193,12 @@ openMail() {
 ; return
 
 ; F10::
-; muteNVDA()
+; copyPageAddress()
+; if (is_mail_message_mode()) {
+; 	MsgBox "mail message mode"
+; } else {
+; 	MsgBox "not mail messagemode"
+; }
 ; return
 
 ; F11::
@@ -214,15 +221,15 @@ openMail() {
 ; clickReadingControls()
 ; return
 
-F12::
-if (is_text_reader_mode()) {
-	TrayTip, is_text_reader_mode, YES, 1
-}
-else {
-	TrayTip, is_text_reader_mode, NO, 1
-}
-; clickReadingControls()
-return
+; F12::
+; if (is_text_reader_mode()) {
+; 	TrayTip, is_text_reader_mode, YES, 1
+; }
+; else {
+; 	TrayTip, is_text_reader_mode, NO, 1
+; }
+; ; clickReadingControls()
+; return
 
 ; F9:
 ; MsgBox, , , "F9", 2
