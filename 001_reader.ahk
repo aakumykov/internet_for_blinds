@@ -146,7 +146,8 @@ openSearch() {
 	muteNVDA()
 	modeStack.addSearchMode()
 	startWebServer()
-	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
+	; Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
+	Run, FirefoxPortable.exe "http://ya.ru", %A_ScriptDir%\..\FirefoxPortable
 	playSound("search-is-opening.mp3")
 	Sleep, 2000
 	focusFirefox()
@@ -156,7 +157,8 @@ openMail() {
 	muteNVDA()
 	modeStack.addMailListMode()
 	startWebServer()
-	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
+	; Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
+	Run, FirefoxPortable.exe "http://mail.yandex.ru/lite", %A_ScriptDir%\..\FirefoxPortable
 	playSound("mailbox-is-opening.mp3")
 }
 
@@ -169,7 +171,16 @@ openMail() {
 
 
 
-
+; F6::
+; ; ; MsgBox %A_ScriptDir%\..\FirefoxPortable
+; ; Run, FirefoxPortable.exe "http://opennet.ru", %A_ScriptDir%\..\FirefoxPortable
+; if ( firefoxIsOpened() ) {
+; 	MsgBox "firefox is opened"
+; }
+; else {
+; 	MsgBox "firefox not opened"
+; }
+; return
 
 ; F7::
 ; if (pageIsLoaded()) {

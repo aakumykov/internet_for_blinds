@@ -49,7 +49,8 @@ openLink_And_WaitForLoad() {
 
 
 openWebPage(address) {
-	Run, firefox.exe %address%, C:\Program Files\Mozilla Firefox\
+	; Run, firefox.exe %address%, C:\Program Files\Mozilla Firefox\
+	Run, FirefoxPortable.exe %address%, %A_ScriptDir%\..\FirefoxPortable
 }
 
 pageIsLoaded() {

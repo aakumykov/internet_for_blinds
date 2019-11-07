@@ -55,16 +55,17 @@ reader_play_pause_button_y := 216
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========
 
 ; Путь к исполняемому файлу NVDA
-nvda_cmd := "C:\Program Files\NVDA\nvda.exe"
+;nvda_cmd := "C:\Program Files\NVDA\nvda.exe"
+nvda_cmd := %A_ScriptDir%\..\NVDA\nvda.exe"
 
 ; Путь к исполняемому файлу веб-сервера (рекомендуется HTTP File Server от Rejetto)
-web_server_command := "C:\Program Files\hfs.exe"
+web_server_command := %A_ScriptDir%\..\hfs.exe
 
 ; Путь к исполняемому файлу утилиты NirCMD
-nircmd := "c:\Program Files\nircmd.exe"
+nircmd := %A_ScriptDir%\..\nircmd.exe
 
 ; Путь к исполняемому файлу mpg123.exe (консольной программы для выигрывания звука)
-sound_player_command := "C:\Program Files\mpg123\mpg123.exe"
+sound_player_command := %A_ScriptDir%\..\mpg123.exe
 
 
 ; ============= ВРЕМЕННЫЕ ЗАДЕРЖКИ (в миллисекундах) ==========
