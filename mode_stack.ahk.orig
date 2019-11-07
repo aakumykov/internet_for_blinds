@@ -42,7 +42,11 @@ class ModeStack {
 	}
 	
 	addMode(newMode) {
+<<<<<<< HEAD
+		TrayTip, addMode(), %newMode%: %clipboard%, 1
+=======
 		TrayTip, addMode(), %newMode%, 1
+>>>>>>> last-workable-version
 		this.pm := this.cm
 		this.cm := newMode
 

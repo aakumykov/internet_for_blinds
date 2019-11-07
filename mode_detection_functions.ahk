@@ -66,6 +66,11 @@ detectMode() {
 		return
 	}
 
+	if (is_redline_live_mode()) {
+		modeStack.addRedlineLiveMode()
+		return
+	}
+
 
 	; ------------ Режим по умолчанию ------------
 	; MsgBox, , detectMode(), "default TEXT_MODE will be added now"

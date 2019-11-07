@@ -10,7 +10,11 @@ page_is_loaded_search_area_x2 := 101
 page_is_loaded_search_area_y2 := 85
 
 ; Координаты кнопки перехода в режим чтения Firefox
+<<<<<<< HEAD
+reader_mode_enable_button_x := 277
+=======
 reader_mode_enable_button_x := 275
+>>>>>>> last-workable-version
 reader_mode_enable_button_y := 73
 
 ; Картинка, по которой определяется режим чтения

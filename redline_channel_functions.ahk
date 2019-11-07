@@ -7,6 +7,15 @@ openRedLineChannel() {
 	playSound("redline-is-opening.mp3")
 }
 
+openRedlineLive() {
+	modeStack.addRedlineLiveMode()
+	stopNVDA()
+	startWebServer()
+	openWebPage("https://tv.yandex.ru/channel/krasnaya-liniya-208/stream")
+	playSound("redline-live-opening.mp3")
+}
+
+
 is_redline_list_mode() {
 	; MsgBox "is_redline_list_mode()"
 
@@ -42,6 +51,10 @@ is_redline_text_mode() {
 	return testClipboardWithRegex("^https://www\.rline\.tv/news/[^/]+/$")
 }
 
+is_redline_live_mode() {
+	copyPageAddress()
+	return testClipboardWithRegex("^https://tv\.yandex\.ru/channel/krasnaya-liniya-208/stream$")
+}
 
 
 
@@ -65,4 +78,10 @@ redlinePlayPause() {
 redlineVideoPlayPause() {
 	Click, 500, 500
 	Sleep, 100 ; Для предотвращения перехода в полноэкранный режим из-за двойного щелчка
+}
+
+redlineLivePlayPause() {
+	; Click, 300, 690
+	Click, 641, 505
+	Sleep, 100
 }

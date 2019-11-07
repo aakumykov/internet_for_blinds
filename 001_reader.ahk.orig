@@ -107,8 +107,13 @@ playPause() {
 		return
 	}
 
+	if (modeStack.isMailListMode()) {
+		openLinkAndPlay(1000)
+		return
+	}
+
 	if (modeStack.isListMode()) {
-		openLinkAndPlay()
+		openLinkAndPlay(0)
 		return
 	}
 
@@ -189,6 +194,39 @@ openMail() {
 ; F9::
 ; mode := modeStack.getCurrentMode()
 ; MsgBox,, CURRENT MODE, %mode%
+<<<<<<< HEAD
+; return
+
+; F10::
+; muteNVDA()
+; return
+
+; F11::
+; if (is_text_reader_mode()) {
+; 	MsgBox "text_reader_mode"
+; }
+; else {
+; 	MsgBox "not text_reader_mode"
+; }
+
+; while (firefoxIsOpened()) {
+; 	Process, Close, firefox.exe
+; 	Sleep, 500
+; }
+; FileRemoveDir, C:\Users\User\AppData\Local\Mozilla, 1
+; Sleep, 2000
+; Run, firefox.exe, C:\Program Files\Mozilla Firefox\
+; return
+
+; F12::
+; if (detect_no_readable_vertion()) {
+; 	MsgBox "no_readable_vertion"
+; }
+; else {
+; 	MsgBox "NOT no_readable_vertion"
+; }
+; return
+=======
 ; ; enableReaderAndRead()
 ; return
 
@@ -236,3 +274,4 @@ openMail() {
 ; clickPlayPause()
 ; TrayTip, "after play pause", 123, 1
 ; return
+>>>>>>> last-workable-version
