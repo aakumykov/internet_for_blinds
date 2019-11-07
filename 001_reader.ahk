@@ -182,14 +182,22 @@ openMail() {
 ; }
 ; return
 
-; F7::
-; if (pageIsLoaded()) {
-; 	MsgBox "page is loaded"
-; }
-; else {
-; 	MsgBox "page is not loaded"
-; }
-; return
+F6::
+; ImageSearch, OutputVarX, OutputVarY, 86, 46, 127, 85, 1.bmp
+; MsgBox %ErrorLevel%
+
+if (pageIsLoaded()) {
+; if (is_text_reader_mode()) {
+	MsgBox "page is loaded"
+; 	MsgBox "text reader mode"
+}
+else {
+	MsgBox "page is not loaded"
+; 	MsgBox "not text reader mode"
+}
+
+; clickTextReaderButton()
+return
 
 ; F8::
 ; detectMode()

@@ -18,6 +18,8 @@ searchImage(image_pattern_file_name, x1, y1, x2, y2, relative_mode) {
 
 	ImageSearch, OutputVarX, OutputVarY, x1, y1, x2, y2, %image_pattern_file_path%
 
+	; MsgBox ErrorLevel: %ErrorLevel%
+
 	if (2 == ErrorLevel) {
 		Throw, "CANNOT PRODUCE IMAGESEARCH"
 	}
