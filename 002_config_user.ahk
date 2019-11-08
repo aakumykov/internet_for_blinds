@@ -2,30 +2,38 @@
 
 ; Картинка, по которой определяется, что страница загружена
 page_is_loaded_image_pattern := "firefox-page-load-complete-default.bmp"
-
-; Область поиска этой картинки 86, 46, 127, 85
 page_is_loaded_search_area_x1 := 86
 page_is_loaded_search_area_y1 := 46
 page_is_loaded_search_area_x2 := 127
 page_is_loaded_search_area_y2 := 85
 
+
 ; Координаты кнопки перехода в режим чтения Firefox
-reader_mode_enable_button_x := 150
-reader_mode_enable_button_y := 50
+reader_mode_enable_button_x := 186
+reader_mode_enable_button_y := 66
+
 
 ; Картинка, по которой определяется режим чтения
 reader_mode_image_pattern := "reader-mode-image-pattern.bmp"
+reader_mode_serch_area_x1 := 0
+reader_mode_serch_area_y1 := 205 
+reader_mode_serch_area_x2 := 48
+reader_mode_serch_area_y2 := 253 
 
-; Область поиска этой картинки
-; reader_mode_serch_area_x1 := 0 
-; reader_mode_serch_area_y1 := 164 
-; reader_mode_serch_area_x2 := 38
-; reader_mode_serch_area_y2 := 202 
 
-reader_mode_serch_area_x1 := 1
-reader_mode_serch_area_y1 := 98 
-reader_mode_serch_area_x2 := 37
-reader_mode_serch_area_y2 := 161 
+; Кнопки управления чтением в режиме Чтеца
+reader_main_button_x := 24
+reader_main_button_y := 280
+
+reader_prev_button_x := 127
+reader_prev_button_y := 268
+
+reader_next_button_x := 375
+reader_next_button_y := 270
+
+reader_play_pause_button_x := 245
+reader_play_pause_button_y := 270
+
 
 ; Картинка для определения отсутствия читабельной версии
 no_readable_version_image_pattern := "no-readable-vertion-image-pattern.bmp"
@@ -34,27 +42,15 @@ no_readable_version_y1 := 200
 no_readable_version_x2 := 930 
 no_readable_version_y2 := 250
 
+
 ; Координаты "пустого места" на странице открытого видео на Youtube
 youtube_empty_place_x := 177
 youtube_empty_place_y := 104
 
+
 ; Координаты кнопки "Играть/Остановить" видео на Youtube
 youtube_play_button_x := 713
 youtube_play_button_y := 457
-
-; Кнопки управления чтением в режиме Чтеца
-reader_main_button_x := 22
-reader_main_button_y := 239
-
-reader_prev_button_x := 100
-reader_prev_button_y := 214
-
-reader_next_button_x := 300
-reader_next_button_y := 214
-
-reader_play_pause_button_x := 195
-reader_play_pause_button_y := 216
-
 
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========

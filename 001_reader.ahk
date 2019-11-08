@@ -184,17 +184,21 @@ openMail() {
 
 F6::
 ; ImageSearch, OutputVarX, OutputVarY, 86, 46, 127, 85, 1.bmp
+; ImageSearch, OutputVarX, OutputVarY, 0, 205, 48, 253, reader-mode-image-pattern1.bmp
 ; MsgBox %ErrorLevel%
 
-if (pageIsLoaded()) {
+; clickTextReaderButton()
+enableReaderAndRead()
+
+; ; if (pageIsLoaded()) {
 ; if (is_text_reader_mode()) {
-	MsgBox "page is loaded"
+; ; 	MsgBox "page is loaded"
 ; 	MsgBox "text reader mode"
-}
-else {
-	MsgBox "page is not loaded"
+; }
+; else {
+; ; 	MsgBox "page is not loaded"
 ; 	MsgBox "not text reader mode"
-}
+; }
 
 ; clickTextReaderButton()
 return
