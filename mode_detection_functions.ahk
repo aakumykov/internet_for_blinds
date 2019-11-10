@@ -3,6 +3,9 @@
 
 detectMode() {
 	copyPageAddress()
+	Sleep, 500
+
+	MsgBox "detectMode() %clipboard%"
 
 	; ===== НЕЛЬЗЯ!!!===
 	; Вызов setReaderMode() здесь ведёт к ошибкам работы в случае отсутствия читабельной версии.

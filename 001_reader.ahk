@@ -1,4 +1,4 @@
-#Include, 002_config_user.ahk
+﻿#Include, 002_config_user.ahk
 #Include, 003_config_system.ahk
 #Include, log_functions.ahk
 #Include, utility_functions.ahk
@@ -26,11 +26,11 @@ return
 
 Numpad6::
 ; openRedLineChannel()
-openRedlineLive()
+openRedlineLive() ;*[001_reader]
 return
 
 Numpad9::
-openSearch()
+openSearch() ;*[001_reader]
 return
 
 
@@ -171,15 +171,24 @@ openMail() {
 
 
 
-; F6::
-; ppid := playSoundFile("c:\Users\������\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3")
+F6::
+detectMode()
+
+; if (RegExMatch("https://www.youtube.com/watch?v=0HwgtSqhUXc", "^https://www\.youtube\.com/watch\?")) {
+; 	MsgBox "совпадает"
+; }
+; else {
+; 	MsgBox "не совпадает"
+; }
+
+; ppid := playSoundFile("c:\Users\Андрей\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3")
 ; TrayTip, , %ppid%
-; return
+return
 
 ; F6::
-; playSoundFile("C:\Users\������\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3")
+; playSoundFile("C:\Users\Андрей\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3")
 
-; Run, "c:\Program Files\mpg123.exe" "C:\Users\������\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3", , UseErrorLevel, OutputVarPID
+; Run, "c:\Program Files\mpg123.exe" "C:\Users\Андрей\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3", , UseErrorLevel, OutputVarPID
 ; MsgBox %OutputVarPID% %ErrorLevel%
 
 ; Run, Target [, WorkingDir, Max|Min|Hide|UseErrorLevel, OutputVarPID]
@@ -257,5 +266,4 @@ openMail() {
 ; F9:
 ; MsgBox, , , "F9", 2
 ; clickPlayPause()
-; TrayTip, "after play pause", 123, 1
-; return
+; TrayTip,s

@@ -1,5 +1,7 @@
 
 openLinkAndPlay() {
+	MsgBox "openLinkAndPlay()"
+
 	muteNVDA()
 	; openLinkAndWaitPageIsLoaded()
 	openLink_And_WaitForLoad()

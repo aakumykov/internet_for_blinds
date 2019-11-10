@@ -24,9 +24,11 @@ videoPlayPause() {
 }
 
 videoSkipForward() {
+	; MsgBox "videoSkipForward"
 	Send, {Right}
 }
 
 videoSkipBack() {
+	; MsgBox "videoSkipBack"
 	Send, {Left}
 }

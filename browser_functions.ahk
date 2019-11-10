@@ -11,6 +11,8 @@ focusFirefox() {
 }
 
 openLink_And_WaitForLoad() {
+	MsgBox "openLink_And_WaitForLoad()"
+
 	global tab_creation_delay
 	global page_load_wait_time
 	global should_wait_for_page_loading
@@ -109,8 +111,6 @@ copyPageAddress() {
 	focusFirefox()
 	Send, ^{l}
 	Send, ^{c}
-	; Send, {Tab}
-	; Send, {Tab}
-	; Send, {Tab}
+	return %clipboard%
 }
 

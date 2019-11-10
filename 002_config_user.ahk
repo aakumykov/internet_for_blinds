@@ -44,8 +44,8 @@ no_readable_version_y2 := 250
 
 
 ; Координаты "пустого места" на странице открытого видео на Youtube
-youtube_empty_place_x := 177
-youtube_empty_place_y := 104
+youtube_empty_place_x := 180
+youtube_empty_place_y := 230
 
 
 ; Координаты кнопки "Играть/Остановить" видео на Youtube

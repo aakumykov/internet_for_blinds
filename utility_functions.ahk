@@ -12,5 +12,6 @@ waitForEventDuringSeconds(testFuncName, timeout) {
 }
 
 testClipboardWithRegex(regex){
+	; MsgBox %clipboard% --- %regex%
 	return RegExMatch(clipboard, regex)
 }
