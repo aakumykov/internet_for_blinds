@@ -49,8 +49,8 @@ youtube_empty_place_y := 104
 
 
 ; Координаты кнопки "Играть/Остановить" видео на Youtube
-youtube_play_button_x := 713
-youtube_play_button_y := 457
+youtube_play_button_x := 410
+youtube_play_button_y := 850
 
 
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========

@@ -172,23 +172,23 @@ openMail() {
 
 
 ; F6::
-; ; ; MsgBox %A_ScriptDir%\..\FirefoxPortable
-; ; Run, FirefoxPortable.exe "http://opennet.ru", %A_ScriptDir%\..\FirefoxPortable
-; if ( firefoxIsOpened() ) {
-; 	MsgBox "firefox is opened"
-; }
-; else {
-; 	MsgBox "firefox not opened"
-; }
+; ppid := playSoundFile("c:\Users\Андрей\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3")
+; TrayTip, , %ppid%
 ; return
 
-F6::
+; F6::
+; playSoundFile("C:\Users\Андрей\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3")
+
+; Run, "c:\Program Files\mpg123.exe" "C:\Users\Андрей\Music\Tunguska_Electronic_Music_Society_-_Aquascape_-_Sunrise_2.mp3", , UseErrorLevel, OutputVarPID
+; MsgBox %OutputVarPID% %ErrorLevel%
+
+; Run, Target [, WorkingDir, Max|Min|Hide|UseErrorLevel, OutputVarPID]
 ; ImageSearch, OutputVarX, OutputVarY, 86, 46, 127, 85, 1.bmp
 ; ImageSearch, OutputVarX, OutputVarY, 0, 205, 48, 253, reader-mode-image-pattern1.bmp
 ; MsgBox %ErrorLevel%
 
 ; clickTextReaderButton()
-enableReaderAndRead()
+; enableReaderAndRead()
 
 ; ; if (pageIsLoaded()) {
 ; if (is_text_reader_mode()) {
@@ -201,7 +201,7 @@ enableReaderAndRead()
 ; }
 
 ; clickTextReaderButton()
-return
+; return
 
 ; F8::
 ; detectMode()
