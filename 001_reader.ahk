@@ -14,6 +14,7 @@
 #Include, youtube_functions.ahk
 #Include, nvda_functions.ahk
 #Include, redline_channel_functions.ahk
+#Include, fips_functions.ahk
 #Include, yandex_functions.ahk
 #Include, content_play_functions.ahk
 
@@ -26,7 +27,8 @@ return
 
 Numpad6::
 ; openRedLineChannel()
-openRedlineLive()
+; openRedlineLive()
+openFIPSList()
 return
 
 Numpad9::
@@ -160,7 +162,15 @@ openMail() {
 	playSound("mailbox-is-opening.mp3")
 }
 
-
+openFIPSList() {
+	muteNVDA()
+	modeStack.addListMode()
+	startWebServer()
+	Run, firefox.exe "http://127.0.0.1/fips-status/patent-request-statuses.html", C:\Program Files\Mozilla Firefox\
+	playSound("fips-list-is-opening.mp3")
+	Sleep, 2000
+	focusFirefox()
+}
 
 
 
@@ -205,21 +215,28 @@ openMail() {
 ; playSound("redline-is-opening.mp3")
 ; return
 
-; F12::
-; ; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\reader\images\browser\no-readable-vertion-image-pattern.bmp
-; ; MsgBox %ErrorLevel%
+F12::
+; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\internet_for_blinds\images\browser\no-readable-vertion-image-pattern.bmp
+; MsgBox %ErrorLevel%
 
-; ; detect_no_readable_vertion()
+; detect_no_readable_vertion()
 
-; ; if (detect_no_readable_vertion()) {
-; ; 	MsgBox "no_readable_vertion"
-; ; }
-; ; else {
-; ; 	MsgBox "NOT no_readable_vertion"
-; ; }
+; if (detect_no_readable_vertion()) {
+; 	MsgBox "no_readable_vertion"
+; }
+; else {
+; 	MsgBox "readable_vertion"
+; }
 
 ; clickReadingControls()
-; return
+
+; if (is_text_reader_mode()) {
+; 	MsgBox "text reader mode"
+; } else {
+; 	MsgBox "not text reader mode"
+; }
+
+return
 
 ; F12::
 ; if (is_text_reader_mode()) {

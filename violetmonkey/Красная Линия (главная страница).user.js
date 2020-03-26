@@ -21,7 +21,6 @@ let newsLinks = collectLinks('.news__item', '.news__item-name', '.news__item-dat
 
 clearPage2("Телеканал красная линия", null);
 
-addLinkWithSound("Прямой эфир телеканала Красной Линии", "https://tv.yandex.ru/channel/krasnaya-liniya-208/stream", "http://127.0.0.1/redline-live-opening.mp3");
 addLinkWithSound("Телепередачи канала Красная Линия (подраздел)", "https://www.rline.tv/programs/", "http://127.0.0.1/redline-channels-list-is-opening.mp3");
 addLinkWithSound("Все новости сайта Красная Линия (подраздел)", "https://www.rline.tv/news/", "http://127.0.0.1/redline-news-is-opening.mp3");
 

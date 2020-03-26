@@ -43,6 +43,10 @@ detectMode() {
 		modeStack.addListMode()
 		return 
 	}
+	if (is_fips_mode()) {
+		modeStack.addListMode()
+		return
+	}
 
 
 	; ------------ Режимы просмотра видео ------------

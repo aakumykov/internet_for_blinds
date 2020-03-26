@@ -113,6 +113,10 @@ class ModeStack {
 		if (this.isSearchMode()) {
 			return true
 		}
+
+		if (this.isFIPSMode()) {
+			return true
+		}
 	}
 
 
@@ -124,6 +128,12 @@ class ModeStack {
 			detectMode()
 		}
 		return "MAIL_LIST_MODE" == this.cm
+	}
+	isFIPSMode() {
+		if ("" == this.cm) {
+			detectMode()
+		}
+		return "LIST_MODE" == this.cm
 	}
 
 

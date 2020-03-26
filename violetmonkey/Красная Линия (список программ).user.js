@@ -28,8 +28,8 @@ function clearPage(newTitle) {
     let documentCorpus = $('body');
     documentCorpus.empty();
     if (null == newTitle) newTitle = "*";
-    documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
-    documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
+    //documentCorpus.append("<br><button id='startPoint'>*</button><br><br>");
+    //documentCorpus.append("<br><button id='startPoint'>"+newTitle+"</button><br><br>");
 }
 
 function collectLinks(linkNodeSelector, linkTextSelector, linkDateSelector) {
