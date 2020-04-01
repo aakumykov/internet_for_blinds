@@ -166,7 +166,8 @@ openFIPSList() {
 	muteNVDA()
 	modeStack.addListMode()
 	startWebServer()
-	Run, firefox.exe "http://127.0.0.1/fips-status/patent-request-statuses.html", C:\Program Files\Mozilla Firefox\
+	; Run, firefox.exe "http://127.0.0.1/fips-status/patent-request-statuses.html", C:\Program Files\Mozilla Firefox\
+	Run, firefox.exe "https://kpsrtz.fips.ru/User/Login", C:\Program Files\Mozilla Firefox\
 	playSound("fips-list-is-opening.mp3")
 	Sleep, 2000
 	focusFirefox()
