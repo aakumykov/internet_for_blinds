@@ -216,7 +216,7 @@ openFIPSList() {
 ; playSound("redline-is-opening.mp3")
 ; return
 
-F12::
+; F12::
 ; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\internet_for_blinds\images\browser\no-readable-vertion-image-pattern.bmp
 ; MsgBox %ErrorLevel%
 
@@ -237,7 +237,7 @@ F12::
 ; 	MsgBox "not text reader mode"
 ; }
 
-return
+; return
 
 ; F12::
 ; if (is_text_reader_mode()) {

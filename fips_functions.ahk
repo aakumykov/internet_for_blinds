@@ -1,10 +1,10 @@
 is_fips_mode() {
 	
-	if (testClipboardWithRegex("^https://www\.fips\.ru/registers-doc-view/fips_servlet\?DB=")) {
+	if (testClipboardWithRegex("^https://kpsrtz\.fips\.ru/?$")) {
 		return true
 	}
 
-	if (testClipboardWithRegex("^http://127\.0\.0\.1/fips-status/patent-request-statuses\.html$")) {
+	if (testClipboardWithRegex("^https://kpsrtz\.fips\.ru/Application/Documents/[0-9]+$")) {
 		return true
 	}
 
