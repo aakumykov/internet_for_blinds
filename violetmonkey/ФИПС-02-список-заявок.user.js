@@ -12,10 +12,27 @@
 
 var $ = window.jQuery;
 
+let alreadyProcessing = false;
+
 var observer = new MutationObserver(function(mutations) {
-    let data = collectData();
-    clearPage("списка заявок");
-    constructNewPage(data);
+    console.log("Обнаружены изменения в нужном месте. Жду 2 секунды...");
+
+    if (!alreadyProcessing) {
+
+        alreadyProcessing = true;
+        
+        window.setTimeout(function(){
+
+            console.log("...начинаю.")
+
+            let data = collectData();
+
+            clearPage("списка заявок");
+
+            constructNewPage(data);
+
+        }, 2000);
+    }
 });
 
 observer.observe(document.querySelector("div.data-content"), {childList: true, subtree: true, attributes: false, characterData: false});
@@ -47,6 +64,8 @@ function collectData() {
 }
 
 function constructNewPage(data) {
+    console.log(data);
+    
     if (0 == data.length) {
         playAudio("http://127.0.0.1/fips-arm-registrator-error-getting-requests-list.mp3");
         playAudio("http://127.0.0.1/fips-arm-retrying-after-15-seconds.mp3");

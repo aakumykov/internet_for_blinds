@@ -17,13 +17,17 @@ var observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(oneMutation){
     //console.log(oneMutation.target.className);
     //console.log(oneMutation);
-    
-      if (certificateIsLoaded(oneMutation)) {
-          console.log("Страница готова к продолжению работы");
-          playAudio("http://127.0.0.1/fips-arm-registrator-login-page.mp3");
-          
-          $("#LoginBtn").click();
-      }
+    window.setTimeout(function(){
+        
+        if (certificateIsLoaded(oneMutation)) {
+              console.log("Страница готова к продолжению работы");
+            
+              playAudio("http://127.0.0.1/fips-arm-registrator-login-page.mp3");
+
+              $("#LoginBtn").click();
+          }
+        
+    }, 1000);
 
   });
 

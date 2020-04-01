@@ -15,30 +15,41 @@ var $ = window.jQuery;
 
 console.log("ФИПС-03-кабинет-содержимое-заявки");
 
+let alreadyProcessing = false;
 let changesNumber = 0;
 
 let observer = new MutationObserver(function(mutations) {
     console.log("обнаружены изменения "+changesNumber+", "+mutations.length);
     
-    changesNumber++;
-    
-    if (0 == changesNumber && mutations.length > 40) {
-        console.log("Не сработало, обновляем");
+    if (!alreadyProcessing) {
+        
+        alreadyProcessing = true;
         
         window.setTimeout(function(){
-            window.location.reload();
-        }, 3000);
-        
-        return;
+
+            changesNumber++;
+
+            if (0 == changesNumber && mutations.length > 40) {
+                console.log("Не сработало, обновляем");
+
+                window.setTimeout(function(){
+                    window.location.reload();
+                }, 3000);
+
+                return;
+            }
+
+
+            if (1 == changesNumber) {
+                console.log("можно обрабатывать");
+                let data = collectData();
+                clearPage("до содержимого заявки");
+                constructNewPage(data);
+            }
+
+        }, 2000);
     }
     
-    
-    if (1 == changesNumber) {
-        console.log("можно обрабатывать");
-        let data = collectData();
-        clearPage("до содержимого заявки");
-        constructNewPage(data);
-    }
 });
 
 observer.observe(
