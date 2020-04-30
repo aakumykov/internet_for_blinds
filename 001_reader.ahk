@@ -192,10 +192,32 @@ openFIPSList() {
 ; return
 
 ; F8::
-; detectMode()
-; mode := modeStack.getCurrentMode()
-; MsgBox,, DETECTED MODE, %mode%
+; focusFirefox()
+
+; ; clickTextReaderButton()
+; ; enableReaderAndRead()
+
+; if (is_text_reader_mode()) {
+; 	MsgBox "reader mode"
+; }
+; else {
+; 	MsgBox "not reader mode"
+; }
 ; return
+
+; F7::
+; muteNVDA()
+; return
+
+; F8::
+; unmuteNVDA()
+; return
+
+F8::
+detectMode()
+mode := modeStack.getCurrentMode()
+MsgBox,, DETECTED MODE, %mode%
+return
 
 ; F9::
 ; mode := modeStack.getCurrentMode()

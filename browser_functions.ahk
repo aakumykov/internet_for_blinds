@@ -105,11 +105,19 @@ closeBrowserPage(silent) {
 ; }
 
 copyPageAddress() {
+	MsgBox "copyPageAddress()"
+
 	focusFirefox()
+	Sleep, 200
+
+	MsgBox %clipboard%
+
 	Send, ^{l}
+	Sleep, 200
+
 	Send, ^{c}
-	; Send, {Tab}
-	; Send, {Tab}
-	; Send, {Tab}
+	Sleep, 200
+
+	MsgBox %clipboard%
 }
 
