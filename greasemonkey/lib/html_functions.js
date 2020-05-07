@@ -1,4 +1,19 @@
-function clearPage(stepButtonsLabel) {
+
+function clearPage() {
+	switch (arguments.length) {
+		case 1:
+			clearPageSimple(arguments[0]);
+			break;
+		case 2:
+			clearPageWithCount(arguments[0], arguments[1]);
+			break;
+		default:
+			console.error("There is no arguments for clearPage()");
+	}
+}
+
+
+function clearPageSimple(stepButtonsLabel) {
   $('body').empty();
 
   if (null != stepButtonsLabel) {
@@ -10,7 +25,7 @@ function clearPage(stepButtonsLabel) {
 }
 
 
-function clearPage(stepButtonsLabel, buttonsCount) {
+function clearPageWithCount(stepButtonsLabel, buttonsCount) {
 	$('body').empty();
 
 	if (null != stepButtonsLabel) 
