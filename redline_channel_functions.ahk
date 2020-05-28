@@ -3,7 +3,7 @@ openRedLineChannel() {
 	modeStack.addRedlineListMode()
 	muteNVDA()
 	startWebServer()
-	Run, firefox.exe "https://www.rline.tv", C:\Program Files\Mozilla Firefox\
+	Run, firefox.exe "https://www.rline.tv", "C:\Program Files\Firefox Developer Edition\
 	playSound("redline-is-opening.mp3")
 }
 

@@ -148,7 +148,7 @@ openSearch() {
 	muteNVDA()
 	modeStack.addSearchMode()
 	startWebServer()
-	Run, firefox.exe "http://ya.ru", C:\Program Files\Mozilla Firefox\
+	Run, firefox.exe "http://ya.ru", "C:\Program Files\Firefox Developer Edition\
 	playSound("search-is-opening.mp3")
 	Sleep, 2000
 	focusFirefox()
@@ -158,7 +158,7 @@ openMail() {
 	muteNVDA()
 	modeStack.addMailListMode()
 	startWebServer()
-	Run, firefox.exe "http://mail.yandex.ru/lite", C:\Program Files\Mozilla Firefox\
+	Run, firefox.exe "http://mail.yandex.ru/lite", "C:\Program Files\Firefox Developer Edition\
 	playSound("mailbox-is-opening.mp3")
 }
 
@@ -166,8 +166,8 @@ openFIPSList() {
 	muteNVDA()
 	modeStack.addListMode()
 	startWebServer()
-	; Run, firefox.exe "http://127.0.0.1/fips-status/patent-request-statuses.html", C:\Program Files\Mozilla Firefox\
-	Run, firefox.exe "https://kpsrtz.fips.ru/User/Login", C:\Program Files\Mozilla Firefox\
+	; Run, firefox.exe "http://127.0.0.1/fips-status/patent-request-statuses.html", "C:\Program Files\Firefox Developer Edition\
+	Run, firefox.exe "https://kpsrtz.fips.ru/User/Login", "C:\Program Files\Firefox Developer Edition\
 	playSound("fips-list-is-opening.mp3")
 	Sleep, 2000
 	focusFirefox()
@@ -253,4 +253,8 @@ openFIPSList() {
 ; MsgBox, , , "F9", 2
 ; clickPlayPause()
 ; TrayTip, "after play pause", 123, 1
+; return
+
+; F9::
+; playSound("search-is-opening.mp3")
 ; return

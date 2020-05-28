@@ -4,14 +4,14 @@
 page_is_loaded_image_pattern := "firefox-page-load-complete-default.bmp"
 
 ; Область поиска этой картинки
-page_is_loaded_search_area_x1 := 70
-page_is_loaded_search_area_y1 := 60
-page_is_loaded_search_area_x2 := 101
-page_is_loaded_search_area_y2 := 85
+page_is_loaded_search_area_x1 := 69
+page_is_loaded_search_area_y1 := 38
+page_is_loaded_search_area_x2 := 98
+page_is_loaded_search_area_y2 := 66
 
 ; Координаты кнопки перехода в режим чтения Firefox
-reader_mode_enable_button_x := 275
-reader_mode_enable_button_y := 73
+reader_mode_enable_button_x := 212
+reader_mode_enable_button_y := 52
 
 ; Картинка, по которой определяется режим чтения
 reader_mode_image_pattern := "reader-mode-image-pattern.bmp"
@@ -55,7 +55,7 @@ reader_play_pause_button_y := 216
 ; ============= ВСПОМОГАТЕЛЬНЫЕ ПРОГРАММЫ ==========
 
 ; Путь к исполняемому файлу NVDA
-nvda_cmd := "C:\Program Files\NVDA\nvda.exe"
+nvda_cmd := "C:\Program Files (x86)\NVDA\nvda.exe"
 
 ; Путь к исполняемому файлу веб-сервера (рекомендуется HTTP File Server от Rejetto)
 web_server_command := "C:\Program Files\hfs.exe"
