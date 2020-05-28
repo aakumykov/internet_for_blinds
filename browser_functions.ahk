@@ -49,7 +49,7 @@ openLink_And_WaitForLoad() {
 
 
 openWebPage(address) {
-	Run, firefox.exe %address%, C:\Program Files\Mozilla Firefox\
+	Run, firefox.exe %address%, "C:\Program Files\Firefox Developer Edition\
 }
 
 pageIsLoaded() {
@@ -63,6 +63,7 @@ pageIsLoaded() {
 
 	if (firefoxIsOpened()) {
 		focusFirefox()
+		CoordMode, Pixel, Screen
 		ImageSearch, imageX, imageY, page_is_loaded_search_area_x1, page_is_loaded_search_area_y1, page_is_loaded_search_area_x2, page_is_loaded_search_area_y2, %image_pattern%
 		if (2 == ErrorLevel) {
 			Throw, "CANNOT PRODUCE IMAGESEARCH"
