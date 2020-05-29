@@ -14,7 +14,6 @@
 #Include, youtube_functions.ahk
 #Include, nvda_functions.ahk
 #Include, redline_channel_functions.ahk
-#Include, fips_functions.ahk
 #Include, yandex_functions.ahk
 #Include, content_play_functions.ahk
 
@@ -27,8 +26,7 @@ return
 
 Numpad6::
 ; openRedLineChannel()
-; openRedlineLive()
-openFIPSList()
+openRedlineLive()
 return
 
 Numpad9::
@@ -109,8 +107,13 @@ playPause() {
 		return
 	}
 
+	if (modeStack.isMailListMode()) {
+		openLinkAndPlay(1000)
+		return
+	}
+
 	if (modeStack.isListMode()) {
-		openLinkAndPlay()
+		openLinkAndPlay(0)
 		return
 	}
 
@@ -162,16 +165,6 @@ openMail() {
 	playSound("mailbox-is-opening.mp3")
 }
 
-openFIPSList() {
-	muteNVDA()
-	modeStack.addListMode()
-	startWebServer()
-	; Run, firefox.exe "http://127.0.0.1/fips-status/patent-request-statuses.html", C:\Program Files\Mozilla Firefox\
-	Run, firefox.exe "https://kpsrtz.fips.ru/User/Login", C:\Program Files\Mozilla Firefox\
-	playSound("fips-list-is-opening.mp3")
-	Sleep, 2000
-	focusFirefox()
-}
 
 
 
@@ -182,14 +175,15 @@ openFIPSList() {
 
 
 
-F7::
-if (pageIsLoaded()) {
-	MsgBox "page is loaded"
-}
-else {
-	MsgBox "page is not loaded"
-}
-return
+
+; F7::
+; if (pageIsLoaded()) {
+; 	MsgBox "page is loaded"
+; }
+; else {
+; 	MsgBox "page is not loaded"
+; }
+; return
 
 ; F8::
 ; detectMode()
@@ -200,6 +194,39 @@ return
 ; F9::
 ; mode := modeStack.getCurrentMode()
 ; MsgBox,, CURRENT MODE, %mode%
+<<<<<<< HEAD
+; return
+
+; F10::
+; muteNVDA()
+; return
+
+; F11::
+; if (is_text_reader_mode()) {
+; 	MsgBox "text_reader_mode"
+; }
+; else {
+; 	MsgBox "not text_reader_mode"
+; }
+
+; while (firefoxIsOpened()) {
+; 	Process, Close, firefox.exe
+; 	Sleep, 500
+; }
+; FileRemoveDir, C:\Users\User\AppData\Local\Mozilla, 1
+; Sleep, 2000
+; Run, firefox.exe, C:\Program Files\Mozilla Firefox\
+; return
+
+; F12::
+; if (detect_no_readable_vertion()) {
+; 	MsgBox "no_readable_vertion"
+; }
+; else {
+; 	MsgBox "NOT no_readable_vertion"
+; }
+; return
+=======
 ; ; enableReaderAndRead()
 ; return
 
@@ -217,26 +244,19 @@ return
 ; return
 
 ; F12::
-; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\internet_for_blinds\images\browser\no-readable-vertion-image-pattern.bmp
-; MsgBox %ErrorLevel%
+; ; ImageSearch, imageX, imageY, 500, 200, 930, 250, C:\Users\User\Documents\reader\images\browser\no-readable-vertion-image-pattern.bmp
+; ; MsgBox %ErrorLevel%
 
-; detect_no_readable_vertion()
+; ; detect_no_readable_vertion()
 
-; if (detect_no_readable_vertion()) {
-; 	MsgBox "no_readable_vertion"
-; }
-; else {
-; 	MsgBox "readable_vertion"
-; }
+; ; if (detect_no_readable_vertion()) {
+; ; 	MsgBox "no_readable_vertion"
+; ; }
+; ; else {
+; ; 	MsgBox "NOT no_readable_vertion"
+; ; }
 
 ; clickReadingControls()
-
-; if (is_text_reader_mode()) {
-; 	MsgBox "text reader mode"
-; } else {
-; 	MsgBox "not text reader mode"
-; }
-
 ; return
 
 ; F12::
@@ -254,3 +274,4 @@ return
 ; clickPlayPause()
 ; TrayTip, "after play pause", 123, 1
 ; return
+>>>>>>> last-workable-version

@@ -6,6 +6,7 @@ function humanizeDate(inDate) {
   
   let oldDateParts = inDate.match(/^(\d+)\.(\d+)\.(\d+)$/);
   let recentDateParts = inDate.match(/^(\d+)\s+([а-я]+)\.$/);
+  let dayAndMonthParts = inDate.match(/^(\d+)\s+([а-я]+)$/);
   let todayDateParts = inDate.match(/^(\d+):(\d+)$/);
   let msgRecentDateParts = inDate.match(/^(\d+)\s+([а-я]+)\.\s+в\s+(\d+):(\d+)$/); // 3 янв. в 15:19
   let msgOldDateParts = inDate.match(/^(\d+)\s+([а-я]+)\s+(\d+)\s+в\s+(\d+):(\d+)$/); // 30 декабря 2018 в 22:35
@@ -22,6 +23,12 @@ function humanizeDate(inDate) {
     //console.log("recentDateParts");
     let day = recentDateParts[1];
     let month = recentDateParts[2];
+    newDate = day + " " + month_short2long(month);
+  }
+  else if (dayAndMonthParts) {
+    console.log(dayAndMonthParts);
+    let day = dayAndMonthParts[1];
+    let month = dayAndMonthParts[2];
     newDate = day + " " + month_short2long(month);
   }
   else if (todayDateParts) {
@@ -96,4 +103,3 @@ function year_short2long(y) {
     default: return "ошибка перевода короткого номера года в длинный";
   }
 }
-

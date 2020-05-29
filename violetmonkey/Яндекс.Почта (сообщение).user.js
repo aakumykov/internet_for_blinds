@@ -109,15 +109,33 @@ function constructNewPage(msgSubject, bodyHTML, msgDate, attachmentsList){
     
     let dateLine = buildLine("Письмо от "+humanDate);
     let subjectLine = buildLine("Заголовок: "+msgSubject);
+<<<<<<< HEAD
+    let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
+  
+    console.log(bodyLine);
+    
+    //let repliedMessageIndex = bodyLine.indexOf("-----Original Message-----");
+    //bodyLine = bodyLine.substr(0, repliedMessageIndex);
+  
+    console.log(bodyLine);
+=======
     
     //let bodyLine = (msgBody.match(/^\s*$/)) ? "пустое сообщение" : "Сообщение: "+msgBody;
     
     //let repliedMessageIndex = bodyLine.indexOf("-----Original Message-----");
     //bodyLine = bodyLine.substr(0, repliedMessageIndex);
+>>>>>>> last-workable-version
     
     ////$('#'+listId).append( buildLine("Письмо от "+humanDate+", "+attachmentsMsg) );
     $('#'+listId).append(dateLine);
     $('#'+listId).append(subjectLine);
+<<<<<<< HEAD
+    $('#'+listId).append( buildLine(bodyLine) );
+    
+    
+
+=======
+>>>>>>> last-workable-version
     
     // вложения
     let attCount = attachmentsList.length;

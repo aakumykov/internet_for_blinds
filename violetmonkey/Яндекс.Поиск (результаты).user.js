@@ -15,7 +15,15 @@ var $ = window.jQuery;
 let searchQuery = $("input.input__control").attr('value').trim();
 
 // Перенаправляю на поиск видео
+<<<<<<< HEAD:violetmonkey/Яндекс.Поиск (результаты).user.js
 if (searchQuery.toLowerCase().match("видео")) {
+=======
+<<<<<<< HEAD:violetmonkey/Яндекс.Поиск (результаты).user.js
+if (searchQuery.toLowerCase().match("видео")) {
+=======
+if (searchQuery.toLowerCase().match(videoKeyword)) {
+>>>>>>> last-workable-version:violetmonkey/Яндекс.Поиск (продолжение).user.js
+>>>>>>> 971f061256d3f3ad9b2d8ccf7103c15c56bf11f9:violetmonkey/Яндекс.Поиск (продолжение).user.js
     playAudio('http://127.0.0.1/video-search-step-first.mp3', function(){
         location.href = "https://www.youtube.com/results?search_query="+searchQuery;
     });

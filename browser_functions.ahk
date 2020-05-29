@@ -16,12 +16,9 @@ openLink_And_WaitForLoad() {
 	global should_wait_for_page_loading
 
 	; Открываю страницу
-	focusFirefox()
-	muteNVDA()
-
-	Send, {Return}
-	Sleep, %tab_creation_delay%
-
+	openLink()
+	Sleep, 3000 ; Грязный хак для "решения" проблемы включения режима чтения без ожидания.
+	
 	; Жду её загрузки
 	should_wait_for_page_loading := true
 
@@ -31,6 +28,7 @@ openLink_And_WaitForLoad() {
 	while (passed_time < page_load_wait_time) {
 
 		if (pageIsLoaded()) {
+			; MsgBox "pageIsLoaded()"
 			return
 		}
 
@@ -47,6 +45,12 @@ openLink_And_WaitForLoad() {
 	closePage(false)
 }
 
+openLink() {
+	focusFirefox()
+	muteNVDA()
+	Send, {Return}
+	Sleep, %tab_creation_delay%
+}
 
 openWebPage(address) {
 	Run, firefox.exe %address%, C:\Program Files\Mozilla Firefox\
@@ -105,11 +109,15 @@ closeBrowserPage(silent) {
 ; }
 
 copyPageAddress() {
+	; MsgBox "copyPageAddress()"
 	focusFirefox()
+	Sleep, 100
+	
 	Send, ^{l}
+	Sleep, 100
+
 	Send, ^{c}
-	; Send, {Tab}
-	; Send, {Tab}
-	; Send, {Tab}
+	Sleep, 100
+	; TrayTip, Clipboard, %clipboard%, 1
 }
 

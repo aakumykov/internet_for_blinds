@@ -1,26 +1,30 @@
 ; ============= ГЛАВНЫЕ НАСТРОЙКИ ==========
 
 ; Картинка, по которой определяется, что страница загружена
-page_is_loaded_image_pattern := "firefox-page-load-complete.bmp"
+page_is_loaded_image_pattern := "firefox-page-load-complete-default.bmp"
 
 ; Область поиска этой картинки
-page_is_loaded_search_area_x1 := 72
-page_is_loaded_search_area_y1 := 40
-page_is_loaded_search_area_x2 := 97
-page_is_loaded_search_area_y2 := 64
+page_is_loaded_search_area_x1 := 70
+page_is_loaded_search_area_y1 := 60
+page_is_loaded_search_area_x2 := 101
+page_is_loaded_search_area_y2 := 85
 
 ; Координаты кнопки перехода в режим чтения Firefox
-reader_mode_enable_button_x := 212
-reader_mode_enable_button_y := 53
+<<<<<<< HEAD
+reader_mode_enable_button_x := 277
+=======
+reader_mode_enable_button_x := 275
+>>>>>>> last-workable-version
+reader_mode_enable_button_y := 73
 
 ; Картинка, по которой определяется режим чтения
 reader_mode_image_pattern := "reader-mode-image-pattern.bmp"
 
 ; Область поиска этой картинки
 reader_mode_serch_area_x1 := 0 
-reader_mode_serch_area_y1 := 170 
+reader_mode_serch_area_y1 := 162 
 reader_mode_serch_area_x2 := 38
-reader_mode_serch_area_y2 := 208 
+reader_mode_serch_area_y2 := 200 
 
 ; Картинка для определения отсутствия читабельной версии
 no_readable_version_image_pattern := "no-readable-vertion-image-pattern.bmp"
